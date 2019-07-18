@@ -1,0 +1,101 @@
+﻿@model IEnumerable<exam_db.Models.Item>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.downloadNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.viewNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.yearOfPublish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.semester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.examType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.likeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.uploadTime)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.downloadNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.viewNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.yearOfPublish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semester)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.examType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.likeNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.uploadTime)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
