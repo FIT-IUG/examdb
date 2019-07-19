@@ -151,9 +151,9 @@ namespace exam_db.Controllers
         {
             if (ModelState.IsValid)
             {
-                departmentId = model.departmentId;
+              //  departmentId = model.departmentId;
                 //, collegeId = model.collegeId
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, departmentId = model.departmentId };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

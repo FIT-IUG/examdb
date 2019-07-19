@@ -12,7 +12,7 @@ namespace exam_db.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            ViewBag.college = db.Colleges.ToList();
+            ViewBag.Colleges = db.Colleges.ToList();
             return View();
         }
 

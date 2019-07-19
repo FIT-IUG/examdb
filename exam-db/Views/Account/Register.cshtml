@@ -37,6 +37,7 @@
 
             <div class="overlay">
                 <h1>Hello There!</h1>
+              
                 <p>Please sign up to continue.</p>
             </div>
 
@@ -56,6 +57,7 @@
                 <h4 class="page_title">@ViewBag.Title</h4>
                 <p class="p_under_title">Please sign up to continue.</p>
                 <hr class="hr_under_title" />
+                <h1>@ViewBag.test</h1>
 
 
                 <div class="row">
@@ -97,22 +99,20 @@
                     <div class="col-lg-5 pr-1 signup_field_col_sm">
                         <div class="form-group">
                             <div class="signup_field_wrap">
-                                
-                              <select name="collegeId" class="form-control" id="Colleges">
-                                  @foreach(var item in ViewBag.Colleges)
-                                  {
-                                      <option id="@item.Id"value="@item.Id">@item.name</option>
-                                  }
-                              </select>
+
+                                <select name="collegeId" class="form-control" id="Colleges">
+                                    @foreach (var item in ViewBag.Colleges)
+                                    {
+                                        <option id="@item.Id" value="@item.Id">@item.name</option>
+                                    }
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5 pl-1 signup_field_col_sm">
                         <div class="form-group">
                             <div class="signup_field_wrap">
-                                <select name="departmentId" class="form-control" id="departments">
-
-                                </select>
+                                <select name="departmentId" class="form-control" id="departments"></select>
                             </div>
                         </div>
                     </div>
@@ -154,15 +154,15 @@
                 </div>
 
 
-            <div class="form-group">
-                <input type="submit" value="Sign up" class="btn btn-primary" />
-            </div>
-            <p>
-                Do you   have an account? <a href="~/Account/Login" class=""> Log in</a>
-            </p>
+                <div class="form-group">
+                    <input type="submit" value="Sign up" class="btn btn-primary" />
+                </div>
+                <p>
+                    Do you   have an account? <a href="~/Account/Login" class=""> Log in</a>
+                </p>
 
             }
-</section>
+        </section>
     </div>
 
 </div>
@@ -174,7 +174,7 @@
 
 
 
-
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 
 @section Scripts {
@@ -190,26 +190,7 @@
         var ID = collegeId.options[collegeId.selectedIndex].value;
         var depatments = document.getElementById("departments");
         console.log(ID);
-        @*$.ajax({
-            url: '@Url.Action("getDepartment","Account")',
-            type: 'POST',
-            dataType: 'json',
-            data: { idString: ID },
-            success: function (data) {
-                console.log(data);
-                console.log(ID);
-
-                //SubMain.innerHTML = "";
-                //$.each(data, function (i, item) {
-                //    var options = "<option value='" + item.ID + "' id='" + item.ID + "'>" + item.Const_Name + "</option>";
-
-                //    $('#SubMain').append(options);
-                //});
-            },
-            error: function (ex) {
-
-            }
-        });*@
+      
 
          $.ajax({
                 url: '@Url.Action("getDepartment","Web")',
@@ -220,8 +201,8 @@
                     console.log(result)
                     depatments.innerHTML = "";
                     $.each(result, function (i, result) {
-                    var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
-
+                        var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
+                        console.log(options);
                     $('#departments').append(options);
                 });
                     },

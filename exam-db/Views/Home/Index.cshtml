@@ -20,31 +20,12 @@
                         <a href="#"><li>bla bla bla <a href="#"> <i class="fa fa-close"></i></a></li></a>
                         <a href="#"><li>bla bla bla <a href="#"> <i class="fa fa-close"></i></a></li></a>
                     </ul>
-                    <h6 class="side_nav_headers"><i class="fa fa-list-alt"></i> Courses Categories</h6>
+                    <h6 class="side_nav_headers"><i class="fa fa-list-alt"></i> Categories</h6>
                     <ul class="list-unstyled side_nav_list">
-                        <a href="~/Web/UniversityRequirements"><li>University requirement</li></a>
-                        <li class="colleges">College requirement
-                            <ul class="list-unstyled colleges_list">
-                                @* get them from database *@
-                                @foreach (var item in ViewBag.college)
-                                {
-                                    <a href="@Url.Action("College","Web",new {CollegeId =item.Id } )"><li>Faculty of @item.name</li></a>
-
-                                }
-                                @*<a href="~/Web/College"><li>Faculty of Medicine</li></a>
-                                <a href="~/Web/College"><li>Faculty of Engineering</li></a>
-                                <a href="~/Web/College"><li>Faculty of Information Technology</li></a>
-                                <a href="~/Web/College"><li>Faculty of Nursing</li></a>
-                                <a href="~/Web/College"><li>Faculty of Science</li></a>
-                                <a href="~/Web/College"><li>Faculty of Health Science</li></a>
-                                <a href="~/Web/College"><li>Faculty of Education</li></a>
-                                <a href="~/Web/College"><li>Faculty of Arts</li></a>
-                                <a href="~/Web/College"><li>Faculty of Sharia & Law</li></a>
-                                <a href="~/Web/College"><li>Faculty of Osoul Eddin</li></a>
-                                <a href="~/Web/College"><li>Faculty of Commerce</li></a>*@
-                            </ul>
-                        </li>
-                     </ul>
+                        <a href="#"><li>University requirement</li></a>
+                        <a href="#"><li>Department requirement</li></a>
+                        <a href="#"><li>Specialty requirement</li></a>
+                    </ul>
                 </div>
 
             </div>
@@ -63,7 +44,7 @@
                             <p>Drag &amp; Drop Files Here or <span class="browse_btn_holder">Browse <input class="browse_btn" type="file" title='Click to add Files' /> </span> to upload files</p>
 
                         </div>
-                        
+
                         <!-- Modal -->
                         <div class="upload_file_modal modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModal" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -93,22 +74,23 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="upload_field_wrap">
-                                                            <select class="form-control">
-                                                                <option value="" disabled selected>Department</option>
-                                                                <option value="">value 1</option>
-                                                                <option value="">value 2</option>
+
+                                                            <select name="collegeId" class="form-control" id="Colleges">
+                                                                @foreach (var item in ViewBag.Colleges)
+                                                                {
+                                                                    <option id="@item.Id" value="@item.Id">@item.name</option>
+                                                                }
                                                             </select>
+                                                            <select name="departmentId" class="form-control" id="departments"></select>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="upload_field_wrap">
-                                                            <select class="form-control">
-                                                                <option value="" disabled selected>Course Name</option>
-                                                                <option value="">value 1</option>
-                                                                <option value="">value 2</option>
-                                                            </select>
+                                                            <select name="departmentId" class="form-control" id="courses"></select>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,10 +114,10 @@
                         </div>
 
                     </form>
-                  
-                    
 
-                   
+
+
+
                     <!-- End File Upload Section -->
                     <!-- Start Recommended Section -->
                     <h4>Recommended</h4>
@@ -150,12 +132,12 @@
                                                 <div class="item_type_img_holder">
                                                     <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                                 </div>
+
                                                 <div class="item_info">
-                                                    <a class="black_link no_decoration" href="~/Web/File">
+                                                    <a class="black_link no_decoration" href="#">
                                                         <h6 class="item_title">database midterm exam</h6>
                                                     </a>
-                                                    <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                    <a class="black_link no_decoration" style="display:block" href="#">
+                                                    <a class="black_link no_decoration" href="#">
                                                         <div class="item_owner">
                                                             <img class="item_owner_img" src="~/Content/images/avatar.png" />
                                                             <span class="item_owner_name">omar kishko</span>
@@ -178,8 +160,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <span class="item_date">2019</span>
                                 </div>
                             </div>
                         </li>
@@ -194,12 +174,12 @@
                                                 <div class="item_type_img_holder">
                                                     <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                                 </div>
+
                                                 <div class="item_info">
-                                                    <a class="black_link no_decoration" href="~/Web/File">
+                                                    <a class="black_link no_decoration" href="#">
                                                         <h6 class="item_title">database midterm exam</h6>
                                                     </a>
-                                                    <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                    <a class="black_link no_decoration" style="display:block" href="#">
+                                                    <a class="black_link no_decoration" href="#">
                                                         <div class="item_owner">
                                                             <img class="item_owner_img" src="~/Content/images/avatar.png" />
                                                             <span class="item_owner_name">omar kishko</span>
@@ -222,8 +202,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <span class="item_date">2018</span>
                                 </div>
                             </div>
                         </li>
@@ -237,17 +215,15 @@
                                                 <div class="item_type_img_holder">
                                                     <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                                 </div>
+
                                                 <div class="item_info">
-                                                    <a class="black_link no_decoration" href="~/Web/File">
+                                                    <a class="black_link no_decoration" href="#">
                                                         <h6 class="item_title">database midterm exam</h6>
                                                     </a>
-                                                    <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                    <a class="black_link no_decoration" style="display:block" href="#">
-                                                        <div class="item_owner">
-                                                            <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                            <span class="item_owner_name">omar kishko</span>
-                                                        </div>
-                                                    </a>
+                                                    <div class="item_owner">
+                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
+                                                        <span class="item_owner_name">omar kishko</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,8 +241,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <span class="item_date">2017</span>
                                 </div>
                             </div>
                         </li>
@@ -280,6 +254,7 @@
 
     </div>
 </div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 @section scripts
 {
@@ -303,7 +278,6 @@
                     // Happens when dragging something OUT of the DnD area
                     this.removeClass('active');
                     $('.upload_container .cloud_upload_img').removeClass('animated infinite shake');
-
                 },
                 onInit: function () {
                     // Plugin is ready to use
@@ -317,9 +291,7 @@
                     // When a new file is added using the file selector or the DnD area
                     ui_add_log('New file added #' + id);
                     ui_multi_add_file(id, file);
-
                     $('#uploadFileModal').modal("show")
-
                 },
                 onBeforeUpload: function (id) {
                     // about tho start uploading a file
@@ -357,6 +329,92 @@
             });
         });
     </script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+    $("#Colleges").change(function () {
+        LoadDepartments();
+    });
+
+    function LoadDepartments() {
+        var collegeId = document.getElementById("Colleges");
+        var ID = collegeId.options[collegeId.selectedIndex].value;
+        var depatments = document.getElementById("departments");
+        console.log(ID);
+
+
+         $.ajax({
+                url: '@Url.Action("getDepartment","Web")',
+                type: 'POST',
+                dataType: "json",
+                data: { idString: ID },
+                success: function (result) {
+                    console.log(result)
+                    depatments.innerHTML = "";
+                    $.each(result, function (i, result) {
+                        var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
+                        console.log(options);
+                    $('#departments').append(options);
+                });
+                    },
+                failure: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                     },
+                error: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                    }
+            });
+}
+    </script>
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+    $("#departments").change(function () {
+        LoadCourses();
+    });
+
+    function LoadDepartments() {
+        var Colleges = document.getElementById("Colleges");
+        var departments = document.getElementById("departments");
+        var collegeId = Colleges.options[collegeId.selectedIndex].value;
+        var departmentId = departments.options[departments.selectedIndex].value;
+        var courses = document.getElementById("courses");
+        console.log(ID);
+
+
+         $.ajax({
+                url: '@Url.Action("getCourses","Web")',
+                type: 'POST',
+                dataType: "json",
+                data: { collegeId: collegeId ,departmentId:departmentId },
+                success: function (result) {
+                    console.log(result)
+                    depatments.innerHTML = "";
+                    $.each(result, function (i, result) {
+                        var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
+                        console.log(options);
+                    $('#departments').append(options);
+                });
+                    },
+                failure: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                     },
+                error: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                    }
+            });
+}
+    </script>
 }
 
 
@@ -390,4 +448,3 @@
         </div>
     </li>
 </script>
-

@@ -217,10 +217,22 @@ namespace exam_db.Controllers
 
             db.Configuration.ProxyCreationEnabled = false;
             var deparments = db.Departments.Where(a => a.collegeId == i).ToList();
-
-            ViewBag.test = "Hello";
+            
+            ViewBag.test = idString;
             return Json(deparments, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult getCourses(String departmentId)
+        {
+            int department = 0;
+            Int32.TryParse(departmentId, out department);
+
+            db.Configuration.ProxyCreationEnabled = false;
+            var deparments = db.Courses.Where(a => a.departmentId == department).ToList();
+
+            return Json(deparments, JsonRequestBehavior.AllowGet);
+        }
+        
 
     }
 }
