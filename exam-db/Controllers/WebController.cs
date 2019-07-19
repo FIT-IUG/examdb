@@ -16,6 +16,10 @@ namespace exam_db.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult UniversityRequirements()
         {
+            College UniversityRequierment = db.Colleges.Find(12);
+            Department requirement = UniversityRequierment.listOfDepartment.First();
+            ViewBag.Requirement = requirement.listOfCourse.ToList();
+            ViewBag.name = requirement.listOfCourse.Count();
             return View();
         }
 
