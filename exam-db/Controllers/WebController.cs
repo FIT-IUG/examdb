@@ -6,26 +6,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MvcPaging;
 using System.Web.Mvc;
 
 namespace exam_db.Controllers
 {
     public class WebController : Controller
     {
-        
+        private const int defaultPageSize = 8;
+        private IList<Course> allCourse = new List<Course>();
         private ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult UniversityRequirements()
-        {
-            College UniversityRequierment = db.Colleges.Find(12);
-            Department requirement = UniversityRequierment.listOfDepartment.First();
-            ViewBag.Requirement = requirement.listOfCourse.ToList();
-            ViewBag.name = requirement.listOfCourse.Count();
-            return View();
-        }
-
         public ActionResult College(int CollegeId)
         {
-
             College college = db.Colleges.Find(CollegeId);
             ViewBag.CollegeName = college.name;
             ViewBag.CollegeId = college.Id;
@@ -35,66 +27,78 @@ namespace exam_db.Controllers
             ViewBag.listOfCourses = firstdept.listOfCourse;
             ViewBag.listOfIds = college.listOfDepartment;
             ViewBag.First = college.listOfDepartment.First();
-            return View();
+            Models.Paging paging = new Models.Paging();
+            int offset = 1;
+            int Page = 1;
+            int Take = defaultPageSize;
+            if (Convert.ToInt32(Request.QueryString["Page"]) > 1)
+            {
+                Page = Convert.ToInt32(Request.QueryString["Page"]);
+            }
+
+            int skip = 0;
+            if (Page == 1)
+                skip = 0;
+            else
+                skip = ((Page - 1) * Take);
+            int total = firstdept.listOfCourse.Count();
+            var data = firstdept.listOfCourse.Skip(skip).Take(Take);
+            string pagin = paging.Pagination(total, Page, Take, offset, "College", "/College", "");
+            ViewBag.Paging = pagin;
+            return View(data.ToList());
         }
   
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Getdept(int id)
+        public ActionResult Getdept(int id , int pageIndex)
         {
             List<Course> courses = new List<Course>();
             List<Object> Mycourses = new List<Object>();
             Department dep = db.Departments.Single(a => a.Id.Equals(id));
+            Department model = new Department();
             JsonArrayAttribute coursesArray = new JsonArrayAttribute();
+            Models.Paging paging = new Models.Paging();
             String myjson = "";
-            
+            int offset = 1;
+            int skip = 0;
+            int Take = defaultPageSize;
+            if (pageIndex == 1)
+                skip = 0;
+            else
+                skip = ((pageIndex - 1) * Take);
+            int total = dep.listOfCourse.Count();
+            var data = dep.listOfCourse.Skip(skip).Take(Take);
+            int startIndex = (pageIndex - 1) * defaultPageSize;
             //IQueryable<ICollection<Course>> listOfCourses = from q in db.Departments where q.Id == data.depid select q.listOfCourse;
-            foreach (Course course in dep.listOfCourse)
+            foreach (Course course in data)
             {
-                //courses.Add(course);
                 Course mycourse = new Course();
                 mycourse.Id = course.Id;
                 mycourse.name = course.name;
                 mycourse.code = course.code;
                 mycourse.listOfItem = course.listOfItem;
                 mycourse.departmentId = course.departmentId;
-
                 Object myObject = new {
                     course = new Course() { Id = course.Id, name = course.name, code = course.code ,departmentId = course.departmentId }
                 };
                 Mycourses.Add(myObject);
-
-               
                     myjson = JsonConvert.SerializeObject(mycourse, Formatting.None);
-              
-                
-                
-               
             }
-
-
-           
-            //String jsonArray = JsonConvert.SerializeObject
-            //JsonArrayAttribute
+            string pagin = paging.Pagination(total, pageIndex, Take, offset, "Getdept", "/College", "");
+            int totalPage = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(total) / defaultPageSize));
+            ViewBag.total = totalPage;
             var list = JsonConvert.SerializeObject(courses,
                                     Formatting.None,
                                     new JsonSerializerSettings()
                                     {
                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                                     });
-            //var list2 = JsonConvert.SerializeObject(Mycourses,
-            //                        Formatting.None,
-            //                        new JsonSerializerSettings()
-            //                        {
-            //                            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //                        });
             var list2 = JsonConvert.SerializeObject(Mycourses , Formatting.Indented);
             //string responseText = JSON.Validate(courses);
             //return Json( list , "application/json") ;
-
-
             return Json(new {
-                data = list2
+                data = list2,
+                totalPage = totalPage
             }, JsonRequestBehavior.AllowGet);
 
         }
@@ -105,39 +109,29 @@ namespace exam_db.Controllers
             ViewBag.CourseId = courseId;
             ViewBag.courseName = course.name;
             ViewBag.ListOfile = course.listOfItem;
-            // code for test 
-            List<File> quizez = new List<File>();   
-            List<File> others = new List<File>();
+            Models.Paging paging = new Models.Paging();
+            int offset = 1;
+            int Page = 1;
+            int Take = defaultPageSize;
+            if (Convert.ToInt32(Request.QueryString["Page"]) > 1)
+            {
+                Page = Convert.ToInt32(Request.QueryString["Page"]);
+            }
+            int skip = 0;
+            if (Page == 1)
+                skip = 0;
+            else
+                skip = ((Page - 1) * Take);
+            int total = course.listOfItem.Count();
+            var data = course.listOfItem.Where(a => a.category.Equals("Exams")).Skip(skip).Take(Take);
+            string pagin = paging.Pagination(total, Page, Take, offset, "Course", "/Course", "");
             List<File> exams = new List<File>();
-            List<File> Summarieses = new List<File>();
-            //foreach(File file in course.listOfItem)
-            //{
-            //    switch (file.Category)
-            //    {
-            //        case "Quizs":
-            //            quizez.Add(file);
-            //            break;
-            //        case "Others":
-            //            others.Add(file);
-            //            break;
-            //        case "Exams":
-            //            exams.Add(file);
-            //            break;
-            //        case "Summaries":
-            //            Summarieses.Add(file);
-            //            break;
-            //    }
-
-            //}
-
-            ViewBag.Quizez = quizez;
-            ViewBag.others = others;
             ViewBag.exams = exams;
-            ViewBag.Summarieses = Summarieses;
             ViewBag.CollegeName = CollegeName;
             Department department = db.Departments.Find(course.departmentId);
             ViewBag.departmentName = department.name;
-            return View();
+            ViewBag.Paging = pagin;
+            return View(data.ToList());
         }
         static string UppercaseFirst(string s)
         {
@@ -149,63 +143,60 @@ namespace exam_db.Controllers
             a[0] = char.ToUpper(a[0]);
             return new string(a);
         }
-        public ActionResult GetFiles(String filetype,int courseId)
+        public ActionResult GetFiles(String filetype,int courseId , int pageIndex)
         {
             Course course = db.Courses.Find(courseId);
             List<Object> MyFiles = new List<Object>();
-            String myJson = "";
-
-            //foreach (File file in course.listOfFile)
-            //{
-
-            //    if (file.Category.Equals(UppercaseFirst(filetype)))
-            //    {
-            //        File myfile = new File();
-            //        myfile.Category = file.Category;
-            //        myfile.Course = file.Course;
-            //        myfile.CourseId = file.CourseId;
-            //        myfile.dislike_number = file.dislike_number;
-            //        myfile.Download_number = file.Download_number;
-            //        myfile.Id = file.Id;
-            //        myfile.like_number = file.like_number;
-            //        myfile.path = file.path;
-            //        myfile.semester = file.semester;
-            //        myfile.size = file.size;
-            //        myfile.title = file.title;
-            //        myfile.type = file.type;
-            //        myfile.view_numbre = file.view_numbre;
-            //        myfile.year = file.year;
-
-            //        Object myobject = new
-            //        {
-            //            file = new File()
-            //            {
-            //                Id = myfile.Id,
-            //                Category = myfile.Category,
-            //                dislike_number = myfile.dislike_number,
-            //                Download_number = myfile.Download_number,
-            //                like_number = myfile.like_number,
-            //                path = myfile.path,
-            //                semester = myfile.semester,
-            //                size = myfile.size,
-            //                title = myfile.title,
-            //                type = myfile.type,
-            //                view_numbre = myfile.view_numbre,
-            //                year = myfile.year
-            //            }
-            //        };
-            //        MyFiles.Add(myobject);
-
-            //    }
-
-
-                
-
-            //}
+            int offset = 1;
+            int skip = 0;
+            int Take = 10;
+            if (pageIndex == 1)
+                skip = 0;
+            else
+                skip = ((pageIndex - 1) * Take);
+            int total = course.listOfItem.Count();
+            var data = course.listOfItem.Skip(skip).Take(Take);
+            int startIndex = (pageIndex - 1) * defaultPageSize;
+            foreach (Item item in data)
+            {
+                if (item.category.Equals(UppercaseFirst(filetype)))
+                {
+                    Item myItem = new Item();
+                    myItem.category = item.category;
+                    myItem.Course = item.Course;
+                    myItem.CourseId = item.CourseId;
+                    myItem.downloadNumber = item.downloadNumber;
+                    myItem.Id = item.Id;
+                    myItem.likeNumber = item.likeNumber;
+                    myItem.semester = item.semester;
+                    myItem.title = item.title;
+                    myItem.examType = item.examType;
+                    myItem.viewNumber = item.viewNumber;
+                    myItem.yearOfPublish = item.yearOfPublish;
+                    Object myobject = new
+                    {
+                        file = new Item()
+                        {
+                            Id = myItem.Id,
+                            category = myItem.category,
+                            downloadNumber = myItem.downloadNumber,
+                            likeNumber = myItem.likeNumber,
+                            semester = myItem.semester,
+                            title = myItem.title,
+                            examType = myItem.examType,
+                            viewNumber = myItem.viewNumber,
+                            yearOfPublish = myItem.yearOfPublish
+                        }
+                    };
+                    MyFiles.Add(myobject);
+                }
+            }
+            int totalPage = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(total) / defaultPageSize));
             var fileList = JsonConvert.SerializeObject(MyFiles, Formatting.Indented);
             return Json(new
             {
-                data = fileList 
+                data = fileList ,
+                totalPage = totalPage
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -218,12 +209,36 @@ namespace exam_db.Controllers
         {
             int i = 0;
             Int32.TryParse(idString, out i);
-
             db.Configuration.ProxyCreationEnabled = false;
             var deparments = db.Departments.Where(a => a.collegeId == i).ToList();
-
-            ViewBag.test = "Hello";
             return Json(deparments, JsonRequestBehavior.AllowGet);
+        }
+        
+        public ActionResult UniversityRequirements()
+        {
+            College UniversityRequierment = db.Colleges.Find(12);
+            ViewBag.PageSize = defaultPageSize;
+            Department requirement = UniversityRequierment.listOfDepartment.First();
+            //define paging model
+            Models.Paging paging = new Models.Paging();
+            int offset = 1;
+            int Page = 1;
+            int Take = 10;
+            if (Convert.ToInt32(Request.QueryString["Page"]) > 1)
+            {
+                Page = Convert.ToInt32(Request.QueryString["Page"]);
+            }
+
+            int skip = 0;
+            if (Page == 1)
+                skip = 0;
+            else
+                skip = ((Page - 1) * Take);
+            int total = requirement.listOfCourse.Count();
+            var data = requirement.listOfCourse.Skip(skip).Take(Take);
+            string pagin = paging.Pagination(total, Page, Take, offset, "UniversityRequirements", "/UniversityRequirements", "");
+            ViewBag.Paging = pagin;
+            return View(data.ToList());
         }
 
     }

@@ -190,26 +190,7 @@
         var ID = collegeId.options[collegeId.selectedIndex].value;
         var depatments = document.getElementById("departments");
         console.log(ID);
-        @*$.ajax({
-            url: '@Url.Action("getDepartment","Account")',
-            type: 'POST',
-            dataType: 'json',
-            data: { idString: ID },
-            success: function (data) {
-                console.log(data);
-                console.log(ID);
-
-                //SubMain.innerHTML = "";
-                //$.each(data, function (i, item) {
-                //    var options = "<option value='" + item.ID + "' id='" + item.ID + "'>" + item.Const_Name + "</option>";
-
-                //    $('#SubMain').append(options);
-                //});
-            },
-            error: function (ex) {
-
-            }
-        });*@
+       
 
          $.ajax({
                 url: '@Url.Action("getDepartment","Web")',

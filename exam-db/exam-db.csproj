@@ -236,6 +236,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Paging.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\College.cs" />
