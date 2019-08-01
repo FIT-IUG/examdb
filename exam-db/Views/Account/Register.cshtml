@@ -1,0 +1,236 @@
+﻿@model exam_db.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    
+}
+    <div class="login_page_navigation">
+        <!-- Start Navigation Button -->
+
+        <div class="bars">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbar_circle">
+            <ol class="list-unstyled">
+                <a href="~/Home/Index" class="no_decoration">
+                    <li id="nabbar_animate_1" class="bold_custom">@Resources.Global.Menu_Home</li>
+                </a>
+                <a href="~/Home/About" class="no_decoration">
+                    <li id="nabbar_animate_2" class="bold_custom">@Resources.Global.Menu_About</li>
+                </a>
+                <a href="~/Home/Contact" class="no_decoration">
+                    <li id="nabbar_animate_3" class="bold_custom">Contact us</li>
+                </a>
+
+            </ol>
+        </div>
+
+    </div>
+<div class="row signup_page">
+    <div class="col-md-5  d-none d-md-block">
+        <section class="hello_section">
+
+            <div class="overlay">
+                <h1>@Resources.Global.Hello</h1>
+                <p>@Resources.Global.Please_sign_up</p>
+            </div>
+
+        </section>
+    </div>
+    <div class="col-md-7">
+        <section class="signup_form_section">
+            <div class="logo_container">
+                <a class="black_link no_decoration" href="~/Home">
+                    <h2 class="logo_text"><img class="logo_img" src="~/Content/images/logo-small.png" /> <strong>Exam</strong>DB</h2>
+                </a>
+            </div>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal signup_form", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4 class="page_title">@ViewBag.Title</h4>
+                <p class="p_under_title">@Resources.Global.Please_sign_up</p>
+                <hr class="hr_under_title" />
+
+
+                <div class="row">
+                    <div class="col-lg-10  signup_field_col_sm ">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-lg-5 pr-1 signup_field_col_sm">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                <label for="FirstName"> @Resources.InternalPages.First_Name</label>
+                                <input class="form-control" type="text" name="FirstName" id="FirstName" />
+                                @*  @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 pl-1 signup_field_col_sm">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                <label for="LastName"> @Resources.InternalPages.Last_Name</label>
+                                <input class="form-control" type="text" name="LastName" id="LastName" />
+                                @* @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-10  signup_field_col_sm ">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                <label for="Email"> @Resources.InternalPages.Email</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", required = "required" })
+                                @if (ViewData.ModelState["Email"] != null && ViewData.ModelState["Email"].Errors.Any())
+                                {
+                                    <i class="fa fa-info-circle field_error_icon"></i>
+                                }
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 pr-1 signup_field_col_sm">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                
+                              <select name="collegeId" class="form-control" id="Colleges">
+                                  @foreach(var item in ViewBag.Colleges)
+                                  {
+                                      <option id="@item.Id"value="@item.Id">@item.name</option>
+                                  }
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 pl-1 signup_field_col_sm">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                <select name="departmentId" class="form-control" id="departments">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 pr-1 signup_field_col_sm">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                <label for="Password"> @Resources.InternalPages.Password</label>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
+
+
+                                @if (ViewData.ModelState["Password"] != null && ViewData.ModelState["Password"].Errors.Any())
+                                {
+                                    <i class="fa fa-info-circle field_error_icon"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-question-circle field_hint_icon">
+                                        <span class="field_hint_text">At least 6 characters including a number and a lowercase letters.</span>
+                                    </i>
+                                }
+
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 pl-1 signup_field_col_sm">
+                        <div class="form-group">
+                            <div class="signup_field_wrap">
+                                <label for="Password"> @Resources.InternalPages.Confirm_password</label>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required" })
+                                @if (ViewData.ModelState["ConfirmPassword"] != null && ViewData.ModelState["ConfirmPassword"].Errors.Any())
+                                {
+                                    <i class="fa fa-info-circle field_error_icon"></i>
+                                }
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="@Resources.Global.Sign_up" class="btn btn-primary" />
+            </div>
+            <p>
+                @Resources.Global.have_account <a href="~/Account/Login" class=""> @Resources.Global.Login</a>
+            </p>
+
+            }
+</section>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+    $("#Colleges").change(function () {
+        LoadDepartments();
+    });
+
+    function LoadDepartments() {
+        var collegeId = document.getElementById("Colleges");
+        var ID = collegeId.options[collegeId.selectedIndex].value;
+        var depatments = document.getElementById("departments");
+        console.log(ID);
+        @*$.ajax({
+            url: '@Url.Action("getDepartment","Account")',
+            type: 'POST',
+            dataType: 'json',
+            data: { idString: ID },
+            success: function (data) {
+                console.log(data);
+                console.log(ID);
+
+                //SubMain.innerHTML = "";
+                //$.each(data, function (i, item) {
+                //    var options = "<option value='" + item.ID + "' id='" + item.ID + "'>" + item.Const_Name + "</option>";
+
+                //    $('#SubMain').append(options);
+                //});
+            },
+            error: function (ex) {
+
+            }
+        });*@
+
+         $.ajax({
+                url: '@Url.Action("getDepartment","Web")',
+                type: 'POST',
+                dataType: "json",
+                data: { idString: ID },
+                success: function (result) {
+                    console.log(result)
+                    depatments.innerHTML = "";
+                    $.each(result, function (i, result) {
+                    var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
+
+                    $('#departments').append(options);
+                });
+                    },
+                failure: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                     },
+                error: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                    }
+            });
+}
+</script>
+}

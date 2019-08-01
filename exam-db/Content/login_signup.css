@@ -1,0 +1,244 @@
+﻿:root {
+    --main-bg-color: #007bff;
+    --main-bg-color-transparent: #007bffc2;
+    --gray-light: #efefef;
+    --gray-dark: #e0e0e0
+}
+
+body {
+    padding: 0
+}
+
+html {
+    overflow: hidden
+}
+/* start login navbar */
+
+.login_page_navigation {
+    position: absolute;
+    top: 30px;
+    right: 40px
+}
+.navbar_circle {
+    z-index: 9;
+}
+/* end login navbar */
+a.forget_password {
+    font-size: 14px;
+    margin-bottom: 10px
+}
+
+.logo_container {
+    margin-bottom: 30px
+}
+
+    .logo_container .logo_text {
+        font-weight: 400;
+        line-height: 2
+    }
+
+    .logo_container .logo_img {
+        width: 46px;
+        padding-bottom: 10px;
+    }
+
+.page_title {
+    font-weight: 700;
+    color: var(--main-bg-color)
+}
+
+p.p_under_title {
+    margin-bottom: 10px
+}
+
+hr.hr_under_title {
+    width: 60px;
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    background: var(--main-bg-color);
+    height: 2px;
+}
+
+.login_page, .signup_page {
+    margin-left: -30px
+}
+
+section.hello_section {
+    background-image: url('images/writing-1149962_1280.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    color: #FFF;
+    height: 100%;
+}
+
+section.login_form_section,
+section.signup_form_section {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 15%
+}
+
+.overlay {
+    background: var(--main-bg-color-transparent);
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    position: absolute;
+    transform: translateY(11px);
+    left: 13px;
+    color: #9c9c9c;
+    transition: all 0.25s ease;
+    -webkit-backface-visibility: hidden;
+    pointer-events: none;
+    font-size: 14px;
+}
+
+    label.active {
+        transform: translateY(6px);
+        left: 13px;
+        font-size: 14px;
+    }
+
+    label.highlight {
+        color: var(--main-bg-color)
+    }
+
+input.form-control,
+select.form-control  {
+    font-weight: 500;
+    font-size: 20px;
+    background-color: var(--gray-light);
+    background-image: none;
+    color: #222;
+    border-color: var(--gray-dark);
+}
+select.form-control {
+    font-size: 18px;
+}
+
+input[type="submit"] {
+    font-size: 14px;
+    width: 180px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 40px
+}
+
+.login_field_wrap {
+    position: relative;
+    margin-bottom: 10px;
+    width: 350px
+}
+
+.signup_field_wrap {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.field_hint_icon {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+    color: #9a9a9a;
+}
+.field_hint_icon:hover {
+    color:#444;
+}
+    .field_hint_icon:hover .field_hint_text {
+        display: inline-block
+    }
+    .field_hint_text {
+        display: none;
+        position: absolute;
+        top: -45px;
+        right: -200px;
+        width: 400px;
+        border-radius: 5px;
+        background: #333;
+        color: #fff;
+        padding: 5px 10px;
+        z-index: 1
+    }
+
+.field_error_icon {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+    color: #dc3545;
+}
+.validation-summary-errors ul {
+    padding-left: 0 !important;
+}
+.validation-summary-errors ul li {
+    background: #fff;
+    padding: 5px 10px;
+    list-style: none;
+    border: 1px solid;
+}
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+    .login_field_wrap {
+            width: auto
+        }
+        .field_hint_text{
+            right: -20px !important
+        }
+    }
+    /*Small devices (landscape phones, less than 768px)*/
+    @media (max-width: 767.98px) {
+        .logo_container {
+            margin-top: 40px;
+        }
+
+        /* make all fields has equal padding in small screen*/
+        .signup_field_col_sm {
+            padding-right: 1rem !important;
+            padding-left: 1rem !important;
+        }
+
+        section.login_form_section, section.signup_form_section {
+            padding-left: 5%
+        }
+
+        input[type="submit"] {
+            width: 100%
+        }
+
+
+    }
+    /*Medium devices (tablets, less than 992px)*/
+    @media (max-width: 991.98px) {
+        .logo_container {
+            margin-top: 40px;
+        }
+
+        /* make all fields has equal padding in small screen*/
+        .signup_field_col_sm {
+            padding-right: 1rem !important;
+            padding-left: 1rem !important;
+        }
+
+        section.login_form_section, section.signup_form_section {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .field_hint_text {
+            right: 0px
+        }
+    }
+    /*Large devices (desktops, less than 1200px)*/
+    @media (max-width: 1199.98px) {
+    }

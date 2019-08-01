@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - ExamDB</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("style", required: false)
+
+    @if (Session["lang"] != null && @HttpContext.Current.Session["lang"].ToString() == "ar")
+    {
+        <!-- only in arabic-->
+        <link href="~/Content/bootstrap-rtl.css" rel="stylesheet" />
+    }
+    else
+    {
+        <!-- only in english-->
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    }
+
+    <!-- same in both arabic and english -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/login_signup.css" rel="stylesheet" />
+
+    <!-- only in arabic -->
+    @if (Session["lang"] != null && @HttpContext.Current.Session["lang"].ToString() == "ar")
+    {
+        <link href="~/Content/site-rtl.css" rel="stylesheet" />
+    }
+
+</head>
+<body>
+
+    <div class="body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/site.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,350 @@
+﻿/* Customize the RTL-ized */
+
+/* start site global */
+@font-face {
+    font-family: 'THESANSARABIC-BOLD';
+    src: url('fonts/THESANSARABIC-BOLD.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'TheSansArabic-Light';
+    src: url('fonts/TheSansArabic-Light.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Droid Sans Arabic';
+    src: url('fonts/Droid Sans Arabic.ttf') format('truetype');
+}
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'THESANSARABIC-BOLD';
+}
+
+.pretty .state label:after, .pretty .state label:before {
+    right: 0;
+    left: unset
+}
+
+
+.search_container .fa-search {
+    left: 28px;
+    right: unset
+}
+
+input.search_input {
+    font-family: 'Droid Sans Arabic';
+    padding: 8px 20px 8px 30px;
+}
+
+a.dropdownUserMenu_item,
+a.dropdownLangMenu_item {
+    padding: 8px 20px 8px 8px;
+}
+
+.dropdownUserMenu {
+    border-radius: 5px;
+    border: 0.5px solid #f1f1f1;
+    box-shadow: 1px 1px 10px 1px #e6e6e6;
+    font-size: 14px;
+}
+
+.navbar_circle {
+    left: -100px;
+    right: unset;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 0;
+}
+
+    .navbar_circle ol {
+        right: 120px;
+        left: unset;
+    }
+
+.item .item_body .item_date {
+    border-radius: 0;
+    border-bottom-right-radius: 5px;
+    left: -1px;
+    right: unset;
+}
+
+.item .item_body .item_statistics .statistic i.fa {
+    margin-left: 5px;
+    margin-right: 0
+}
+
+.item .item_body .item_info {
+    margin-right: 20px;
+    margin-left: 0
+}
+
+a.dropdownUserMenu_item .fa,
+a.dropdownLangMenu_item .fa  {
+    margin-left: 3px;
+    margin-right: unset !important
+}
+
+.profile_header .profile_user .user_img_holder {
+    margin-left: 20px;
+    margin-right: 0 !important
+}
+
+/* end site global */
+
+/* start homepage */
+.side_nav {
+    margin-left: unset !important;
+    margin-right: -15px !important
+}
+
+    .side_nav ul.side_nav_list li i.fa {
+        left: 10px !important;
+        right: unset !important
+    }
+
+.uploaded_item .item_body .item_info {
+    margin-right: 20px !important;
+    margin-left: 0 !important;
+}
+
+    .uploaded_item .item_body .item_info .item_details .item_size {
+        margin-left: 15px !important;
+        margin-right: 0 !important
+    }
+
+    .uploaded_item .item_body .item_info .item_details .item_progress_value {
+        margin-right: auto;
+        margin-left: unset !important
+    }
+
+label.active {
+    right: 13px;
+    left: unset !important
+}
+
+.upload_file_modal label {
+    right: 13px;
+    left: unset !important
+}
+
+.side_nav ul.side_nav_list li.colleges ul.colleges_list {
+    left: -260px;
+    right: unset !important
+}
+
+.side_nav .side_nav_headers i.fa {
+    margin-left: 5px;
+    margin-right: 0 !important
+}
+/* end homepage */
+/* start profile page*/
+.info_filed.editable::after {
+    content: "\f104" !important;
+    left: 15px;
+    right: unset !important
+}
+
+.profile_modal label {
+    right: 13px;
+    left: unset !important
+}
+
+.profile_page .uploaded_list .item_upload_date i.fa {
+    margin-left: 5px;
+    margin-right: 0 !important
+}
+
+/* end profile page*/
+
+/* start about page */
+
+.supervisor .links {
+    right: 15px;
+    left: unset !important
+}
+
+    .supervisor .links a {
+        margin-left: 18px;
+        margin-right: 0 !important
+    }
+
+.student .student_img .overlay a {
+    margin-left: 18px;
+    margin-right: 0 !important
+}
+/* end about page */
+
+/* start item page */
+
+.file_page .file_box .file_main_info .download_info {
+    right: unset !important;
+    left: 0
+}
+
+    .file_page .file_box .file_main_info .download_info .type_img_holder {
+        margin-left: 20px;
+        margin-right: 0 !important
+    }
+
+    .file_page .file_box .file_main_info .download_info .file_size {
+        margin-left: 10px;
+        margin-right: 0 !important
+    }
+
+.file_page .file_box .file_main_info .file_title_holder .file_title {
+    margin-right: 0 !important;
+    margin-left: 10px
+}
+
+.file_page .file_box .file_college_info {
+    display: flex
+}
+
+    .file_page .file_box .file_college_info > span {
+        margin-left: 25px;
+        margin-right: 0 !important
+    }
+
+    .file_page .file_box .file_college_info .fa {
+        margin-left: 8px;
+        margin-right: 0 !important
+    }
+
+.file_page .file_box .file_main_info .item_upload_date i.fa {
+    margin-left: 8px;
+    margin-right: 0 !important
+}
+
+.file_page .file_box a.favorite {
+    margin-left: 10px;
+    margin-right: 0 !important
+}
+
+.file_statistics .statistic {
+    margin-left: 25px;
+    margin-right: 0 !important
+}
+
+.file_page .file_box .report_abuse {
+    left: 10px;
+    right: unset !important
+}
+
+
+/* end item page */
+
+/* start courses page */
+.course_card .course_items_number i.fa {
+    margin-left: 5px;
+    margin-right: 0 !important
+}
+
+.years_select_li {
+    margin-right: auto;
+    margin-left: unset !important
+}
+
+    .years_select_li label {
+        margin-left: 10px;
+        margin-right: 0 !important
+    }
+
+    .years_select_li select {
+        padding-right: 15px;
+        padding-left: 28px;
+    }
+
+/* end courses page */
+
+/* start login page */
+
+.login_page_navigation {
+    left: 40px;
+    right: unset !important
+}
+
+/* end login page */
+
+/***************************************************************************************** Start Media */
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+}
+
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+    .login_register_nav li {
+        margin-left: 20px;
+        margin-right: 0 !important
+    }
+
+    .homepage_contant .bars {
+        right: 30px;
+        left: unset !important
+    }
+
+    .side_nav {
+        padding-left: 12px;
+        padding-right: unset !important
+    }
+
+    .side_nav_container {
+        right: 0;
+        left: unset !important
+    }
+}
+
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+
+    .dropdownUserMenu {
+        right: -100px;
+        left: unset !important
+    }
+
+    .login_register_nav li {
+        margin-right: 0
+    }
+
+        .login_register_nav li:first-of-type {
+            margin-right: 20px
+        }
+}
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+    .search_container .fa-search {
+        left: 50px;
+        right: unset !important
+    }
+
+    .search_container .filter_btn {
+        margin-right: 7px;
+        margin-left: unset !important
+    }
+}
+
+@media (max-width: 476px) {
+    .dropdownLangMenu {
+        right: -100px
+    }
+    .navbar .bars {
+        left: 10px;
+        right: unset !important
+    }
+
+    input.search_input {
+        margin-right: 10px;
+        margin-left: unset !important
+    }
+
+    .search_container .fa-search {
+        left: 147px;
+        right: unset !important
+    }
+}
+
+@media (max-width: 380px) {
+
+    .search_container .fa-search {
+        left: 115px;
+        right: unset !important
+    }
+}
+
+/***************************************************************************************** End Media */

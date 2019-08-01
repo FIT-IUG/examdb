@@ -1,0 +1,140 @@
+﻿body {
+}
+
+.about_us_page {
+    background: #fff;
+    padding: 50px;
+    padding-top: 50px;
+    min-height: calc(100vh - 65px)
+}
+
+.heading {
+    margin-bottom: 25px
+}
+
+section {
+    margin-bottom: 60px
+}
+
+.student {
+}
+
+    .student .student_img,
+    .supervisor .supervisor_img {
+        overflow: hidden;
+        height: 260px;
+        margin-bottom: 10px;
+        position: relative
+    }
+        .supervisor .supervisor_img {
+            margin: 0
+        }
+
+        .student .student_img .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--main-color-transparent);
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            /*visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.4s ease-in-out;*/
+        }
+
+    .student:hover .overlay {
+        display: flex
+        /*visibility: visible;
+            opacity: 1;*/
+    }
+
+    .student:hover .student_img .overlay a {
+        display: inline-block
+    }
+
+    .student .student_img .overlay a {
+        display: none;
+        margin-right: 18px;
+        color: inherit
+    }
+
+.about_us_page .student .student_img img,
+.about_us_page .supervisor .supervisor_img img {
+    width: 100%
+}
+
+.student .name {
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.student .bio {
+    text-align: center;
+    color: #898989;
+    font-size: 14px;
+}
+
+.student:hover .name {
+    color: var(--main-color)
+}
+
+.supervisor .name {
+    margin-bottom: 3px;
+    margin-top: 20px;
+}
+
+    .supervisor .bio {
+        color: #898989;
+        font-size: 14px;
+    }
+.supervisor .links {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+}
+.supervisor .links a {
+    color: #444;
+    margin-right: 18px;
+    
+}
+
+/***************************************************************************************** Start Media */
+
+
+
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+}
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+    .supervisor .links {
+        bottom: -20px
+    }
+    .supervisor .name {
+        margin-top: 0
+    }
+    .supervisor .about {
+        font-size: 14px
+    }
+}
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+    .about_us_page{
+        padding: 50px 30px
+    }
+    .supervisor .name {
+        margin-top: 25px;
+    }
+}
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+    .about_us_page {
+        margin-top: 45px;
+    }
+}
+
+/***************************************************************************************** End Media */

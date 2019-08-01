@@ -1,0 +1,48 @@
+﻿body {
+}
+
+.search_page {
+    background: #fff;
+    padding: 50px;
+    min-height: calc(100vh - 65px)
+}
+    .search_page .search_page_title {
+        margin-bottom: 0px
+    }
+    .search_page nav.pagination_nav {
+        display: flex;
+        justify-content: space-between;
+    }
+.bottom_nav_pagination .pagination {
+    justify-content: flex-end
+}
+
+/***************************************************************************************** Start Media */
+
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+
+}
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+
+}
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+   
+
+    .search_page nav.pagination_nav {
+        flex-direction: column;
+        height: 100px;
+    }
+}
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+    .search_page {
+        padding: 70px 10px
+    }
+    
+    
+}
+
+/***************************************************************************************** End Media */
