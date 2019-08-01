@@ -10,11 +10,13 @@ namespace exam_db.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public virtual ICollection<File> listOfFavoriteFile { get; set; }
-        public int depatrmantId { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public virtual ICollection<Item> listOfFavoriteFile { get; set; }
+        public int departmentId { get; set; }
         public virtual Department department { get; set; }
-        public int collegeId { get; set; }
-        public virtual College college { get; set; }
+        //public int collegeId { get; set; }
+        //public virtual College college { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -45,5 +47,26 @@ namespace exam_db.Models
         public System.Data.Entity.DbSet<exam_db.Models.Department> Departments { get; set; }
 
         public System.Data.Entity.DbSet<exam_db.Models.File> Files { get; set; }
+
+        public System.Data.Entity.DbSet<exam_db.Models.Item> Items { get; set; }
+
+        private DbSet<ApplicationUser> users;
+
+        public DbSet<ApplicationUser> GetUsers()
+        {
+            return users;
+        }
+
+        public void SetUsers(DbSet<ApplicationUser> value)
+        {
+            users = value;
+        }
+
+        //old code
+        //public DbSet<ApplicationUser> Users { get; set; }
+
+        public System.Data.Entity.DbSet<exam_db.Models.Report> Reports { get; set; }
+
+        public System.Data.Entity.DbSet<exam_db.Models.Favorite> Favorites { get; set; }
     }
 }
