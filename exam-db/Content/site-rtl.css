@@ -259,20 +259,66 @@ label.active {
     right: unset !important
 }
 
+section.login_form_section, section.signup_form_section {
+    padding-right: 15%;
+    padding-left: 0 !important
+}
+.pr-1 {
+    padding-left: 0.25rem !important;
+    padding-right: 15px !important;
+}
+.pl-1 {
+    padding-right: 0.25rem !important;
+    padding-left: 15px !important;
+}
+.field_hint_icon {
+    left: 10px;
+    right: unset !important
+}
+.signup_page label,
+.login_page  label {
+    right: 13px;
+    left: unset !important
+}
+input.form-control, select.form-control {
+    text-align: right
+}
 /* end login page */
-
 /***************************************************************************************** Start Media */
 /*Large devices (desktops, less than 1200px)*/
 @media (max-width: 1199.98px) {
+    input .search_input {
+        width: 350px;
+        
+    }
+
 }
 
 /*Medium devices (tablets, less than 992px)*/
 @media (max-width: 991.98px) {
+    .signup_field_col_sm {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+  
+    section.login_form_section, section.signup_form_section {
+        padding-left: 8% !important;
+        padding-right: 0% !important;
+    }
     .login_register_nav li {
         margin-left: 20px;
+        font-size:12px;
         margin-right: 0 !important
     }
-
+    a.navbar-brand {
+        font-size: 20px;
+    }
+    input.search_input {
+        width: 300px;
+    }
+    #dropdownLangMenu.dropdown-toggle {
+        font-size: 20px
+    }
     .homepage_contant .bars {
         right: 30px;
         left: unset !important
@@ -291,7 +337,14 @@ label.active {
 
 /*Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767.98px) {
+    section.login_form_section, section.signup_form_section {
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
 
+    input.search_input {
+        width: 230px;
+    }
     .dropdownUserMenu {
         right: -100px;
         left: unset !important
@@ -316,6 +369,9 @@ label.active {
     .search_container .filter_btn {
         margin-right: 7px;
         margin-left: unset !important
+    }
+    input.search_input {
+        width: 90%;
     }
 }
 

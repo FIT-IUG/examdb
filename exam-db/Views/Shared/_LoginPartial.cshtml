@@ -3,16 +3,16 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
 
         <div class="dropdown">
-            <div class="dropdown-toggle" id="dropdownUserMenu"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown-toggle" id="dropdownUserMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="navbar-user-img" src="~/Content/images/avatar.png" />
                 <span class="username">
-                    
-                                <a href="~/Manage/Index" class="black_link bold_custom">@User.Identity.GetUserName()</a>
-                            </span>
+
+                    <a href="~/Manage/Index" class="black_link bold_custom">@User.Identity.GetUserName()</a>
+                </span>
 
             </div>
 
@@ -26,11 +26,26 @@
 }
 else
 {
-    <ul class="nav navbar-nav login_register_nav">
-        <li  class="nav-item"><a class="nav-link" href="~/Account/Register" id="registerLink"><i class="fa fa-user-plus"></i> @Resources.Global.Sign_up</a></li>
-        <li  class="nav-item"><a class="nav-link" href="~/Account/Login" id="loginLink"><i class="fa fa-sign-in"></i> @Resources.Global.Login</a></li>
+
+
+    <!-- login & signup links dropdown -->
+    <div class="dropdown d-flex d-md-none">
+        <div class="dropdown-toggle" data-toggle="dropdown" id="dropdownUserMenu" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle "></i>
+        </div>
+
+        <div class="dropdown-menu dropdownUserMenu animated fadeInDown faster" aria-labelledby="dropdownUserMenu">
+            <a class="dropdown-item bold_custom dropdownUserMenu_item " href="~/Account/Register"  id="registerLink"><i class="fa fa-user-plus"></i>@Resources.Global.Sign_up</a>
+            <a class="dropdown-item bold_custom dropdownUserMenu_item" href="~/Account/Login" id="loginLink"><i class="fa fa-sign-in"></i>@Resources.Global.Login</a>
+        </div>
+    </div>
+
+
+    <ul class="nav navbar-nav login_register_nav d-none d-md-flex">
+        <li class="nav-item"><a class="nav-link" href="~/Account/Register" id="registerLink"><i class="fa fa-user-plus"></i> @Resources.Global.Sign_up</a></li>
+        <li class="nav-item"><a class="nav-link" href="~/Account/Login" id="loginLink"><i class="fa fa-sign-in"></i> @Resources.Global.Login</a></li>
     </ul>
 }
 @*<ul>
-    <li><a class="" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-</ul>*@
+        <li><a class="" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>*@
