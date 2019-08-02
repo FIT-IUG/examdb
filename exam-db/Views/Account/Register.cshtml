@@ -67,7 +67,8 @@
                         <div class="form-group">
                             <div class="signup_field_wrap">
                                 <label for="FirstName"> First Name</label>
-                                <input class="form-control" type="text" name="FirstName" id="FirstName" />
+                                @*<input class="form-control" type="text" name="FirstName" id="FirstName" />*@
+                                @Html.TextBoxFor(m =>m.firstname , new { @class = "form-control", required = "required" })
                                 @*  @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
@@ -76,7 +77,8 @@
                         <div class="form-group">
                             <div class="signup_field_wrap">
                                 <label for="LastName"> Last Name</label>
-                                <input class="form-control" type="text" name="LastName" id="LastName" />
+                                @*<input class="form-control" type="text" name="LastName" id="LastName" />*@
+                                @Html.TextBoxFor(m => m.lastname, new { @class = "form-control", required = "required" })
                                 @* @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })*@
                             </div>
                         </div>

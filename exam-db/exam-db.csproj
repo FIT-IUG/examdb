@@ -233,6 +233,10 @@
     <Compile Include="Migrations\201907161047427_deleteCollegeId.Designer.cs">
       <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908021644121_updateidentity2.cs" />
+    <Compile Include="Migrations\201908021644121_updateidentity2.Designer.cs">
+      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Item.cs" />
@@ -403,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907161047427_deleteCollegeId.resx">
       <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
+      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -68,7 +68,9 @@ namespace exam_db.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
         public string firstname { get; set; }
+        [Required]
         public string lastname { get; set; }
         
         public int departmentId { get; set; }
