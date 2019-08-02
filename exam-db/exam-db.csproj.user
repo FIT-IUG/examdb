@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
@@ -10,6 +10,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Controller_SelectedScaffolderID>MvcControllerWithActionsScaffolder</Controller_SelectedScaffolderID>
+    <Controller_SelectedScaffolderCategoryPath>root/Controller</Controller_SelectedScaffolderCategoryPath>
+    <WebStackScaffolding_ControllerDialogWidth>600</WebStackScaffolding_ControllerDialogWidth>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
