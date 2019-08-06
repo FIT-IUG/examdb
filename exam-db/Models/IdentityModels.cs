@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,13 +10,9 @@ namespace exam_db.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        public string firstname { get; set; }
-        [Required]
-        public string lastname { get; set; }
-
+        //public string firstName { get; set; }
+        //public string lastName { get; set; }
         public virtual ICollection<Item> listOfFavoriteFile { get; set; }
-        [Required]
         public int departmentId { get; set; }
         public virtual Department department { get; set; }
         //public int collegeId { get; set; }

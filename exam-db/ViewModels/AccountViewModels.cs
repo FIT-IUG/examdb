@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 //this class contain View model of All Required model to deal with 
 namespace exam_db.Models
 {
@@ -68,11 +69,12 @@ namespace exam_db.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required]
+        [Column("nvarchar(max)")]
         public string firstname { get; set; }
-        [Required]
+        [Column("nvarchar(max)")]
         public string lastname { get; set; }
-        
+
+
         public int departmentId { get; set; }
         //public virtual Department department { get; set; }
         public int collegeId { get; set; }

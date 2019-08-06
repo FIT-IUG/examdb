@@ -15,36 +15,87 @@
             <a class="navbar-brand" href="~/Home/Index">
                 <img class="navbar-logo" src="~/Content/images/logo-small.png" /> Exam<span>DB</span>
             </a>
+            @*<form id="search_form" method="get" action="~/Home/Search" class="search_container">
+                    <input type="text" class="search_input" placeholder="Search For Exams, Quizs and others.." />
+                    <i onclick="document.getElementById('search_form').submit();" style="cursor:pointer" class="fa fa-search"></i>
+                    <span class="filter_btn"><i class="fa fa-sliders"></i></span>
+                </form>
+
+                <div class="search_filters_container">
+                    <div class="pretty  p-default p-curve">
+                        <input type="checkbox" value="midterm" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom">Midterm</label>
+                        </div>
+                    </div>
+                    <div class="pretty  p-default p-curve">
+                        <input type="checkbox" value="final" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom">Final</label>
+                        </div>
+                    </div>
+                    <div class="pretty p-default p-curve check_all_filter">
+                        <input type="checkbox" value="all" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom">All</label>
+                        </div>
+                    </div>
+                </div>*@
             <!-- Search -->
-            
-            <form id="search_form" method="get" action="~/Home/Search" class="search_container">
-                <input type="text" class="search_input" placeholder="Search For Exams, Quizs and others.." />
-                <i onclick="document.getElementById('search_form').submit();" style="cursor:pointer" class="fa fa-search"></i>
-                <span class="filter_btn"><i class="fa fa-sliders"></i></span>
-            </form>
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "search_container", id = "search_form" }))
+            {
 
-            <div class="search_filters_container">
-                <div class="pretty  p-default p-curve">
-                    <input type="checkbox" value="midterm" />
-                    <div class="state p-primary-o">
-                        <label class="bold_custom">Midterm</label>
-                    </div>
-                </div>
-                <div class="pretty  p-default p-curve">
-                    <input type="checkbox" value="final" />
-                    <div class="state p-primary-o">
-                        <label class="bold_custom">Final</label>
-                    </div>
-                </div>
+                <input type="text" class="search_input" id="search" name="search" placeholder="Search For Exams, Quizs and others.." />
+                    <i onclick="document.getElementById('search_form').submit();" style="cursor:pointer" class="fa fa-search"></i>
+                    <span class="filter_btn"><i class="fa fa-sliders"></i></span>
 
-                <div class="pretty p-default p-curve check_all_filter">
-                    <input type="checkbox" value="all" />
-                    <div class="state p-primary-o">
-                        <label class="bold_custom">All</label>
-                    </div>
-                </div>
 
-            </div>
+                    <div class="search_filters_container">
+                        <div class="pretty  p-default p-curve">
+                            <input type="checkbox" id="mid" name="mid" value="mid" />
+                            <div class="state p-primary-o">
+                                <label class="bold_custom">Midterm</label>
+                            </div>
+                        </div>
+                        <div class="pretty  p-default p-curve">
+                            <input type="checkbox" id="final" name="final" value="final" />
+                            <div class="state p-primary-o">
+                                <label class="bold_custom">Final</label>
+                            </div>
+                        </div>
+                        <div class="pretty p-default p-curve check_all_filter">
+                            <input type="checkbox" id="all" name="all" value="all" />
+                            <div class="state p-primary-o">
+                                <label class="bold_custom">All</label>
+                            </div>
+                        </div>
+                        <div class="pretty p-default p-curve check_all_filter">
+                            <input type="checkbox" id="quiz" name="quiz" value="quiz" />
+                            <div class="state p-primary-o">
+                                <label class="bold_custom">Quiz</label>
+                            </div>
+                        </div>
+                        <div class="pretty p-default p-curve check_all_filter">
+                            <input type="checkbox" id="summary" name="summary" value="summary" />
+                            <div class="state p-primary-o">
+                                <label class="bold_custom">Summary</label>
+                            </div>
+                        </div>
+                        <div class="pretty p-default p-curve check_all_filter">
+                            <select id="year" name="year" class="search_form">
+                                <option value=""> Select Year</option>
+                                <option value="allyears"> All Years</option>
+                                @for (int i = 2000; i < 2020; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        
+                        </div>
+                    </div>
+
+            }
+
 
 
 
@@ -75,16 +126,16 @@
 
 
             <!-- End Navigation Button -->
-           
+
         </div>
-</nav>
+    </nav>
 
 
 
     <div class="body-content">
         @RenderBody()
 
-        
+
         @* <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - ExamDB</p>
@@ -98,3 +149,8 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<script>
+    $('input[type="checkbox"]').on('change', function () {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+    });
+</script>

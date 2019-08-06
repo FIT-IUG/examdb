@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,15 +47,49 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="iDiTect.Converter">
+      <HintPath>..\..\..\..\iDiTect.Converter.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MvcPaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Paging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Paging.1.0.1\lib\net40\Paging.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Common, Version=2.2.12.61046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net46\Spire.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.7.46, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net46\Spire.License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=5.2.8.19046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net46\Spire.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=9.2.12.61046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net46\Spire.XLS.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -217,27 +251,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907161005484_AddAll.cs" />
-    <Compile Include="Migrations\201907161005484_AddAll.Designer.cs">
-      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
+    <Compile Include="Migrations\201908041435321_Reset.cs" />
+    <Compile Include="Migrations\201908041435321_Reset.Designer.cs">
+      <DependentUpon>201908041435321_Reset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907161023188_edit.cs" />
-    <Compile Include="Migrations\201907161023188_edit.Designer.cs">
-      <DependentUpon>201907161023188_edit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907161032365_anotherEdit.cs" />
-    <Compile Include="Migrations\201907161032365_anotherEdit.Designer.cs">
-      <DependentUpon>201907161032365_anotherEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907161047427_deleteCollegeId.cs" />
-    <Compile Include="Migrations\201907161047427_deleteCollegeId.Designer.cs">
-      <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908021644121_updateidentity2.cs" />
-    <Compile Include="Migrations\201908021644121_updateidentity2.Designer.cs">
-      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
+    <Compile Include="Migrations\201908041438307_DeleteColumnsUserTbl.cs" />
+    <Compile Include="Migrations\201908041438307_DeleteColumnsUserTbl.Designer.cs">
+      <DependentUpon>201908041438307_DeleteColumnsUserTbl.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Paging.cs" />
@@ -252,6 +275,10 @@
     <Compile Include="Models\University.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ConvertText.cs" />
+    <Compile Include="ViewModels\ReadContent.cs" />
+    <Compile Include="ViewModels\RecommendViewModel.cs" />
+    <Compile Include="ViewModels\Search.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ExamDB.mdf" />
@@ -282,6 +309,7 @@
     <Content Include="Content\images\writing-1149962_1280.jpg" />
     <Content Include="Content\jquery.dm-uploader.min.css" />
     <Content Include="Content\login_signup.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\pretty-checkbox.min.css" />
     <Content Include="Content\profile_page.css" />
     <Content Include="Content\search.css" />
@@ -292,11 +320,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dm-uploader.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\upload_file_ui.js" />
+    <Content Include="ViewModels\dropzone.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -388,6 +418,7 @@
     <Content Include="Views\Favorites\Details.cshtml" />
     <Content Include="Views\Favorites\Edit.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
+    <Content Include="Views\Home\Recommended.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -396,20 +427,14 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907161005484_AddAll.resx">
-      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
+    <Folder Include="Content\uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201908041435321_Reset.resx">
+      <DependentUpon>201908041435321_Reset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161023188_edit.resx">
-      <DependentUpon>201907161023188_edit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161032365_anotherEdit.resx">
-      <DependentUpon>201907161032365_anotherEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161047427_deleteCollegeId.resx">
-      <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
-      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908041438307_DeleteColumnsUserTbl.resx">
+      <DependentUpon>201908041438307_DeleteColumnsUserTbl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

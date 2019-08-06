@@ -23,7 +23,8 @@
                     <h6 class="side_nav_headers"><i class="fa fa-list-alt"></i> Courses Categories</h6>
                     <ul class="list-unstyled side_nav_list">
                         <a href="~/Web/UniversityRequirements"><li>University requirement</li></a>
-                        <li class="colleges">College requirement
+                        <li class="colleges">
+                            College requirement
                             <ul class="list-unstyled colleges_list">
                                 @* get them from database *@
                                 @foreach (var item in ViewBag.college)
@@ -32,40 +33,42 @@
 
                                 }
                                 @*<a href="~/Web/College"><li>Faculty of Medicine</li></a>
-                                <a href="~/Web/College"><li>Faculty of Engineering</li></a>
-                                <a href="~/Web/College"><li>Faculty of Information Technology</li></a>
-                                <a href="~/Web/College"><li>Faculty of Nursing</li></a>
-                                <a href="~/Web/College"><li>Faculty of Science</li></a>
-                                <a href="~/Web/College"><li>Faculty of Health Science</li></a>
-                                <a href="~/Web/College"><li>Faculty of Education</li></a>
-                                <a href="~/Web/College"><li>Faculty of Arts</li></a>
-                                <a href="~/Web/College"><li>Faculty of Sharia & Law</li></a>
-                                <a href="~/Web/College"><li>Faculty of Osoul Eddin</li></a>
-                                <a href="~/Web/College"><li>Faculty of Commerce</li></a>*@
+                                    <a href="~/Web/College"><li>Faculty of Engineering</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Information Technology</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Nursing</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Science</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Health Science</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Education</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Arts</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Sharia & Law</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Osoul Eddin</li></a>
+                                    <a href="~/Web/College"><li>Faculty of Commerce</li></a>*@
                             </ul>
                         </li>
-                     </ul>
+                    </ul>
                 </div>
 
             </div>
         </div>
         <!-- End Side Nav Section -->
         <!-- Start Content Section-->
+        @*@using (Html.BeginForm("Upload","Home",FormMethod.Post))
+            {*@
+
+        <div id="filedata"></div>
         <div class="col-md-9">
             <div class="homepage_contant">
                 <div class="container">
                     <!-- Start File Upload Section -->
                     <h4>File Upload</h4>
-
-                    <form id="drag-and-drop-zone" class=" upload_container" action="/file-upload" method="POST" enctype="multipart/form-data">
+                    <form id="drag-and-drop-zone" class="upload_container" action="/Home/Upload" method="POST" enctype="multipart/form-data" ondrop="dropHandler(event);">
                         <div class="text-center">
                             <img class="cloud_upload_img" src="~/Content/images/cloud.png" />
-                            <p>Drag &amp; Drop Files Here or <span class="browse_btn_holder">Browse <input class="browse_btn" type="file" title='Click to add Files' /> </span> to upload files</p>
-
+                            <p>Drag &amp; Drop Files Here or <span class="browse_btn_holder">Browse <input class="browse_btn" type="file" accept=".xls..xlsx image/* " multiple id="mfile" name="mfile" title='Click to add Files' /> </span> to upload files</p>
                         </div>
-                        
+
                         <!-- Modal -->
-                        <div class="upload_file_modal modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModal" aria-hidden="true">
+                        <div class="upload_file_modal modal" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModal" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -74,44 +77,79 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
 
+
+                                    <div class="modal-body">
                                         <div class="container">
                                             <ul class="list-unstyled p-2 d-flex flex-column col" style="padding:0 !important" id="files">
-                                                <li class="text-muted text-center empty">No files uploaded.</li>
-                                            </ul>
+                                                <li class="text-muted text-center empty"><p id="txt"> Files has been seleted. </p></li>
 
+                                            </ul>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <div class="upload_field_wrap">
                                                             <label for="ItemTitle"> File Title</label>
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" class="form-control" id="title" name="title" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="upload_field_wrap">
-                                                            <select class="form-control">
-                                                                <option value="" disabled selected>Department</option>
-                                                                <option value="">value 1</option>
-                                                                <option value="">value 2</option>
-                                                            </select>
+
+                                                            @Html.DropDownList("Department", ViewBag.lst as SelectList, "Select Department", new { @class = "form-control" })
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="upload_field_wrap">
-                                                            <select class="form-control">
-                                                                <option value="" disabled selected>Course Name</option>
-                                                                <option value="">value 1</option>
-                                                                <option value="">value 2</option>
+                                                            <select class="form-control" id="CourseId" name="CourseId">
+                                                                <option value="" disabled selected>Course</option>
                                                             </select>
+
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="upload_field_wrap">
+                                                            <select class="form-control" id="category" name="category">
+                                                                <option value="" disabled selected>Select Category</option>
+                                                                <option value="mid">
+                                                                    Mid Term
+                                                                </option>
+                                                                <option value="final">
+                                                                    Final
+                                                                </option>
+                                                                <option value="quiz">
+                                                                    Quiz
+                                                                </option>
+                                                                <option value="summary">
+                                                                    Summary
+                                                                </option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="upload_field_wrap">
+                                                            <select id="yearOfPublish" name="yearOfPublish" class="form-control">
+                                                                <option value="" disabled> Select Year</option>
+
+                                                                @for (int i = 2000; i < 2020; i++)
+                                                                {
+                                                                    <option value="@i">@i</option>
+                                                                }
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <div class="upload_field_wrap">
@@ -122,160 +160,27 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </form>
-                  
-                    
 
-                   
+
+
                     <!-- End File Upload Section -->
                     <!-- Start Recommended Section -->
                     <h4>Recommended</h4>
-                    <ul class="list-unstyled recommended_list">
-                        <!-- Start list item show (repeat it inside for loop)-->
-                        <li>
-                            <div class="item">
-                                <div class="item_body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="item_img_and_info_holder">
-                                                <div class="item_type_img_holder">
-                                                    <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                                </div>
-                                                <div class="item_info">
-                                                    <a class="black_link no_decoration" href="~/Web/File">
-                                                        <h6 class="item_title">database midterm exam</h6>
-                                                    </a>
-                                                    <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                    <a class="black_link no_decoration" style="display:block" href="#">
-                                                        <div class="item_owner">
-                                                            <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                            <span class="item_owner_name">omar kishko</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="item_statistics">
-                                                <div class="statistic">
-                                                    <i class="fa fa-heart"></i> 184
-                                                </div>
-                                                <div class="statistic">
-                                                    <i class="fa fa-eye"></i> 301
-                                                </div>
-                                                <div class="statistic">
-                                                    <i class="fa fa-download"></i> 190
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <span class="item_date">2019</span>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- End list item show (repeat it inside for loop)-->
-
-                        <li>
-                            <div class="item">
-                                <div class="item_body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="item_img_and_info_holder">
-                                                <div class="item_type_img_holder">
-                                                    <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                                </div>
-                                                <div class="item_info">
-                                                    <a class="black_link no_decoration" href="~/Web/File">
-                                                        <h6 class="item_title">database midterm exam</h6>
-                                                    </a>
-                                                    <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                    <a class="black_link no_decoration" style="display:block" href="#">
-                                                        <div class="item_owner">
-                                                            <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                            <span class="item_owner_name">omar kishko</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="item_statistics">
-                                                <div class="statistic">
-                                                    <i class="fa fa-heart"></i> 184
-                                                </div>
-                                                <div class="statistic">
-                                                    <i class="fa fa-eye"></i> 301
-                                                </div>
-                                                <div class="statistic">
-                                                    <i class="fa fa-download"></i> 190
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <span class="item_date">2018</span>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="item">
-                                <div class="item_body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="item_img_and_info_holder">
-                                                <div class="item_type_img_holder">
-                                                    <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                                </div>
-                                                <div class="item_info">
-                                                    <a class="black_link no_decoration" href="~/Web/File">
-                                                        <h6 class="item_title">database midterm exam</h6>
-                                                    </a>
-                                                    <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                    <a class="black_link no_decoration" style="display:block" href="#">
-                                                        <div class="item_owner">
-                                                            <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                            <span class="item_owner_name">omar kishko</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="item_statistics">
-                                                <div class="statistic">
-                                                    <i class="fa fa-heart"></i> 184
-                                                </div>
-                                                <div class="statistic">
-                                                    <i class="fa fa-eye"></i> 301
-                                                </div>
-                                                <div class="statistic">
-                                                    <i class="fa fa-download"></i> 190
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <span class="item_date">2017</span>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
+                    @Html.Action("Recommended")
                     <!-- End Recommended Section -->
                 </div>
             </div>
         </div>
+        @*}*@
+
         <!-- End Content Section-->
 
     </div>
@@ -287,107 +192,291 @@
     <script src="~/Scripts/jquery.dm-uploader.min.js"></script>
     <script src="~/Scripts/upload_file_ui.js"></script>
     <script>
-        $(function () {
-            /*
-             * drag & drop file uploding plugin configuration & callbacks.
-             */
-            $('#drag-and-drop-zone').dmUploader({ //
-                url: 'backend/upload.php',
-                maxFileSize: 3000000, // 3 Megs
+        function dropHandler(event) {
+
+            event.preventDefault();
+
+            mfile.files = event.dataTransfer.files;
+            console.log(mfile);
+            //ChangeImageHandler();
+            FileConfigHandler();
+
+        }
+        function formatBytes(bytes, decimals) {
+            if (bytes == 0) return '0 Bytes';
+            var k = 1024,
+                dm = decimals <= 0 ? 0 : decimals || 2,
+                sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+        function ChangeImageHandler()
+        {
+            var x = $('#mfile').val();
+            let file = $('#mfile')[0].files[0];
+            var size = $('#mfile')[0].size;
+
+            var sizeWithTag = formatBytes(size);
+            $('#item_size').text(sizeWithTag);
+            $('#item_title').text(file.name);
+            if (x.split('.').pop()=='pdf') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/pdf.png");
+            }
+            else if (x.split('.').pop() == 'docx') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/doc.png");
+            }
+            else if (x.split('.').pop() == 'jpg') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/jpg.png");
+            }
+            else if (x.split('.').pop() == 'png') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/png.png");
+            }
+            else if (x.split('.').pop() == 'ppt') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/ppt.png");
+            }
+            else if (x.split('.').pop() == 'txt') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/txt.png");
+            }
+            else if (x.split('.').pop() == 'xls') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/xls.png");
+            }
+            else if (x.split('.').pop() == 'csv') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/csv.png");
+            }
+                console.log();
+
+        }
+        function FileConfigHandler()
+        {
+            //console.log('chal raha h')
+            //var f = Object.assign({}, mfile);
+            //var files1=f;
+            //console.log(f);
+            
+            //for (var i = 0; i < f.length; i++) {
+
+            //   // console.log(files1[i]);
+            //  // var x= AddChild(files1[i]);
+            //  $('#files').append(x);
+
+            //}
+            var fi = document.getElementById('mfile');
+            Object.freeze(mfile);
+
+           // var fi = JSON.parse(JSON.stringify(fii));
+            
+            //fi = $('mfile').clone(true);
+
+            // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+            if (fi.files.length > 0) {
+
+
+
+                // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                    var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+                    var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                    var x = AddChild(fname, fsize);
+                    // SHOW THE EXTRACTED DETAILS OF THE FILE.
+                     $('#files').append(x);
+
+                }
+                JSON.parse(fii);//dont remove this please i know it is making error but please
+            }
+        }
+   
+        function AddChild(name,sizee)
+        {
+            var template = $('#files-template').html();
+            var name = name;
+            var parent = $(template);
+            var extention =  name.split('.').pop();
+           // console.log(item.name.split('.').pop());
+            ////item.name;
+            var temp_size = sizee;//item.size;
+            var size = formatBytes(temp_size);
+          parent.find('#item_size').text(sizee)
+           parent.find('#item_title').text(name)
+
+            if (extention == 'pdf') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/pdf.png");
+            }
+            else if (extention == 'docx') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/doc.png");
+            }
+            else if (extention == 'jpg') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/jpg.png");
+            }
+            else if (extention == 'png') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/png.png");
+            }
+            else if (extention == 'ppt') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/ppt.png");
+            }
+            else if (extention == 'txt') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/txt.png");
+            }
+            else if (extention == 'xls' || extention=='xlsx') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/xls.png");
+            }
+            else if (extention == 'csv') {
+               $(parent).find('.item_type_img').attr("src", "../../Content/images/files_types/csv.png");
+            }
+
+
+            return '<li class="uploaded_item">' + parent.html() + '</li>'
+        }
+
+        //function dropHandler(ev) {
+        //    console.log('File(s) dropped');
+
+        //    // Prevent default behavior (Prevent file from being opened)
+        //    ev.preventDefault();
+        //    var file = ev.dataTransfer.files;
+        //    //  var file = e.originalEvent.dataTransfer.files;
+        //    var fileData = new FormData();
+        //    for (var i = 0; i < file.length; i++) {
+        //        fileData.append("fileData", ev.dataTransfer.files[i]);
+        //    }
+
+
+            //if (ev.dataTransfer.items) {
+            //    // Use DataTransferItemList interface to access the file(s)
+            //    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+            //        // If dropped items aren't files, reject them
+            //        if (ev.dataTransfer.items[i].kind === 'file') {
+            //            file[i] = ev.dataTransfer.items[i].getAsFile();
+            //            fileData.append("fileData",ev.dataTransfer.files[i]);
+            //            console.log('... file[' + i + '].name = ' + file.name);
+            //        }
+            //    }
+
+
+            //} else {
+            //    // Use DataTransfer interface to access the file(s)
+            //    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+            //        fileData.append("fileData", ev.dataTransfer.files[i]);
+            //        console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+            //    }
+            //}
+
+
+        //    $.ajax({
+        //        type: "POST",
+        //        dataType: "json",
+        //        enctype: 'multipart/form-data',
+        //        url:'/Home/SendFile',
+        //        contentType: false, // Not to set any content header
+        //        processData: false, // Not to process data
+        //        data: fileData,
+        //        success: function (result, status, xhr) {
+        //            alert(result);
+        //        },
+        //        error: function (xhr, status, error) {
+        //            alert(status);
+        //        }
+
+
+        //    })
+        //}
+
+
+        $(document).ready(function () {
+            $('#uploadFileModal').hide();
+            $('#drag-and-drop-zone').dmUploader({
                 onDragEnter: function () {
                     // Happens when dragging something over the DnD area
                     this.addClass('active');
-                    $('.upload_container .cloud_upload_img').addClass('animated infinite shake');
+                    $('.upload_container .cloud_upload_img').addClass('animated infinite shake')
+
+
                 },
-                onDragLeave: function () {
+                onDragLeave: function (e) {
                     // Happens when dragging something OUT of the DnD area
                     this.removeClass('active');
                     $('.upload_container .cloud_upload_img').removeClass('animated infinite shake');
+                    //readmultifiles(document.getElementById('#file'));
 
-                },
-                onInit: function () {
-                    // Plugin is ready to use
-                    ui_add_log('Penguin initialized :)', 'info');
-                },
-                onComplete: function () {
-                    // All files in the queue are processed (success or error)
-                    ui_add_log('All pending tranfers finished');
-                },
-                onNewFile: function (id, file) {
-                    // When a new file is added using the file selector or the DnD area
-                    ui_add_log('New file added #' + id);
-                    ui_multi_add_file(id, file);
+                    $('#uploadFileModal').modal("show");
 
-                    $('#uploadFileModal').modal("show")
 
+
+
+                }})
+        })
+
+
+
+        $('#mfile').change(function () {
+
+            console.log(mfile.files);
+            $('#uploadFileModal').modal("show");
+            //document.getElementById("#txt").innerHTML = "1 file has been Selected";
+           // console.log(mfile.files);
+            //ChangeImageHandler();
+            FileConfigHandler();
+
+
+        });
+        $("#Department").change(function () {
+            LoadDepartments();
+        });
+
+        function LoadDepartments() {
+            var collegeId = document.getElementById("Department");
+            var ID = collegeId.options[collegeId.selectedIndex].value;
+            var depatments = document.getElementById("CourseId");
+            console.log(ID);
+
+            $.ajax({
+                url: '@Url.Action("getCourses", "Home")',
+                type: 'GET',
+                dataType: "json",
+                data: { idString: ID },
+                success: function (result) {
+                    console.log(result)
+                    depatments.innerHTML = "";
+
+                    $.each(result, function (i, result) {
+                        var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
+
+                        $('#CourseId').append(options);
+                    });
                 },
-                onBeforeUpload: function (id) {
-                    // about tho start uploading a file
-                    ui_add_log('Starting the upload of #' + id);
-                    ui_multi_update_file_status(id, 'uploading', 'Uploading...');
-                    ui_multi_update_file_progress(id, 0, '', true);
+                failure: function (response) {
+                    alert(response.responseText);
+                    console.log(response.responseText);
                 },
-                onUploadCanceled: function (id) {
-                    // Happens when a file is directly canceled by the user.
-                    ui_multi_update_file_status(id, 'warning', 'Canceled by User');
-                    ui_multi_update_file_progress(id, 0, 'warning', false);
-                },
-                onUploadProgress: function (id, percent) {
-                    // Updating file progress
-                    ui_multi_update_file_progress(id, percent);
-                },
-                onUploadSuccess: function (id, data) {
-                    // A file was successfully uploaded
-                    ui_add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
-                    ui_add_log('Upload of file #' + id + ' COMPLETED', 'success');
-                    ui_multi_update_file_status(id, 'success', 'Upload Complete');
-                    ui_multi_update_file_progress(id, 100, 'success', false);
-                },
-                onUploadError: function (id, xhr, status, message) {
-                    ui_multi_update_file_status(id, 'danger', message);
-                    ui_multi_update_file_progress(id, 0, 'danger', false);
-                },
-                onFallbackMode: function () {
-                    // When the browser doesn't support this plugin :(
-                    ui_add_log('Plugin cant be used here, running Fallback callback', 'danger');
-                },
-                onFileSizeError: function (file) {
-                    ui_add_log('File \'' + file.name + '\' cannot be added: size excess limit', 'danger');
+                error: function (response) {
+                    alert(response.responseText);
+                    console.log(response.responseText);
                 }
             });
-        });
+        }
     </script>
 }
-
-
 <!-- Debug item template -->
 <script type="text/html" id="debug-template">
     <li class="list-group-item text-%%color%%"><strong>%%date%%</strong>: %%message%%</li>
 </script>
 
 <!-- File item template -->
-<script type="text/html" id="files-template">
+<script type="text/template" id="files-template">
     <li class="uploaded_item">
         <div class="item_body">
             <div class="item_img_and_info_holder">
                 <div class="item_type_img_holder">
-                    <img class="item_type_img" src="../../Content/images/files_types/pdf.png" />
+                    <img class="item_type_img" id="item_type_img" src="../../Content/images/files_types/pdf.png" />
                 </div>
                 <div class="item_info" style="width: 100%">
-                    <h6 class="item_title">%%filename%% </h6>
+                    <h6 class="item_title" id="item_title">%%filename%% </h6>
                     <div class="item_details" style="margin-bottom: 10px;">
-                        <span class="item_size">00.0 MB</span> <span> Status: </span> <span class="text-muted status">Waiting</span> <span class="item_progress_value">44%</span>
+                        <span class="item_size" id="item_size">00.0 MB</span>
                     </div>
-                    <div class="progress file_upload_progress mb-2">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                             role="progressbar"
-                             style="width: 0%"
-                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </li>
 </script>
-

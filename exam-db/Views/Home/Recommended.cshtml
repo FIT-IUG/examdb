@@ -1,0 +1,60 @@
+﻿@if (Request.IsAuthenticated)
+{
+
+    <ul class="list-unstyled recommended_list">
+        <!-- Start list item show (repeat it inside for loop)-->
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="item">
+                    <div class="item_body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="item_img_and_info_holder">
+                                    <div class="item_type_img_holder">
+                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
+                                    </div>
+                                    <div class="item_info">
+                                        <a class="black_link no_decoration" href="~/Web/File">
+                                            <h6 class="item_title">@item.title</h6>
+                                        </a>
+                                        <span class="item_college">@item.college - <span>@item.department</span></span>
+                                        <a class="black_link no_decoration" style="display:block" href="#">
+                                            <div class="item_owner">
+                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
+                                                <span class="item_owner_name">@item.user</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="item_statistics">
+                                    <div class="statistic">
+                                        <i class="fa fa-heart"></i> @item.likes
+                                    </div>
+                                    <div class="statistic">
+                                        <i class="fa fa-eye"></i> @item.views
+                                    </div>
+                                    <div class="statistic">
+                                        <i class="fa fa-download"></i> @item.download
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="item_date">@item.year</span>
+                    </div>
+                </div>
+            </li>
+        }
+
+    
+
+    </ul>
+
+
+}
+else
+{
+       <p class="text"> </p>
+}

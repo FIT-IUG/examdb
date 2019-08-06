@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,8 @@ namespace exam_db.Models
         public string category { get; set; }//file category (quiz , exam,others,Summaries);
         public int likeNumber { get; set; }
         public DateTime uploadTime { get; set; }
+        [Column(TypeName ="nvarchar(max)")]
+        public string FileContent { get; set; }
         public virtual ICollection<File> listOfFile { get; set; }
 
         public int CourseId { get; set; }
