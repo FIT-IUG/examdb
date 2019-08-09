@@ -21,9 +21,9 @@ body {
     background: var(--main-bg-app)
 }
 .successToaster,
-.errorToaster{
+.errorToaster {
     display: block;
-    background: #1abc9c;
+    
     position: fixed;
     top: 10px;
     left: calc(50% - 150px);
@@ -31,18 +31,42 @@ body {
     width: 300px;
     z-index: 10000;
     padding: 10px;
-    border-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     color: #fff;
-    box-shadow: 0px 3px 5px -3px #555;
+    box-shadow: -8px 3px 5px -3px #555;
 }
-
 .errorToaster {
-    background: #eb4d4b !important;
+    background: #e74c3c;
 }
-
-    .bold_custom {
-        font-weight: 450 !important
+.successToaster {
+    background: #2ecc71;
+}
+    .successToaster:before, .errorToaster:before {
+        font: normal normal normal 14px/1 FontAwesome;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: -50px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        box-shadow: 0px 3px 5px -3px #555;
     }
+.successToaster:before {
+    content: "\f058";
+    background-color: #27ae60
+}
+.errorToaster:before {
+    content: "\f057";
+    background-color: #c0392b
+}
+.bold_custom {
+    font-weight: 450 !important
+}
 a.black_link {
     color: #333 !important
 }

@@ -12,6 +12,10 @@ using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using PagedList;
 
+using System.Data;
+using System.Data.Entity;
+
+
 namespace exam_db.Controllers
 {
     public class HomeController : ApplicationBaseController
@@ -69,28 +73,28 @@ namespace exam_db.Controllers
         {
             JsonResult jsonResult = new JsonResult();
             jsonResult.MaxJsonLength = Int32.MaxValue;
-
-            if (!string.IsNullOrEmpty(user.firstname) && !string.IsNullOrEmpty(user.lastname))
+            if(!string.IsNullOrEmpty(user.firstname) && !string.IsNullOrEmpty(user.lastname))
             {
-                var username = User.Identity.Name;
-                var user_db = db.Users.SingleOrDefault(u => u.UserName == username);
-                user_db.firstname = user.firstname;
-                user_db.lastname = user.lastname;
-                db.SaveChanges();
-                jsonResult = Json(new
+                if (!string.IsNullOrEmpty(user.firstname.Trim()) && !string.IsNullOrEmpty(user.lastname.Trim()))
                 {
-                    success = true
-                }, JsonRequestBehavior.AllowGet);
-                return jsonResult;
-            }else
-            {
-                jsonResult = Json(new
-                {
-                    success = false,
-                    error = "FirstName & LastName can't be Empty"
-                }, JsonRequestBehavior.AllowGet);
-                return jsonResult;
+                    var username = User.Identity.Name;
+                    var user_db = db.Users.SingleOrDefault(u => u.UserName == username);
+                    user_db.firstname = user.firstname;
+                    user_db.lastname = user.lastname;
+                    db.SaveChanges();
+                    jsonResult = Json(new
+                    {
+                        success = true
+                    }, JsonRequestBehavior.AllowGet);
+                    return jsonResult;
+                }
             }
+            jsonResult = Json(new
+            {
+                success = false,
+                error = "FirstName & LastName can't be Empty"
+            }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
         }
 
         [HttpPost]
@@ -101,7 +105,6 @@ namespace exam_db.Controllers
 
             if (user.departmentId != 0)
             {
-               
                 var username = User.Identity.Name;
                 var user_db = db.Users.SingleOrDefault(u => u.UserName == username);
                 user_db.departmentId = user.departmentId;
@@ -123,12 +126,27 @@ namespace exam_db.Controllers
             }
         }
 
-        public ActionResult GetUploadedItems(int pageIndex)
+        public ActionResult GetUploadedItems(int pageIndex, int method) // method indicate getting the (1 -> uploaded or 2-> Favorites) items 
         {
+           
             var userId = User.Identity.GetUserId();
             List<Item> items = new List<Item>();
             List<Object> objects = new List<Object>();
-            var db_list = db.Items.Where(c => c.UserId == userId).ToList();
+            List<Item> db_list = new List<Item>();
+            if (method == 1)
+            {
+                db_list = db.Items.Where(c => c.UserId == userId).ToList();
+            }
+            else if(method == 2)
+            {
+                var favorite_items = db.Favorites.Include(f => f.Item).Where(f => f.UserId == userId).ToList();
+                foreach (Favorite favorite in favorite_items)
+                {
+                    Item item = favorite.Item;
+                    db_list.Add(item);
+                }
+            }
+            
 
             Paging paging = new Paging();
             String jsonString = "";

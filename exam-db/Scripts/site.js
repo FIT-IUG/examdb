@@ -115,8 +115,8 @@ function successToaster(text) {
     var textnode = document.createTextNode(text);
     node.appendChild(textnode);
     document.body.appendChild(node);
-    setTimeout(function () { node.className += " fadeOutUp"; }, 4000);
-    setTimeout(function () { node.remove(); }, 5000);
+    setTimeout(function () { node.className += " fadeOutUp"; }, 3000);
+    setTimeout(function () { node.remove(); }, 4000);
 }
 function errorToaster(text) {
     var node = document.createElement("div");
@@ -124,6 +124,6 @@ function errorToaster(text) {
     var textnode = document.createTextNode(text);
     node.appendChild(textnode);
     document.body.appendChild(node);
-    setTimeout(function () { node.className += " fadeOutUp"; }, 4000);
-    setTimeout(function () { node.remove(); }, 5000);
+    setTimeout(function () { node.className += " fadeOutUp"; }, 3000);
+    setTimeout(function () { node.remove(); }, 4000);
 }

@@ -36,7 +36,7 @@
                 <a class="nav-link" id="Uploaded_files_tab" data-toggle="tab" href="#Uploaded_files" role="tab" aria-controls="Uploaded_files" aria-selected="false">@Resources.InternalPages.Uploaded_files</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id=" -tab" data-toggle="tab" href="#Favorites" role="tab" aria-controls="Favorites" aria-selected="false">@Resources.InternalPages.Favorites</a>
+                <a class="nav-link" id="Favorites_files_tab" data-toggle="tab" href="#Favorites" role="tab" aria-controls="Favorites" aria-selected="false">@Resources.InternalPages.Favorites</a>
             </li>
         </ul>
 
@@ -315,7 +315,7 @@
             <!-- Start Favorites content  -->
 
             <div class="tab-pane fade" id="Favorites">
-                <ul class="list-unstyled uploaded_list">
+                <ul class="list-unstyled uploaded_list" id="Favorites_files_ul">
                     <!-- Start list item show (repeat it inside for loop)-->
                     <li>
                         <div class="item">
@@ -360,6 +360,9 @@
                         </div>
                     </li>
                     <!-- End list item show (repeat it inside for loop)-->
+                </ul>
+                <ul class="pagination" id="favorites_items_pagination">
+
                 </ul>
             </div>
 
@@ -419,25 +422,35 @@
             });
         }
 
+        // getting the (Uploaded & Favorites) items when page loaded
+        UploadedItemsPaging(1, 1);
+        UploadedItemsPaging(1, 2);
 
-        $("#Uploaded_files_tab").on("click", function ()
-        {
-            UploadedItemsPaging(1);
-        });
-        
+        // get it only when click on tap
+        //$("#Uploaded_files_tab").on("click", function ()
+        //{
+        //    UploadedItemsPaging(1, 1);
+        //});
+        //$("#Favorites_files_tab").on("click", function ()
+        //{
+        //    UploadedItemsPaging(1, 2);
+        //});
         //--- UploadedItemsPaging function
-        function UploadedItemsPaging(page) {
+        function UploadedItemsPaging(page, methodFlag) { // methodFlag indicate getting the (1 -> uploaded or 2-> Favorites) items 
             $.ajax({
                  url: '@Url.Action("GetUploadedItems","Home")',
                 type: 'POST',
                 dataType: "json",
-                data: { pageIndex: page },
+                data: { pageIndex: page, method: methodFlag },
                 success: function (result) {
                     var jsonString = jQuery.parseJSON(JSON.stringify(result));
                     var array = JSON.parse(jsonString.data);
-                    console.log(array);
-                    var uploaded_items_parent = document.getElementById("Uploaded_files_ul");
-                    uploaded_items_parent.innerHTML = ''; // clean the parent
+                    if (methodFlag == 1) {
+                        var items_parent = document.getElementById("Uploaded_files_ul");
+                    } else if (methodFlag == 2) {
+                        var items_parent = document.getElementById("Favorites_files_ul");
+                    }
+                    items_parent.innerHTML = ''; // clean the parent
                     for (var i = 0; i < array.length; i++) {
                         // Start Item Block
                         var ItemHtmlBlock =
@@ -477,19 +490,23 @@
                                     '</div>' +
                                 '</div>' +
                             '</li >';
-                        uploaded_items_parent.innerHTML += ItemHtmlBlock;
+                        items_parent.innerHTML += ItemHtmlBlock;
                         // Start Pagination nav
-                        var uploaded_items_pagination = document.getElementById("uploaded_items_pagination");
+                        if (methodFlag == 1) {
+                             var items_pagination = document.getElementById("uploaded_items_pagination");
+                        } else if (methodFlag == 2) {
+                             var items_pagination = document.getElementById("favorites_items_pagination");
+                        }
                         var previous = page - 1; var next = page + 1;
                         var previousDisabled = (!(page >= 2)) ? "disabled" : "";
                         var nextDisabled = (!(page < jsonString.totalPage)) ? "disabled" : "";
-                        var PaginationHtmlBlock = '<li class="page-item '+ previousDisabled +' "><span class="page-link" onclick="UploadedItemsPaging('+ previous +')">@Resources.InternalPages.Previous</span></li>';
+                        var PaginationHtmlBlock = '<li class="page-item '+ previousDisabled +' "><span class="page-link" onclick="UploadedItemsPaging('+ previous +', ' + methodFlag + ')">@Resources.InternalPages.Previous</span></li>';
                         for (var j = 1; j < jsonString.totalPage + 1; j++) {
                             var active = (page == j) ? 'active' :'';
-                            PaginationHtmlBlock += '<li class="page-item ' + active + ' "><span class="page-link "  onclick="UploadedItemsPaging(' + j + ')">' + j + '</span></li>';
+                            PaginationHtmlBlock += '<li class="page-item ' + active + ' "><span class="page-link "  onclick="UploadedItemsPaging(' + j + ', ' + methodFlag + ')">' + j + '</span></li>';
                         }
-                        PaginationHtmlBlock += '<li class="page-item '+ nextDisabled +' "><span class="page-link" onclick="UploadedItemsPaging('+ next +')">@Resources.InternalPages.Next</span></li>';
-                        uploaded_items_pagination.innerHTML = PaginationHtmlBlock;
+                        PaginationHtmlBlock += '<li class="page-item '+ nextDisabled +' "><span class="page-link" onclick="UploadedItemsPaging('+ next +', ' + methodFlag + ')">@Resources.InternalPages.Next</span></li>';
+                        items_pagination.innerHTML = PaginationHtmlBlock;
                     }
                 },
                 failure: function (response) {
@@ -504,22 +521,4 @@
 
     </script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    @*$.ajax({
-            url: '@Url.Action("ProfileEditName","Home")',
-            type: 'POST',
-            dataType: "json",
-            data: {
-                id: Id,
-                pageIndex: page
-            },
-            success: function (data) {
-
-            },
-            failure: function (e) {
-                alert(e.responseText);
-            },
-            error: function (e) {
-                alert(e.responseText);
-            }
-        });*@
 }

@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201908021644121_updateidentity2.Designer.cs">
       <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908091647100_Edit_Favorite_Model.cs" />
+    <Compile Include="Migrations\201908091647100_Edit_Favorite_Model.Designer.cs">
+      <DependentUpon>201908091647100_Edit_Favorite_Model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Item.cs" />
@@ -501,6 +505,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
       <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908091647100_Edit_Favorite_Model.resx">
+      <DependentUpon>201908091647100_Edit_Favorite_Model.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\exam_db.Resources.Global.ar.resources" />
     <EmbeddedResource Include="obj\Debug\exam_db.Resources.Global.resources" />
