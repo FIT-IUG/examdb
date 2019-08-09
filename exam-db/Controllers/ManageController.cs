@@ -226,9 +226,17 @@ namespace exam_db.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            JsonResult jsonResult = new JsonResult();
+            jsonResult.MaxJsonLength = Int32.MaxValue;
+
             if (!ModelState.IsValid)
             {
-                return View(model);
+                jsonResult = Json(new
+                {
+                    success = false,
+                    error = ModelState.Values
+                }, JsonRequestBehavior.AllowGet);
+                return jsonResult;
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -238,10 +246,22 @@ namespace exam_db.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+
+                jsonResult = Json(new
+                {
+                    success = true,
+                    Message = ManageMessageId.ChangePasswordSuccess
+                }, JsonRequestBehavior.AllowGet);
+                return jsonResult;
+
             }
             AddErrors(result);
-            return View(model);
+            jsonResult = Json(new
+            {
+                success = false,
+                error = ModelState.Values.ToList()
+            }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
         }
 
         //

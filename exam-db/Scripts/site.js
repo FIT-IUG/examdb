@@ -1,7 +1,7 @@
 ﻿
 $(window).on('load', function () {
     // animate login & signup fields placeholder
-    $('.login_form, .signup_form, .upload_file_modal, .profile_modal').find('input:not([type="submit"]), textarea').on('keyup  blur focus', function (e) {
+    $('.login_form, .signup_form, .upload_file_modal, .profile_modal').find('input:not([type="submit"]), textarea, select').on('keyup  blur focus', function (e) {
 
         var $this = $(this),
             label = $this.prev('label');
@@ -34,7 +34,7 @@ $(window).on('load', function () {
     });
 
     // animate login & signup fields placeholder (fix for reload) 
-    $('.login_form, .signup_form, .profile_modal').find('input:not([type="submit"]), textarea').each(function () {
+    $('.login_form, .signup_form, .profile_modal').find('input:not([type="submit"]), textarea, select').each(function () {
         var $this = $(this),
             label = $this.prev('label');
         if ($this.val() === '') {
@@ -104,7 +104,26 @@ $(window).on('load', function () {
         $('.search_filters_container').toggleClass('animated flipInX faster');
     });
 
-
- 
-
+    
+    
 });
+
+/* Success Toster */
+function successToaster(text) {
+    var node = document.createElement("div");
+    node.className += " successToaster animated fadeInDown";
+    var textnode = document.createTextNode(text);
+    node.appendChild(textnode);
+    document.body.appendChild(node);
+    setTimeout(function () { node.className += " fadeOutUp"; }, 4000);
+    setTimeout(function () { node.remove(); }, 5000);
+}
+function errorToaster(text) {
+    var node = document.createElement("div");
+    node.className += " errorToaster animated fadeInDown";
+    var textnode = document.createTextNode(text);
+    node.appendChild(textnode);
+    document.body.appendChild(node);
+    setTimeout(function () { node.className += " fadeOutUp"; }, 4000);
+    setTimeout(function () { node.remove(); }, 5000);
+}

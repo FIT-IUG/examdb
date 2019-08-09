@@ -12,19 +12,19 @@ namespace exam_db.Controllers
 {
     public class WebController : Controller
     {
-        private const int defaultPageSize = 8;
+        private const int defaultPageSize =5 ;
         private IList<Course> allCourse = new List<Course>();
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult College(int CollegeId)
         {
             College college = db.Colleges.Find(CollegeId);
             ViewBag.CollegeName = college.name;
-            ViewBag.CollegeId = college.Id;
+            //ViewBag.CollegeId = college.Id;
             ViewBag.Departments = college.listOfDepartment.Skip(1);
-            ViewBag.DepartmentsCount = college.listOfDepartment.Count;
+            //ViewBag.DepartmentsCount = college.listOfDepartment.Count;
             Department firstdept = college.listOfDepartment.First();
-            ViewBag.listOfCourses = firstdept.listOfCourse;
-            ViewBag.listOfIds = college.listOfDepartment;
+            //ViewBag.listOfCourses = firstdept.listOfCourse;
+            //ViewBag.listOfIds = college.listOfDepartment;
             ViewBag.First = college.listOfDepartment.First();
             Models.Paging paging = new Models.Paging();
             int offset = 1;
@@ -42,7 +42,7 @@ namespace exam_db.Controllers
                 skip = ((Page - 1) * Take);
             int total = firstdept.listOfCourse.Count();
             var data = firstdept.listOfCourse.Skip(skip).Take(Take);
-            string pagin = paging.Pagination(total, Page, Take, offset, "College", "/College", "");
+            string pagin = paging.Pagination(total, Page, Take, offset, "College", "College", "");
             ViewBag.Paging = pagin;
             return View(data.ToList());
         }
@@ -54,8 +54,8 @@ namespace exam_db.Controllers
             List<Course> courses = new List<Course>();
             List<Object> Mycourses = new List<Object>();
             Department dep = db.Departments.Single(a => a.Id.Equals(id));
-            Department model = new Department();
-            JsonArrayAttribute coursesArray = new JsonArrayAttribute();
+            //Department model = new Department();
+            //JsonArrayAttribute coursesArray = new JsonArrayAttribute();
             Models.Paging paging = new Models.Paging();
             String myjson = "";
             int offset = 1;

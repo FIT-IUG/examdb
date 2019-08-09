@@ -51,9 +51,16 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -197,6 +204,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationBaseController.cs" />
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
@@ -211,13 +219,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905150910080_addAll.cs" />
-    <Compile Include="Migrations\201905150910080_addAll.Designer.cs">
-      <DependentUpon>201905150910080_addAll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905160950026_editFile.cs" />
-    <Compile Include="Migrations\201905160950026_editFile.Designer.cs">
-      <DependentUpon>201905160950026_editFile.cs</DependentUpon>
+    <Compile Include="Migrations\201907161005484_AddAll.cs" />
+    <Compile Include="Migrations\201907161005484_AddAll.Designer.cs">
+      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201907161023188_edit.cs" />
     <Compile Include="Migrations\201907161023188_edit.Designer.cs">
@@ -230,6 +234,10 @@
     <Compile Include="Migrations\201907161047427_deleteCollegeId.cs" />
     <Compile Include="Migrations\201907161047427_deleteCollegeId.Designer.cs">
       <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908021644121_updateidentity2.cs" />
+    <Compile Include="Migrations\201908021644121_updateidentity2.Designer.cs">
+      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Favorite.cs" />
@@ -438,6 +446,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dm-uploader.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\site.js" />
@@ -477,11 +487,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905150910080_addAll.resx">
-      <DependentUpon>201905150910080_addAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905160950026_editFile.resx">
-      <DependentUpon>201905160950026_editFile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907161005484_AddAll.resx">
+      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907161023188_edit.resx">
       <DependentUpon>201907161023188_edit.cs</DependentUpon>
@@ -492,8 +499,9 @@
     <EmbeddedResource Include="Migrations\201907161047427_deleteCollegeId.resx">
       <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="obj\Debug\exam_db.Migrations.addAll.resources" />
-    <EmbeddedResource Include="obj\Debug\exam_db.Migrations.editFile.resources" />
+    <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
+      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\exam_db.Resources.Global.ar.resources" />
     <EmbeddedResource Include="obj\Debug\exam_db.Resources.Global.resources" />
     <EmbeddedResource Include="obj\Debug\exam_db.Resources.Homepage.ar.resources" />

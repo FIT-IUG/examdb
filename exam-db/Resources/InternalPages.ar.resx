@@ -252,4 +252,10 @@
   <data name="Confirm_password" xml:space="preserve">
     <value>تأكيد كلمة المرور</value>
   </data>
+  <data name="Title_Profile_Page" xml:space="preserve">
+    <value>الصفحة الشخصية</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>القسم</value>
+  </data>
 </root>

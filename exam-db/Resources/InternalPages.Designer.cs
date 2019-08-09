@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string Department {
+            get {
+                return ResourceManager.GetString("Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done.
         /// </summary>
         public static string Done {
@@ -417,6 +426,15 @@ namespace Resources {
         public static string Supervisor_Title {
             get {
                 return ResourceManager.GetString("Supervisor_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Title_Profile_Page {
+            get {
+                return ResourceManager.GetString("Title_Profile_Page", resourceCulture);
             }
         }
         

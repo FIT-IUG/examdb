@@ -252,4 +252,10 @@
   <data name="Confirm_password" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="Title_Profile_Page" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
 </root>

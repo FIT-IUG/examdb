@@ -1,4 +1,8 @@
-﻿
+﻿@model IEnumerable<exam_db.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = Resources.InternalPages.Title_Profile_Page;
+}
 <link href="~/Content/profile_page.css" rel="stylesheet" />
 
 <!-- Start Profile Header -->
@@ -10,8 +14,8 @@
                 <img src="~/Content/images/omar.jpg" />
             </div>
             <div class="user_info_holder">
-                <h2 class="username">Omar Kishko</h2>
-                <h5 class="user_college">Information Technology</h5>
+                <h2 class="username FullNameView"> @ViewData["FullName"] </h2>
+                <h5 class="user_college CollegeView">@ViewBag.User.department.college.name</h5>
             </div>
         </div>
     </div>
@@ -26,13 +30,13 @@
 
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id=" -tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="true">@Resources.InternalPages.Personal_Information</a>
+                <a class="nav-link active" id=" -tab" data-toggle="tab" href="#Personal_Information" role="tab" aria-controls="Personal_Information" aria-selected="true">@Resources.InternalPages.Personal_Information</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id=" -tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">@Resources.InternalPages.Uploaded_files</a>
+                <a class="nav-link" id="Uploaded_files_tab" data-toggle="tab" href="#Uploaded_files" role="tab" aria-controls="Uploaded_files" aria-selected="false">@Resources.InternalPages.Uploaded_files</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id=" -tab" data-toggle="tab" href="#three" role="tab" aria-controls="three" aria-selected="false">@Resources.InternalPages.Favorites</a>
+                <a class="nav-link" id=" -tab" data-toggle="tab" href="#Favorites" role="tab" aria-controls="Favorites" aria-selected="false">@Resources.InternalPages.Favorites</a>
             </li>
         </ul>
 
@@ -43,7 +47,7 @@
 
             <!-- Start Personal Information content  -->
 
-            <div class="tab-pane personal_info pt-5 fade show active" id="one">
+            <div class="tab-pane personal_info pt-5 fade show active" id="Personal_Information">
                 <!-- Profile Section -->
                 <section>
                     <h5 class="personal_info_title">@Resources.InternalPages.Profile_Title</h5>
@@ -54,7 +58,7 @@
                                 <lable class="info_filed_key">@Resources.InternalPages.Name</lable>
                             </div>
                             <div class="col-md-10">
-                                <h6 class="info_filed_value">Omar kishko</h6>
+                                <h6 class="FullNameView info_filed_value">@ViewData["FullName"]</h6>
                             </div>
                         </div>
                     </div>
@@ -64,35 +68,58 @@
                     <div class="profile_modal modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
+
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="">@Resources.InternalPages.Name</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input_field_wrap">
-                                                    <label for="ItemTitle"> @Resources.InternalPages.First_Name</label>
-                                                    <input type="text" class="form-control" />
+                                @using (Ajax.BeginForm("ProfileEditName", "Home", new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    OnSuccess = "OnSuccessEditName",
+                                    OnFailure = "errorToaster('Error updating, try again')",
+                                }))
+                                {
+
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input_field_wrap">
+                                                        <label for="ItemTitle"> @Resources.InternalPages.First_Name</label>
+                                                        <input type="text" class="form-control" name="firstname" id="FirstNameEdit" value="@ViewBag.User.firstname" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input_field_wrap">
-                                                    <label for="ItemTitle"> @Resources.InternalPages.Last_Name</label>
-                                                    <input type="text" class="form-control" />
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input_field_wrap">
+                                                        <label for="ItemTitle"> @Resources.InternalPages.Last_Name</label>
+                                                        <input type="text" class="form-control" name="lastname" id="LastNameEdit" value="@ViewBag.User.lastname" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">@Resources.InternalPages.Done</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">@Resources.InternalPages.Done</button>
+                                    </div>
+                                }
+                                <script>
+                                    function OnSuccessEditName(data) {
+                                        if (data.success) {
+                                            successToaster('Your Name Updated Successfully');
+                                            $('.FullNameView').text($('#FirstNameEdit').val() + " " + $('#LastNameEdit').val());
+                                            $('#nameModal').modal('hide');
+
+
+                                        } else {
+                                            errorToaster(data.error);
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -105,7 +132,7 @@
                                 <lable class="info_filed_key"> @Resources.InternalPages.Email</lable>
                             </div>
                             <div class="col-md-10">
-                                <h6 class="info_filed_value">omarskishkow@gmail.com</h6>
+                                <h6 class="info_filed_value">@ViewBag.User.Email</h6>
                             </div>
                         </div>
                     </div>
@@ -142,7 +169,17 @@
                                 <lable class="info_filed_key">@Resources.InternalPages.College</lable>
                             </div>
                             <div class="col-md-10">
-                                <h6 class="info_filed_value">Information technology</h6>
+                                <h6 class="info_filed_value CollegeView ">@ViewBag.User.department.college.name</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info_filed editable" data-toggle="modal" data-target="#collegeModal">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <lable class="info_filed_key">@Resources.InternalPages.Department</lable>
+                            </div>
+                            <div class="col-md-10">
+                                <h6 class="info_filed_value DepartmentView ">@ViewBag.User.department.name</h6>
                             </div>
                         </div>
                     </div>
@@ -158,25 +195,65 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input_field_wrap">
-                                                    <select class="form-control">
-                                                        <option>Medicine</option>
-                                                        <option>Engineering</option>
-                                                        <option>Information Technology</option>
-                                                        <option>Nursing</option>
-                                                    </select>
+                                @using (Ajax.BeginForm("ProfileEditCollege", "Home", new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    OnSuccess = "OnSuccessEditCollege",
+                                    OnFailure = "errorToaster('Error updating, try again')",
+                                }))
+                                {
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input_field_wrap">
+                                                        <label> @Resources.InternalPages.College</label>
+                                                        <select class="form-control" id="Colleges">
+                                                            @foreach (var item in ViewBag.college)
+                                                            {
+                                                                if (item.Id == ViewBag.User.department.college.Id)
+                                                                {
+                                                                    <option value="@item.Id" selected>@item.name</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@item.Id">@item.name</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input_field_wrap">
+                                                        <label>@Resources.InternalPages.Department</label>
+
+                                                        <select name="departmentId" class="form-control" id="departments"></select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">@Resources.InternalPages.Done</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">@Resources.InternalPages.Done</button>
+                                    </div>
+                                }
+                                <script>
+                                    function OnSuccessEditCollege(data) {
+                                        if (data.success) {
+                                            successToaster('Your College Updated Successfully');
+                                            $('.CollegeView').text($('#Colleges option:selected').text());
+                                            $('.DepartmentView').text($('#departments option:selected').text());
+
+                                            $('#collegeModal').modal('hide');
+
+
+                                        } else {
+                                            errorToaster(data.error);
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -201,7 +278,7 @@
                     </div>
 
                     <!-- Start Changing "College" Modal -->
-
+                    
                     <div class="profile_modal modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
@@ -211,37 +288,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input_field_wrap">
-                                                    <label for="ItemTitle"> @Resources.InternalPages.Currently_password</label>
-                                                    <input type="password" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input_field_wrap">
-                                                    <label for="ItemTitle"> @Resources.InternalPages.New_password</label>
-                                                    <input type="password" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input_field_wrap">
-                                                    <label for="ItemTitle"> @Resources.InternalPages.Confirm_new_password</label>
-                                                    <input type="password" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">@Resources.InternalPages.Done</button>
-                                </div>
+                                @Html.Partial("~/Views/Manage/ChangePassword.cshtml")
                             </div>
                         </div>
                     </div>
@@ -255,138 +302,19 @@
             <!-- End Personal Information content  -->
             <!-- Start Uploaded files content -->
 
-            <div class="tab-pane fade" id="two">
-
-                <ul class="list-unstyled uploaded_list">
-                    <!-- Start list item show (repeat it inside for loop)-->
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <p class="item_upload_date"><i class="fa fa-clock-o"></i>02:34pm  -  May 14, 2019</p>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2019</span>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- End list item show (repeat it inside for loop)-->
-
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <p class="item_upload_date"><i class="fa fa-clock-o"></i>02:34pm  -  May 14, 2019</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2018</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <p class="item_upload_date"><i class="fa fa-clock-o"></i>02:34pm  -  May 14, 2019</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2017</span>
-                            </div>
-                        </div>
-                    </li>
+            <div class="tab-pane fade" id="Uploaded_files">
+                <ul class="list-unstyled uploaded_list" id="Uploaded_files_ul">
 
                 </ul>
-
+                <ul class="pagination" id="uploaded_items_pagination">
+                    
+                </ul>
             </div>
 
             <!-- End Uploaded files content -->
             <!-- Start Favorites content  -->
 
-            <div class="tab-pane fade" id="three">
-
+            <div class="tab-pane fade" id="Favorites">
                 <ul class="list-unstyled uploaded_list">
                     <!-- Start list item show (repeat it inside for loop)-->
                     <li>
@@ -432,136 +360,6 @@
                         </div>
                     </li>
                     <!-- End list item show (repeat it inside for loop)-->
-
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <a class="black_link no_decoration" style="display:block" href="#">
-                                                    <div class="item_owner">
-                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                        <span class="item_owner_name">omar kishko</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2018</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <a class="black_link no_decoration" style="display:block" href="#">
-                                                    <div class="item_owner">
-                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                        <span class="item_owner_name">omar kishko</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2018</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <a class="black_link no_decoration" style="display:block" href="#">
-                                                    <div class="item_owner">
-                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                        <span class="item_owner_name">omar kishko</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2017</span>
-                            </div>
-                        </div>
-                    </li>
-
                 </ul>
             </div>
 
@@ -580,10 +378,148 @@
         if (url.match('#')) {
             $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
         }
-
         // Change hash for page-reload
         $('.nav-tabs a').on('shown.bs.tab', function (e) {
             window.location.hash = e.target.hash;
         })
+        // get department list when select the college
+        $("#Colleges").change(function () {
+            LoadDepartments();
+        });
+        // Fetch the department first time
+        LoadDepartments();
+        // Fetch the departments
+        function LoadDepartments() {
+            var collegeId = document.getElementById("Colleges");
+            var ID = collegeId.options[collegeId.selectedIndex].value;
+            var depatments = document.getElementById("departments");
+            $.ajax({
+                url: '@Url.Action("getDepartment","Web")',
+                type: 'POST',
+                dataType: "json",
+                data: { idString: ID },
+                success: function (result) {
+                    depatments.innerHTML = "";
+                    $.each(result, function (i, result) {
+                        var option;
+                        if (result.Id == @ViewBag.User.departmentId) {
+                            option = "<option value='" + result.Id + "' id='" + result.Id + "' selected >" + result.name + "</option>";
+                        } else {
+                            option = "<option value='" + result.Id + "' id='" + result.Id + "' >" + result.name + "</option>";
+                        }
+                        $('#departments').append(option);
+                    });
+                },
+                failure: function (response) {
+                        console.log(response.responseText);
+                },
+                error: function (response) {
+                        console.log(response.responseText);
+                }
+            });
+        }
+
+
+        $("#Uploaded_files_tab").on("click", function ()
+        {
+            UploadedItemsPaging(1);
+        });
+        
+        //--- UploadedItemsPaging function
+        function UploadedItemsPaging(page) {
+            $.ajax({
+                 url: '@Url.Action("GetUploadedItems","Home")',
+                type: 'POST',
+                dataType: "json",
+                data: { pageIndex: page },
+                success: function (result) {
+                    var jsonString = jQuery.parseJSON(JSON.stringify(result));
+                    var array = JSON.parse(jsonString.data);
+                    console.log(array);
+                    var uploaded_items_parent = document.getElementById("Uploaded_files_ul");
+                    uploaded_items_parent.innerHTML = ''; // clean the parent
+                    for (var i = 0; i < array.length; i++) {
+                        // Start Item Block
+                        var ItemHtmlBlock =
+                            '<li>' +
+                                '<div class="item">' +
+                                    '<div class="item_body">' +
+                                        '<div class="row">' +
+                                            '<div class="col-md-7">' +
+                                                '<div class="item_img_and_info_holder"> ' +
+                                                    '<div class="item_type_img_holder">' +
+                                                        '<img class="item_type_img" src="../../Content/images/files_types/pdf.png" />' +
+                                                    '</div>' +
+                                                    '<div class="item_info">' +
+                                                        '<a class="black_link no_decoration" href="~/Web/File">' +
+                                                            '<h6 class="item_title">' + array[i].title + '</h6>' +
+                                                        '</a>' +
+                                                        '<span class="item_college"> ' + array[i].CourseName + ' - <span> ' + array[i].DepartmentName + '</span></span>' +
+                                                        '<p class="item_upload_date"><i class="fa fa-clock-o"></i> ' + array[i].uploadTime + '</p>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div> ' +
+                                            '<div class="col-md-5">' +
+                                                '<div class="item_statistics">' +
+                                                    '<div class="statistic">' +
+                                                        '<i class="fa fa-heart"></i>' + array[i].likeNumber +
+                                                    '</div>' +
+                                                    '<div class="statistic">' +
+                                                        '<i class="fa fa-eye"></i>' + array[i].viewNumber +
+                                                    '</div>' +
+                                                    '<div class="statistic">' +
+                                                        '<i class="fa fa-download"></i>' + array[i].downloadNumber +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<span class="item_date">' + array[i].yearOfPublish + '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</li >';
+                        uploaded_items_parent.innerHTML += ItemHtmlBlock;
+                        // Start Pagination nav
+                        var uploaded_items_pagination = document.getElementById("uploaded_items_pagination");
+                        var previous = page - 1; var next = page + 1;
+                        var previousDisabled = (!(page >= 2)) ? "disabled" : "";
+                        var nextDisabled = (!(page < jsonString.totalPage)) ? "disabled" : "";
+                        var PaginationHtmlBlock = '<li class="page-item '+ previousDisabled +' "><span class="page-link" onclick="UploadedItemsPaging('+ previous +')">@Resources.InternalPages.Previous</span></li>';
+                        for (var j = 1; j < jsonString.totalPage + 1; j++) {
+                            var active = (page == j) ? 'active' :'';
+                            PaginationHtmlBlock += '<li class="page-item ' + active + ' "><span class="page-link "  onclick="UploadedItemsPaging(' + j + ')">' + j + '</span></li>';
+                        }
+                        PaginationHtmlBlock += '<li class="page-item '+ nextDisabled +' "><span class="page-link" onclick="UploadedItemsPaging('+ next +')">@Resources.InternalPages.Next</span></li>';
+                        uploaded_items_pagination.innerHTML = PaginationHtmlBlock;
+                    }
+                },
+                failure: function (response) {
+                    console.log(response.responseText);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+
+
     </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*$.ajax({
+            url: '@Url.Action("ProfileEditName","Home")',
+            type: 'POST',
+            dataType: "json",
+            data: {
+                id: Id,
+                pageIndex: page
+            },
+            success: function (data) {
+
+            },
+            failure: function (e) {
+                alert(e.responseText);
+            },
+            error: function (e) {
+                alert(e.responseText);
+            }
+        });*@
 }

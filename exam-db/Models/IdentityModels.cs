@@ -1,27 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Security.Principal;
 
 namespace exam_db.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        [Required]
+        public string firstname { get; set; }
+        [Required]
+        public string lastname { get; set; }
         public virtual ICollection<Item> listOfFavoriteFile { get; set; }
+        [Required]
         public int departmentId { get; set; }
         public virtual Department department { get; set; }
-        //public int collegeId { get; set; }
-        //public virtual College college { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+
             return userIdentity;
         }
     }
@@ -69,4 +75,6 @@ namespace exam_db.Models
 
         public System.Data.Entity.DbSet<exam_db.Models.Favorite> Favorites { get; set; }
     }
+
+    
 }

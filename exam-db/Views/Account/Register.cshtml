@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <div class="signup_field_wrap">
                                 <label for="FirstName"> @Resources.InternalPages.First_Name</label>
-                                <input class="form-control" type="text" name="FirstName" id="FirstName" />
+                                <input class="form-control" type="text" name="firstname" id="FirstName" required />
                                 @*  @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <div class="signup_field_wrap">
                                 <label for="LastName"> @Resources.InternalPages.Last_Name</label>
-                                <input class="form-control" type="text" name="LastName" id="LastName" />
+                                <input class="form-control" type="text" name="lastname" id="LastName"  required/>
                                 @* @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                     <div class="col-lg-5 pr-1 signup_field_col_sm">
                         <div class="form-group">
                             <div class="signup_field_wrap">
-                                
+                                <label for="Colleges">@Resources.InternalPages.College</label>
                               <select name="collegeId" class="form-control" id="Colleges">
                                   @foreach(var item in ViewBag.Colleges)
                                   {
@@ -107,6 +107,7 @@
                     <div class="col-lg-5 pl-1 signup_field_col_sm">
                         <div class="form-group">
                             <div class="signup_field_wrap">
+                                <label for="departments">@Resources.InternalPages.Department</label>
                                 <select name="departmentId" class="form-control" id="departments">
 
                                 </select>

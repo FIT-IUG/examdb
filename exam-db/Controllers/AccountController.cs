@@ -149,11 +149,20 @@ namespace exam_db.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            ViewBag.Colleges = db.Colleges.ToList();
             if (ModelState.IsValid)
             {
                 //, departmentId = model.departmentId 
                 //, collegeId = model.collegeId
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email ,departmentId = model.departmentId};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    firstname = model.firstname,
+                    lastname = model.lastname,
+                    Email = model.Email,
+                    departmentId = model.departmentId
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
