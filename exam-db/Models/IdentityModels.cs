@@ -73,5 +73,11 @@ namespace exam_db.Models
         public System.Data.Entity.DbSet<exam_db.Models.Report> Reports { get; set; }
 
         public System.Data.Entity.DbSet<exam_db.Models.Favorite> Favorites { get; set; }
+
+        public System.Data.Entity.DbSet<exam_db.Models.Constant> Constants { get; set; }
+
+        //public System.Data.Entity.DbSet<exam_db.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        //public System.Data.Entity.DbSet<exam_db.Models.Favorite> Favorites { get; set; }
     }
 }

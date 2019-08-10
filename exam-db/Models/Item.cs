@@ -13,9 +13,10 @@ namespace exam_db.Models
         public int viewNumber { get; set; }
         public string yearOfPublish { get; set; }
         public string semester { get; set; }
+        public string description { get; set; }
         public string examType { get; set; }
         public string category { get; set; }//file category (quiz , exam,others,Summaries);
-        public int likeNumber { get; set; }
+        public int likeNumber  { get; set; }
         public DateTime uploadTime { get; set; }
         public virtual ICollection<File> listOfFile { get; set; }
 
