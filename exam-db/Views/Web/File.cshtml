@@ -21,18 +21,17 @@
                     <span><i class="fa fa-wpexplorer"></i> @ViewBag.depName</span>
                     <span><i class="fa fa-bank"></i> @ViewBag.CollegeName</span>
                 </div>
-                @ViewBag.user
+                
 
                 <div class="file_desc">
                     <p>
                         @Model.description
                     </p>
                 </div>
-<<<<<<< .mine
-                <p class="item_upload_date"><i class="fa fa-clock-o"></i> @Resources.InternalPages.Upload_at: 02:34pm  -  May 14, 2019</p>
-=======
+
+                @*<p class="item_upload_date"><i class="fa fa-clock-o"></i> @Resources.InternalPages.Upload_at: 02:34pm  -  May 14, 2019</p>*@
+
                 <p class="item_upload_date"><i class="fa fa-clock-o"></i> @Model.uploadTime</p>
->>>>>>> .theirs
 
                 <div class="flex-row d-flex align-items-center ">
                     @if (ViewBag.Liked == "true")
@@ -78,19 +77,19 @@
                             @foreach (var cons in ViewBag.constants)
                             {
                             <div class="custom-control custom-radio">
-<<<<<<< .mine
-                                <input class="custom-control-input" type="radio" name="report" id="report1" value="option1">
+
+                                @*<input class="custom-control-input" type="radio" name="report" id="report1" value="option1">
                                 <label class="custom-control-label" for="report1">
-                                    @Resources.InternalPages.Report_1
-=======
+                                    @Resources.InternalPages.Report_1*@
+
                                     <input class="custom-control-input reportKey" type="radio" name="report" id="@cons.Id" value="@cons.Key">
                                     <label class="custom-control-label" for="@cons.Id">
                                         @cons.Value
->>>>>>> .theirs
+
                                 </label>
                             </div>
-<<<<<<< .mine
-                            <div class="custom-control custom-radio">
+
+                            @*<div class="custom-control custom-radio">
                                 <input class="custom-control-input" type="radio" name="report" id="report2" value="option2">
                                 <label class="custom-control-label" for="report2">
                                     @Resources.InternalPages.Report_2
@@ -119,48 +118,16 @@
                                 <label class="custom-control-label" for="report6">
                                     @Resources.InternalPages.Report_6 
                                 </label>
-                            </div>
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
+                            </div>*@
 
                             }
                         </div>
                         <div class="modal-footer">
-<<<<<<< .mine
-                            <button type="button" class="btn btn-primary">@Resources.InternalPages.Report</button>
-=======
+
+                            @*<button type="button" class="btn btn-primary">@Resources.InternalPages.Report</button>*@
+
                             <button type="button" class="btn btn-primary reportbtn">Report</button>
->>>>>>> .theirs
+
                         </div>
                     </div>
                 </div>
@@ -217,10 +184,10 @@
                     </div>
                 </div>
             </li>
-<<<<<<< .mine
+
             <!-- End list item show (repeat it inside for loop)-->
 
-            <li>
+            @*<li>
                 <div class="item">
                     <div class="item_body">
                         <div class="row">
@@ -304,98 +271,9 @@
                         <span class="item_date">2017</span>
                     </div>
                 </div>
-            </li>
+            </li>*@
 
-=======
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
         </ul>
 
 

@@ -10,7 +10,6 @@ using System.IO;
 using System.Web.Routing;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
-using PagedList;
 
 using System.Data;
 using System.Data.Entity;
@@ -146,9 +145,9 @@ namespace exam_db.Controllers
                     db_list.Add(item);
                 }
             }
-            
 
-            Paging paging = new Paging();
+            Models.Paging paging = new Models.Paging();
+            
             String jsonString = "";
             int offset = 1;
             int skip = 0;

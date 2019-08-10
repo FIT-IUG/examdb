@@ -17,11 +17,8 @@ namespace exam_db.Controllers
         // GET: Favorites
         public ActionResult Index()
         {
-<<<<<<< .mine
-            var favorites = db.Favorites.Include(f => f.Item);
-=======
-            var favorites = db.Favorites.Include(f => f.item).Include(f => f.User);
->>>>>>> .theirs
+            var favorites = db.Favorites.Include(f => f.Item).Include(f => f.User);
+
             return View(favorites.ToList());
         }
 

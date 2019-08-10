@@ -14,19 +14,12 @@ namespace exam_db.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-<<<<<<< .mine
+
         [Required]
         public string firstname { get; set; }
         [Required]
         public string lastname { get; set; }
 
-=======
-        [Required]
-        public string firstname { get; set; }
-        [Required]
-        public string lastname { get; set; }
-
->>>>>>> .theirs
         public virtual ICollection<Item> listOfFavoriteFile { get; set; }
         [Required]
         public int departmentId { get; set; }

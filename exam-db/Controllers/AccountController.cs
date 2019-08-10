@@ -154,17 +154,6 @@ namespace exam_db.Controllers
             {
                 //, departmentId = model.departmentId 
                 //, collegeId = model.collegeId
-<<<<<<< .mine
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    firstname = model.firstname,
-                    lastname = model.lastname,
-                    Email = model.Email,
-                    departmentId = model.departmentId
-                };
-
-=======
                 var user = new ApplicationUser {
                     UserName = model.Email,
                     firstname = model.firstname,
@@ -174,7 +163,7 @@ namespace exam_db.Controllers
 
 
 
->>>>>>> .theirs
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

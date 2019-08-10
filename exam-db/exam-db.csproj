@@ -48,19 +48,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
-    </Reference>
-    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    <Reference Include="Paging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Paging.1.0.1\lib\net40\Paging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -220,61 +219,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="Migrations\201907161005484_AddAll.cs" />
-    <Compile Include="Migrations\201907161005484_AddAll.Designer.cs">
-      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907161023188_edit.cs" />
-    <Compile Include="Migrations\201907161023188_edit.Designer.cs">
-      <DependentUpon>201907161023188_edit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907161032365_anotherEdit.cs" />
-    <Compile Include="Migrations\201907161032365_anotherEdit.Designer.cs">
-      <DependentUpon>201907161032365_anotherEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907161047427_deleteCollegeId.cs" />
-    <Compile Include="Migrations\201907161047427_deleteCollegeId.Designer.cs">
-      <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908021644121_updateidentity2.cs" />
-    <Compile Include="Migrations\201908021644121_updateidentity2.Designer.cs">
-      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
-    </Compile>
-<<<<<<< HEAD
-    <Compile Include="Migrations\201908091647100_Edit_Favorite_Model.cs" />
-    <Compile Include="Migrations\201908091647100_Edit_Favorite_Model.Designer.cs">
-      <DependentUpon>201908091647100_Edit_Favorite_Model.cs</DependentUpon>
-=======
-    <Compile Include="Migrations\201908061043395_updateFavorite.cs" />
-    <Compile Include="Migrations\201908061043395_updateFavorite.Designer.cs">
-      <DependentUpon>201908061043395_updateFavorite.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908070644353_updateReportTable.cs" />
-    <Compile Include="Migrations\201908070644353_updateReportTable.Designer.cs">
-      <DependentUpon>201908070644353_updateReportTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908070705156_addConstantTable.cs" />
-    <Compile Include="Migrations\201908070705156_addConstantTable.Designer.cs">
-      <DependentUpon>201908070705156_addConstantTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908070725300_updateConstantTableToAdd_flag_and_parentId.cs" />
-    <Compile Include="Migrations\201908070725300_updateConstantTableToAdd_flag_and_parentId.Designer.cs">
-      <DependentUpon>201908070725300_updateConstantTableToAdd_flag_and_parentId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.cs" />
-    <Compile Include="Migrations\201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.Designer.cs">
-      <DependentUpon>201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908070933020_updateItemTableToAdd_description.cs" />
-    <Compile Include="Migrations\201908070933020_updateItemTableToAdd_description.Designer.cs">
-      <DependentUpon>201908070933020_updateItemTableToAdd_description.cs</DependentUpon>
->>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
-=======
     <Compile Include="Migrations\201908101618237_addAll_8_10.cs" />
     <Compile Include="Migrations\201908101618237_addAll_8_10.Designer.cs">
       <DependentUpon>201908101618237_addAll_8_10.cs</DependentUpon>
->>>>>>> 6d40b8f2d381662f151c43d006fc37f50fada2be
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constant.cs" />
@@ -282,36 +229,12 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Paging.cs" />
     <Compile Include="Models\Report.cs" />
-    <Compile Include="Resources\InternalPages.ar.Designer.cs">
-      <DependentUpon>InternalPages.ar.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\InternalPages.Designer.cs">
-      <DependentUpon>InternalPages.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Homepage.ar.Designer.cs">
-      <DependentUpon>Homepage.ar.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Homepage.Designer.cs">
-      <DependentUpon>Homepage.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Global.ar.Designer.cs">
-      <DependentUpon>Global.ar.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Global.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Global.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Resources\Global.ar.Designer.cs" />
+    <Compile Include="Resources\Global.Designer.cs" />
+    <Compile Include="Resources\Homepage.ar.Designer.cs" />
+    <Compile Include="Resources\Homepage.Designer.cs" />
+    <Compile Include="Resources\InternalPages.ar.Designer.cs" />
+    <Compile Include="Resources\InternalPages.Designer.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\College.cs" />
     <Compile Include="Models\Course.cs" />
@@ -328,113 +251,7 @@
     <Content Include="App_Data\ExamDB_log.ldf">
       <DependentUpon>ExamDB.mdf</DependentUpon>
     </Content>
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
-    <Content Include="bin\ar\exam-db.resources.dll" />
-    <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
-    <Content Include="bin\exam-db.dll" />
-    <Content Include="bin\exam-db.pdb" />
-    <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
-    <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
-    <Content Include="bin\Microsoft.AI.DependencyCollector.xml" />
-    <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
-    <Content Include="bin\Microsoft.AI.ServerTelemetryChannel.dll" />
-    <Content Include="bin\Microsoft.AI.Web.dll" />
-    <Content Include="bin\Microsoft.AI.Web.xml" />
-    <Content Include="bin\Microsoft.AI.WindowsServer.dll" />
-    <Content Include="bin\Microsoft.AI.WindowsServer.xml" />
-    <Content Include="bin\Microsoft.ApplicationInsights.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
-    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
-    <Content Include="bin\Microsoft.AspNet.TelemetryCorrelation.dll" />
-    <Content Include="bin\Microsoft.AspNet.TelemetryCorrelation.xml" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
-    <Content Include="bin\Microsoft.Owin.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Facebook.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Facebook.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.Google.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Google.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Twitter.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Microsoft.Owin.xml" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\Owin.dll" />
-    <Content Include="bin\roslyn\csc.exe" />
-    <Content Include="bin\roslyn\csi.exe" />
-    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
-    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="bin\roslyn\System.AppContext.dll" />
-    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
-    <Content Include="bin\roslyn\System.Console.dll" />
-    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
-    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
-    <Content Include="bin\roslyn\System.IO.Compression.dll" />
-    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
-    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="bin\roslyn\System.IO.Pipes.AccessControl.dll" />
-    <Content Include="bin\roslyn\System.IO.Pipes.dll" />
-    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
-    <Content Include="bin\roslyn\System.Security.AccessControl.dll" />
-    <Content Include="bin\roslyn\System.Security.Claims.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
-    <Content Include="bin\roslyn\System.Security.Principal.Windows.dll" />
-    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
-    <Content Include="bin\roslyn\System.ValueTuple.dll" />
-    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
-    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
-    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
-    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
-    <Content Include="bin\roslyn\vbc.exe" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="bin\System.Diagnostics.DiagnosticSource.xml" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
-    <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
-    <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
-    <Content Include="bin\WebGrease.dll" />
-    <Content Include="Content\about_us.css" />
     <Content Include="Content\animate.css" />
-    <Content Include="Content\bootstrap-rtl.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\courses.css" />
     <Content Include="Content\customAnimation.css" />
@@ -442,10 +259,8 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\homepage.css" />
-    <Content Include="Content\images\ar-flag.png" />
     <Content Include="Content\images\avatar.png" />
     <Content Include="Content\images\cloud.png" />
-    <Content Include="Content\images\en-flag.png" />
     <Content Include="Content\images\files_types\csv.png" />
     <Content Include="Content\images\files_types\doc.png" />
     <Content Include="Content\images\files_types\jpg.png" />
@@ -453,10 +268,8 @@
     <Content Include="Content\images\files_types\ppt.png" />
     <Content Include="Content\images\files_types\txt.png" />
     <Content Include="Content\images\files_types\xls.png" />
-    <Content Include="Content\images\Image 1.png" />
     <Content Include="Content\images\logo-small.png" />
     <Content Include="Content\images\files_types\pdf.png" />
-    <Content Include="Content\images\omar.jpg" />
     <Content Include="Content\images\profile-background.png" />
     <Content Include="Content\images\team-1.jpg" />
     <Content Include="Content\images\writing-1149962_1280.jpg" />
@@ -465,31 +278,16 @@
     <Content Include="Content\pretty-checkbox.min.css" />
     <Content Include="Content\profile_page.css" />
     <Content Include="Content\search.css" />
-    <Content Include="Content\site-rtl.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="obj\Debug\ar\exam-db.resources.dll" />
-    <Content Include="obj\Debug\exam-db.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\exam-db.dll" />
-    <Content Include="obj\Debug\exam-db.pdb" />
-    <Content Include="obj\Debug\TempPE\Resources.Global.ar.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Resources.Global.ar2.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Resources.Global.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Resources.Homepage.ar.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Resources.Homepage.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Resources.InternalPages.ar.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Resources.InternalPages.Designer.cs.dll" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dm-uploader.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\json2.js" />
-    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\upload_file_ui.js" />
     <Content Include="Web.config" />
@@ -527,91 +325,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907161005484_AddAll.resx">
-      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161023188_edit.resx">
-      <DependentUpon>201907161023188_edit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161032365_anotherEdit.resx">
-      <DependentUpon>201907161032365_anotherEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161047427_deleteCollegeId.resx">
-      <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
-      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908091647100_Edit_Favorite_Model.resx">
-      <DependentUpon>201908091647100_Edit_Favorite_Model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="obj\Debug\exam_db.Resources.Global.ar.resources" />
-    <EmbeddedResource Include="obj\Debug\exam_db.Resources.Global.resources" />
-    <EmbeddedResource Include="obj\Debug\exam_db.Resources.Homepage.ar.resources" />
-    <EmbeddedResource Include="obj\Debug\exam_db.Resources.Homepage.resources" />
-    <EmbeddedResource Include="obj\Debug\exam_db.Resources.InternalPages.ar.resources" />
-    <EmbeddedResource Include="obj\Debug\exam_db.Resources.InternalPages.resources" />
-    <EmbeddedResource Include="Resources\InternalPages.ar.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>InternalPages.ar.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\InternalPages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>InternalPages.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Homepage.ar.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Homepage.ar.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Homepage.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Homepage.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Global.ar.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Global.ar.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Global.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Global.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\Merienda-Regular.ttf" />
-    <Content Include="Content\fonts\Roboto-Regular.ttf" />
-    <Content Include="Content\fonts\THESANSARABIC-BOLD.ttf" />
-    <Content Include="Content\fonts\TheSansArabic-Light.otf" />
-    <Content Include="Content\fonts\Droid Sans Arabic.ttf" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\exam-db.csproj.CopyComplete" />
-    <Content Include="obj\Debug\exam-db.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\exam-db.csproj.GenerateResource.cache" />
-    <Content Include="obj\Debug\exam-db.csprojAssemblyReference.cache" />
-    <Content Include="obj\Debug\Tsc.out" />
-    <Content Include="bin\ApplicationInsights.config" />
-    <Content Include="bin\exam-db.dll.config" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.exe.config" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Colleges\Create.cshtml" />
@@ -648,11 +366,6 @@
     <Content Include="Views\Web\UniversityRequirements.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Home\Profile.cshtml" />
-    <Content Include="Views\Favorites\Create.cshtml" />
-    <Content Include="Views\Favorites\Delete.cshtml" />
-    <Content Include="Views\Favorites\Details.cshtml" />
-    <Content Include="Views\Favorites\Edit.cshtml" />
-    <Content Include="Views\Favorites\Index.cshtml" />
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Items\Delete.cshtml" />
     <Content Include="Views\Items\Details.cshtml" />
@@ -663,9 +376,6 @@
     <Content Include="Views\Reports\Details.cshtml" />
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Account\RegisterSuccess.cshtml" />
-=======
     <Content Include="Views\Favorites\Create.cshtml" />
     <Content Include="Views\Favorites\Delete.cshtml" />
     <Content Include="Views\Favorites\Details.cshtml" />
@@ -676,7 +386,6 @@
     <Content Include="Views\Constants\Details.cshtml" />
     <Content Include="Views\Constants\Edit.cshtml" />
     <Content Include="Views\Constants\Index.cshtml" />
->>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -685,49 +394,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Folder Include="bin\bin\ar\" />
-    <Folder Include="Content\images\team\" />
-=======
-    <EmbeddedResource Include="Migrations\201907161005484_AddAll.resx">
-      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161023188_edit.resx">
-      <DependentUpon>201907161023188_edit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161032365_anotherEdit.resx">
-      <DependentUpon>201907161032365_anotherEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907161047427_deleteCollegeId.resx">
-      <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
-      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908061043395_updateFavorite.resx">
-      <DependentUpon>201908061043395_updateFavorite.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908070644353_updateReportTable.resx">
-      <DependentUpon>201908070644353_updateReportTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908070705156_addConstantTable.resx">
-      <DependentUpon>201908070705156_addConstantTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908070725300_updateConstantTableToAdd_flag_and_parentId.resx">
-      <DependentUpon>201908070725300_updateConstantTableToAdd_flag_and_parentId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.resx">
-      <DependentUpon>201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908070933020_updateItemTableToAdd_description.resx">
-      <DependentUpon>201908070933020_updateItemTableToAdd_description.cs</DependentUpon>
-=======
     <EmbeddedResource Include="Migrations\201908101618237_addAll_8_10.resx">
       <DependentUpon>201908101618237_addAll_8_10.cs</DependentUpon>
->>>>>>> 6d40b8f2d381662f151c43d006fc37f50fada2be
     </EmbeddedResource>
->>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
+    <EmbeddedResource Include="Resources\Global.ar.resx" />
+    <EmbeddedResource Include="Resources\Global.resx" />
+    <EmbeddedResource Include="Resources\Homepage.ar.resx" />
+    <EmbeddedResource Include="Resources\Homepage.resx" />
+    <EmbeddedResource Include="Resources\InternalPages.ar.resx" />
+    <EmbeddedResource Include="Resources\InternalPages.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

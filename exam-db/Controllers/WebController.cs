@@ -208,10 +208,10 @@ namespace exam_db.Controllers
             ViewBag.CollegeName = CollegeName;
             ViewBag.depName = depName;
             Item item = db.Items.Find(fileId);
-            int count = (from a in db.Favorites where a.itemId == fileId select a).Count();
+            int count = (from a in db.Favorites where a.ItemId == fileId select a).Count();
             item.likeNumber = count;
             String userId = User.Identity.GetUserId(); // get Current User
-            Favorite existFav = (from a in db.Favorites where a.UserId == userId && a.itemId == fileId select a).FirstOrDefault();
+            Favorite existFav = (from a in db.Favorites where a.UserId == userId && a.ItemId == fileId select a).FirstOrDefault();
             if (existFav == null)
             {
                 ViewBag.Liked = "false";
@@ -267,10 +267,10 @@ namespace exam_db.Controllers
         {
             String userId = User.Identity.GetUserId();
             Favorite favorite = new Favorite();
-            favorite.itemId = itemId;
+            favorite.ItemId = itemId;
             favorite.UserId = userId;
 
-            Favorite existFav = (from a in db.Favorites where a.UserId == userId && a.itemId == itemId select a).FirstOrDefault();
+            Favorite existFav = (from a in db.Favorites where a.UserId == userId && a.ItemId == itemId select a).FirstOrDefault();
             Item item = db.Items.Find(itemId);
 
             if (existFav == null)
