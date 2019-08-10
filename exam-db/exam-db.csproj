@@ -408,8 +408,10 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\homepage.css" />
+    <Content Include="Content\images\ar-flag.png" />
     <Content Include="Content\images\avatar.png" />
     <Content Include="Content\images\cloud.png" />
+    <Content Include="Content\images\en-flag.png" />
     <Content Include="Content\images\files_types\csv.png" />
     <Content Include="Content\images\files_types\doc.png" />
     <Content Include="Content\images\files_types\jpg.png" />

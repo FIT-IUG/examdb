@@ -112,6 +112,10 @@ a.dropdownLangMenu_item .fa  {
         margin-right: auto;
         margin-left: unset !important
     }
+.lang_flag {
+    margin-left: 5px;
+    margin-right:0 !important
+}
 
 label.active {
     right: 13px;

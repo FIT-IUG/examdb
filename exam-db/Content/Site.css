@@ -242,6 +242,15 @@ a.dropdownLangMenu_item {
 .dropdown:hover #dropdownLangMenu {
     color: var(--main-color)
 }
+
+.lang_flag {
+    width: 25px;
+    display: inline-block;
+    margin-right: 5px;
+}
+.lang_flag img {
+    width: 100%
+}
 /* Start navigation button animate style */
 .bars {
     position: relative;
@@ -339,10 +348,8 @@ a.dropdownLangMenu_item {
 /* End navigation button animate style */
 
 
-    /* End Navbar Style */
-
-
-    /*Start Item Design */
+/* End Navbar Style */
+/*Start Item Design */
 .item {
     border: 1px solid #e5e5e5;
     border-radius: 5px;
