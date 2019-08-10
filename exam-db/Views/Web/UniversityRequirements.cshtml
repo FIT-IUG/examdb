@@ -1,0 +1,68 @@
+﻿@model IEnumerable<exam_db.Models.Course>
+<link href="~/Content/courses.css" rel="stylesheet" />
+<div class="container">
+    <h1>@ViewBag.test</h1>
+    <div class="courses_page">
+        <h4 class="courses_page_title">University Requirements</h4>
+        @*@using (Html.BeginForm("Paging", "Web", FormMethod.Get))
+        {*@
+        <div class="row" id="custome">
+
+            @foreach (var course in Model)
+            {
+                <div class="col-md-6">
+                    <a class="black_link no_decoration" href="@Url.Action("Course","Web",new {courseId =course.Id , CollegeName = ViewBag.CollegeName } )">
+                        <div class="course_card">
+                            <div class="course_title">
+                                <h6 class="course_name">@course.name</h6>
+                                <span class="course_code">Code | @course.code</span>
+                            </div>
+                            <span class="course_items_number"><i class="fa fa-file-o"></i> @course.listOfItem.Count items</span>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        @Html.Raw(ViewBag.Paging)
+        
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        // Javascript to enable link to tab
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+
+        // Change hash for page-reload
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        })
+
+
+        $('#custome').DataTable();
+    </script>
+
+}
+@*@foreach (var course in ViewBag.Requirement)
+    {
+        <div class="col-md-6">
+
+            <a class="black_link no_decoration" href="@Url.Action("Course","Web",new {courseId =course.Id , CollegeName = ViewBag.CollegeName } )">
+                <div class="course_card">
+                    <div class="course_title">
+
+                        <h6 class="course_name">@course.name</h6>
+
+                        <span class="course_code">Code | @course.code</span>
+                    </div>
+
+                    <span class="course_items_number"><i class="fa fa-file-o"></i> @course.listOfItem.Count items</span>
+                </div>
+            </a>
+
+        </div>
+    }*@
