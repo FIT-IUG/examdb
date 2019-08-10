@@ -220,6 +220,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\201907161005484_AddAll.cs" />
     <Compile Include="Migrations\201907161005484_AddAll.Designer.cs">
       <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
@@ -269,6 +270,11 @@
     <Compile Include="Migrations\201908070933020_updateItemTableToAdd_description.Designer.cs">
       <DependentUpon>201908070933020_updateItemTableToAdd_description.cs</DependentUpon>
 >>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
+=======
+    <Compile Include="Migrations\201908101618237_addAll_8_10.cs" />
+    <Compile Include="Migrations\201908101618237_addAll_8_10.Designer.cs">
+      <DependentUpon>201908101618237_addAll_8_10.cs</DependentUpon>
+>>>>>>> 6d40b8f2d381662f151c43d006fc37f50fada2be
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constant.cs" />
@@ -680,6 +686,7 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Folder Include="bin\bin\ar\" />
     <Folder Include="Content\images\team\" />
 =======
@@ -715,6 +722,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908070933020_updateItemTableToAdd_description.resx">
       <DependentUpon>201908070933020_updateItemTableToAdd_description.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\201908101618237_addAll_8_10.resx">
+      <DependentUpon>201908101618237_addAll_8_10.cs</DependentUpon>
+>>>>>>> 6d40b8f2d381662f151c43d006fc37f50fada2be
     </EmbeddedResource>
 >>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
   </ItemGroup>
