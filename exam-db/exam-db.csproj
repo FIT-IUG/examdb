@@ -206,6 +206,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationBaseController.cs" />
     <Compile Include="Controllers\CollegesController.cs" />
+    <Compile Include="Controllers\ConstantsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\FavoritesController.cs" />
@@ -239,11 +240,38 @@
     <Compile Include="Migrations\201908021644121_updateidentity2.Designer.cs">
       <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\201908091647100_Edit_Favorite_Model.cs" />
     <Compile Include="Migrations\201908091647100_Edit_Favorite_Model.Designer.cs">
       <DependentUpon>201908091647100_Edit_Favorite_Model.cs</DependentUpon>
+=======
+    <Compile Include="Migrations\201908061043395_updateFavorite.cs" />
+    <Compile Include="Migrations\201908061043395_updateFavorite.Designer.cs">
+      <DependentUpon>201908061043395_updateFavorite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908070644353_updateReportTable.cs" />
+    <Compile Include="Migrations\201908070644353_updateReportTable.Designer.cs">
+      <DependentUpon>201908070644353_updateReportTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908070705156_addConstantTable.cs" />
+    <Compile Include="Migrations\201908070705156_addConstantTable.Designer.cs">
+      <DependentUpon>201908070705156_addConstantTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908070725300_updateConstantTableToAdd_flag_and_parentId.cs" />
+    <Compile Include="Migrations\201908070725300_updateConstantTableToAdd_flag_and_parentId.Designer.cs">
+      <DependentUpon>201908070725300_updateConstantTableToAdd_flag_and_parentId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.cs" />
+    <Compile Include="Migrations\201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.Designer.cs">
+      <DependentUpon>201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908070933020_updateItemTableToAdd_description.cs" />
+    <Compile Include="Migrations\201908070933020_updateItemTableToAdd_description.Designer.cs">
+      <DependentUpon>201908070933020_updateItemTableToAdd_description.cs</DependentUpon>
+>>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Constant.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Paging.cs" />
@@ -629,7 +657,20 @@
     <Content Include="Views\Reports\Details.cshtml" />
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Account\RegisterSuccess.cshtml" />
+=======
+    <Content Include="Views\Favorites\Create.cshtml" />
+    <Content Include="Views\Favorites\Delete.cshtml" />
+    <Content Include="Views\Favorites\Details.cshtml" />
+    <Content Include="Views\Favorites\Edit.cshtml" />
+    <Content Include="Views\Favorites\Index.cshtml" />
+    <Content Include="Views\Constants\Create.cshtml" />
+    <Content Include="Views\Constants\Delete.cshtml" />
+    <Content Include="Views\Constants\Details.cshtml" />
+    <Content Include="Views\Constants\Edit.cshtml" />
+    <Content Include="Views\Constants\Index.cshtml" />
+>>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -638,8 +679,44 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="bin\bin\ar\" />
     <Folder Include="Content\images\team\" />
+=======
+    <EmbeddedResource Include="Migrations\201907161005484_AddAll.resx">
+      <DependentUpon>201907161005484_AddAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907161023188_edit.resx">
+      <DependentUpon>201907161023188_edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907161032365_anotherEdit.resx">
+      <DependentUpon>201907161032365_anotherEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907161047427_deleteCollegeId.resx">
+      <DependentUpon>201907161047427_deleteCollegeId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908021644121_updateidentity2.resx">
+      <DependentUpon>201908021644121_updateidentity2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908061043395_updateFavorite.resx">
+      <DependentUpon>201908061043395_updateFavorite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070644353_updateReportTable.resx">
+      <DependentUpon>201908070644353_updateReportTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070705156_addConstantTable.resx">
+      <DependentUpon>201908070705156_addConstantTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070725300_updateConstantTableToAdd_flag_and_parentId.resx">
+      <DependentUpon>201908070725300_updateConstantTableToAdd_flag_and_parentId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.resx">
+      <DependentUpon>201908070731516_updateReportTableToAdd_ConstantId_ForigenKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070933020_updateItemTableToAdd_description.resx">
+      <DependentUpon>201908070933020_updateItemTableToAdd_description.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> 35466f30d1b9864726fc8e24510b091a775a2ce8
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

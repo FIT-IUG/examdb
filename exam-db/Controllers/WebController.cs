@@ -2,11 +2,13 @@
 using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using System;
+using System.Data.Entity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace exam_db.Controllers
 {
@@ -46,10 +48,10 @@ namespace exam_db.Controllers
             ViewBag.Paging = pagin;
             return View(data.ToList());
         }
-  
+
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Getdept(int id , int pageIndex)
+        public ActionResult Getdept(int id, int pageIndex)
         {
             List<Course> courses = new List<Course>();
             List<Object> Mycourses = new List<Object>();
@@ -77,11 +79,12 @@ namespace exam_db.Controllers
                 mycourse.code = course.code;
                 mycourse.listOfItem = course.listOfItem;
                 mycourse.departmentId = course.departmentId;
-                Object myObject = new {
-                    course = new Course() { Id = course.Id, name = course.name, code = course.code ,departmentId = course.departmentId }
+                Object myObject = new
+                {
+                    course = new Course() { Id = course.Id, name = course.name, code = course.code, departmentId = course.departmentId }
                 };
                 Mycourses.Add(myObject);
-                    myjson = JsonConvert.SerializeObject(mycourse, Formatting.None);
+                myjson = JsonConvert.SerializeObject(mycourse, Formatting.None);
             }
             string pagin = paging.Pagination(total, pageIndex, Take, offset, "Getdept", "/College", "");
             int totalPage = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(total) / defaultPageSize));
@@ -92,17 +95,18 @@ namespace exam_db.Controllers
                                     {
                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                                     });
-            var list2 = JsonConvert.SerializeObject(Mycourses , Formatting.Indented);
+            var list2 = JsonConvert.SerializeObject(Mycourses, Formatting.Indented);
             //string responseText = JSON.Validate(courses);
             //return Json( list , "application/json") ;
-            return Json(new {
+            return Json(new
+            {
                 data = list2,
                 totalPage = totalPage
             }, JsonRequestBehavior.AllowGet);
 
         }
-      
-        public ActionResult Course(int courseId , String CollegeName)
+
+        public ActionResult Course(int courseId, String CollegeName)
         {
             Course course = db.Courses.Find(courseId);
             ViewBag.CourseId = courseId;
@@ -142,7 +146,7 @@ namespace exam_db.Controllers
             a[0] = char.ToUpper(a[0]);
             return new string(a);
         }
-        public ActionResult GetFiles(String filetype,int courseId , int pageIndex)
+        public ActionResult GetFiles(String filetype, int courseId, int pageIndex)
         {
             Course course = db.Courses.Find(courseId);
             List<Object> MyFiles = new List<Object>();
@@ -194,15 +198,135 @@ namespace exam_db.Controllers
             var fileList = JsonConvert.SerializeObject(MyFiles, Formatting.Indented);
             return Json(new
             {
-                data = fileList ,
+                data = fileList,
                 totalPage = totalPage
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult File()
+        public ActionResult File(int fileId, String CollegeName, String depName)
         {
-            return View();
+            ViewBag.CollegeName = CollegeName;
+            ViewBag.depName = depName;
+            Item item = db.Items.Find(fileId);
+            int count = (from a in db.Favorites where a.itemId == fileId select a).Count();
+            item.likeNumber = count;
+            String userId = User.Identity.GetUserId(); // get Current User
+            Favorite existFav = (from a in db.Favorites where a.UserId == userId && a.itemId == fileId select a).FirstOrDefault();
+            if (existFav == null)
+            {
+                ViewBag.Liked = "false";
+            }
+            else
+            {
+                ViewBag.Liked = "true";
+            }
+
+            //get Reports Constants 
+            Constant constant = (from a in db.Constants where a.Key == "Report" select a).FirstOrDefault();
+            List<Constant> constants = (from a in db.Constants where a.parentId == constant.Id select a).ToList();
+            ViewBag.constants = constants;
+
+            //get Related Files
+            List<Item> relatedFiles = (from a in db.Items where a.CourseId == item.CourseId && a.Id != item.Id select a).OrderByDescending( v => v.downloadNumber).Take(5).ToList();
+            //List<Item> relatedFiles = db.Items.Where(a => a.CourseId == item.CourseId && a.Id == item.Id).Take(2).ToList();
+            Course course = db.Courses.Find(item.CourseId);
+            if (relatedFiles.Count() == 0)
+            {
+                relatedFiles = (from a in db.Items where a.Course.departmentId == course.departmentId && a.Id != item.Id select a).OrderByDescending(v => v.downloadNumber).Take(5).ToList();
+            }
+            ViewBag.Related = relatedFiles;
+
+            // create Cookies 
+
+            string cookie =  userId + item.Id;
+
+            if (Request.Cookies[cookie] == null)
+            {
+                HttpCookie view = new HttpCookie(cookie);
+                view[""] = cookie;
+                view.Expires.AddMonths(2);
+                Response.Cookies.Add(view);
+
+                item.viewNumber = item.viewNumber + 1;
+                if (ModelState.IsValid)
+                {
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                //ViewBag.user = cookie;
+                ViewBag.user = Request.Cookies[cookie].Value;
+            }
+
+            return View(item);
         }
+
+        public JsonResult AddLike(int itemId)
+        {
+            String userId = User.Identity.GetUserId();
+            Favorite favorite = new Favorite();
+            favorite.itemId = itemId;
+            favorite.UserId = userId;
+
+            Favorite existFav = (from a in db.Favorites where a.UserId == userId && a.itemId == itemId select a).FirstOrDefault();
+            Item item = db.Items.Find(itemId);
+
+            if (existFav == null)
+            {
+                item.likeNumber = item.likeNumber + 1;
+                if (ModelState.IsValid)
+                {
+                    db.Favorites.Add(favorite);
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                item.likeNumber = item.likeNumber - 1;
+                if (ModelState.IsValid)
+                {
+                    db.Favorites.Remove(existFav);
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                
+                return Json("Remove Like", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult Report(int itemId, string reportKey)
+        {
+            String userId = User.Identity.GetUserId();
+            Report report = new Report();
+            // get id for the selection Report
+            Constant selection = (from a in db.Constants where a.Key == reportKey select a).FirstOrDefault();
+            report.ConstantId = selection.Id;
+            report.itemId = itemId;
+            report.UserId = userId;
+            Report existReport = (from a in db.Reports where a.UserId == userId && a.itemId == itemId select a).FirstOrDefault();
+            if(existReport == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Reports.Add(report);
+                    db.SaveChanges();
+                }
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Just One Report For Person", JsonRequestBehavior.AllowGet);
+            }
+           
+            
+        }
+
+
 
         public JsonResult getDepartment(String idString)
         {
@@ -212,7 +336,7 @@ namespace exam_db.Controllers
             var deparments = db.Departments.Where(a => a.collegeId == i).ToList();
             return Json(deparments, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult UniversityRequirements()
         {
             College UniversityRequierment = db.Colleges.Find(12);

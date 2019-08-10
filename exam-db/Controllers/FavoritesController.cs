@@ -17,7 +17,11 @@ namespace exam_db.Controllers
         // GET: Favorites
         public ActionResult Index()
         {
+<<<<<<< .mine
             var favorites = db.Favorites.Include(f => f.Item);
+=======
+            var favorites = db.Favorites.Include(f => f.item).Include(f => f.User);
+>>>>>>> .theirs
             return View(favorites.ToList());
         }
 
@@ -40,6 +44,7 @@ namespace exam_db.Controllers
         public ActionResult Create()
         {
             ViewBag.itemId = new SelectList(db.Items, "Id", "title");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "firstname");
             return View();
         }
 
@@ -58,6 +63,7 @@ namespace exam_db.Controllers
             }
 
             ViewBag.itemId = new SelectList(db.Items, "Id", "title", favorite.ItemId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "firstname", favorite.UserId);
             return View(favorite);
         }
 
@@ -74,6 +80,7 @@ namespace exam_db.Controllers
                 return HttpNotFound();
             }
             ViewBag.itemId = new SelectList(db.Items, "Id", "title", favorite.ItemId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "firstname", favorite.UserId);
             return View(favorite);
         }
 
@@ -91,6 +98,7 @@ namespace exam_db.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.itemId = new SelectList(db.Items, "Id", "title", favorite.ItemId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "firstname", favorite.UserId);
             return View(favorite);
         }
 

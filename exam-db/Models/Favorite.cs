@@ -7,6 +7,12 @@ namespace exam_db.Models
 {
     public class Favorite
     {
+        //public Favorite(int itemId, string userId)
+        //{
+        //    this.itemId = itemId;
+        //    UserId = userId;
+        //}
+
         public int Id { get; set; }
 
         public int ItemId { get; set; }
