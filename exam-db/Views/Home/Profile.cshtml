@@ -316,50 +316,7 @@
 
             <div class="tab-pane fade" id="Favorites">
                 <ul class="list-unstyled uploaded_list" id="Favorites_files_ul">
-                    <!-- Start list item show (repeat it inside for loop)-->
-                    <li>
-                        <div class="item">
-                            <div class="item_body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="item_img_and_info_holder">
-                                            <div class="item_type_img_holder">
-                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                            </div>
-                                            <div class="item_info">
-                                                <a class="black_link no_decoration" href="~/Web/File">
-                                                    <h6 class="item_title">database midterm exam</h6>
-                                                </a>
-                                                <span class="item_college">Information technology - <span>Computer science</span></span>
-                                                <a class="black_link no_decoration" style="display:block" href="#">
-                                                    <div class="item_owner">
-                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                        <span class="item_owner_name">omar kishko</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item_statistics">
-                                            <div class="statistic">
-                                                <i class="fa fa-heart"></i> 184
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-eye"></i> 301
-                                            </div>
-                                            <div class="statistic">
-                                                <i class="fa fa-download"></i> 190
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <span class="item_date">2019</span>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- End list item show (repeat it inside for loop)-->
+                  
                 </ul>
                 <ul class="pagination" id="favorites_items_pagination">
 
@@ -447,10 +404,13 @@
                     var array = JSON.parse(jsonString.data);
                     if (methodFlag == 1) {
                         var items_parent = document.getElementById("Uploaded_files_ul");
+                        items_parent.innerHTML = ''; // clean the parent
+                        items_parent.innerHTML = (array.length == 0) ? "<p class'lead'>You have no uploaded items</p>" : "";
                     } else if (methodFlag == 2) {
                         var items_parent = document.getElementById("Favorites_files_ul");
+                        items_parent.innerHTML = ''; // clean the parent
+                        items_parent.innerHTML = (array.length == 0) ? "<p class'lead'>You have no favorites items</p>" : "";
                     }
-                    items_parent.innerHTML = ''; // clean the parent
                     for (var i = 0; i < array.length; i++) {
                         // Start Item Block
                         var ItemHtmlBlock =
@@ -491,11 +451,13 @@
                                 '</div>' +
                             '</li >';
                         items_parent.innerHTML += ItemHtmlBlock;
+                    }
+                    if (array.length != 0) {
                         // Start Pagination nav
                         if (methodFlag == 1) {
-                             var items_pagination = document.getElementById("uploaded_items_pagination");
+                                var items_pagination = document.getElementById("uploaded_items_pagination");
                         } else if (methodFlag == 2) {
-                             var items_pagination = document.getElementById("favorites_items_pagination");
+                                var items_pagination = document.getElementById("favorites_items_pagination");
                         }
                         var previous = page - 1; var next = page + 1;
                         var previousDisabled = (!(page >= 2)) ? "disabled" : "";
