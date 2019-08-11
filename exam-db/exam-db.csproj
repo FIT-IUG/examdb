@@ -251,14 +251,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908041435321_Reset.cs" />
-    <Compile Include="Migrations\201908041435321_Reset.Designer.cs">
-      <DependentUpon>201908041435321_Reset.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908041438307_DeleteColumnsUserTbl.cs" />
-    <Compile Include="Migrations\201908041438307_DeleteColumnsUserTbl.Designer.cs">
-      <DependentUpon>201908041438307_DeleteColumnsUserTbl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Favorite.cs" />
@@ -428,14 +420,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908041435321_Reset.resx">
-      <DependentUpon>201908041435321_Reset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908041438307_DeleteColumnsUserTbl.resx">
-      <DependentUpon>201908041438307_DeleteColumnsUserTbl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
