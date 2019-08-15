@@ -9,20 +9,24 @@
                     <h4 class="file_title">@Model.title</h4>
                     <div class="h4"><span class="badge badge-info">@Model.yearOfPublish</span></div>
                 </div>
-                 <div class="download_info">
-                    <span class="file_size">5 MB</span>
+                <div class="download_info">
+                    <span class="file_size">@ViewBag.size MB</span>
                     <div class="type_img_holder">
                         <img src="~/Content/images/files_types/pdf.png" />
                     </div>
-                    <a class="btn btn-success" href="#"><i class="fa fa-download"></i> @Resources.InternalPages.Download</a>
+                  
+                    <a class="btn btn-success" href="@Url.Action("Download","Web",new { itemId = Model.Id })"><i class="fa fa-download"></i> @Resources.InternalPages.Download</a>
+                   
                 </div>
 
                 <div class="file_college_info">
                     <span><i class="fa fa-wpexplorer"></i> @ViewBag.depName</span>
                     <span><i class="fa fa-bank"></i> @ViewBag.CollegeName</span>
                 </div>
-                
 
+               
+                @TempData["message"]
+               
                 <div class="file_desc">
                     <p>
                         @Model.description
@@ -60,7 +64,7 @@
 
             <!-- Report Abuse -->
             <a class="report_abuse" data-toggle="modal" data-target="#reportAbuseModal" href="#" title="Report Abuse"><i class="fa fa-thumbs-o-down"></i> @Resources.InternalPages.Report</a>
-            <div class="report_abuse_modal modal fade" id="reportAbuseModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="report_abuse_modal modal fade" id="reportAbuseModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -76,49 +80,49 @@
 
                             @foreach (var cons in ViewBag.constants)
                             {
-                            <div class="custom-control custom-radio">
+                                <div class="custom-control custom-radio">
 
-                                @*<input class="custom-control-input" type="radio" name="report" id="report1" value="option1">
-                                <label class="custom-control-label" for="report1">
-                                    @Resources.InternalPages.Report_1*@
+                                    @*<input class="custom-control-input" type="radio" name="report" id="report1" value="option1">
+                                        <label class="custom-control-label" for="report1">
+                                            @Resources.InternalPages.Report_1*@
 
                                     <input class="custom-control-input reportKey" type="radio" name="report" id="@cons.Id" value="@cons.Key">
                                     <label class="custom-control-label" for="@cons.Id">
                                         @cons.Value
 
-                                </label>
-                            </div>
+                                    </label>
+                                </div>
 
-                            @*<div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" name="report" id="report2" value="option2">
-                                <label class="custom-control-label" for="report2">
-                                    @Resources.InternalPages.Report_2
-                                </label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" name="report" id="report3" value="option3">
-                                <label class="custom-control-label" for="report3">
-                                    @Resources.InternalPages.Report_3 
-                                </label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" name="report" id="report4" value="option4">
-                                <label class="custom-control-label" for="report4">
-                                    @Resources.InternalPages.Report_4 
-                                </label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" name="report" id="report5" value="option5">
-                                <label class="custom-control-label" for="report5">
-                                    @Resources.InternalPages.Report_5 
-                                </label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" name="report" id="report6" value="option6">
-                                <label class="custom-control-label" for="report6">
-                                    @Resources.InternalPages.Report_6 
-                                </label>
-                            </div>*@
+                                @*<div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="report" id="report2" value="option2">
+                                        <label class="custom-control-label" for="report2">
+                                            @Resources.InternalPages.Report_2
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="report" id="report3" value="option3">
+                                        <label class="custom-control-label" for="report3">
+                                            @Resources.InternalPages.Report_3
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="report" id="report4" value="option4">
+                                        <label class="custom-control-label" for="report4">
+                                            @Resources.InternalPages.Report_4
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="report" id="report5" value="option5">
+                                        <label class="custom-control-label" for="report5">
+                                            @Resources.InternalPages.Report_5
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="report" id="report6" value="option6">
+                                        <label class="custom-control-label" for="report6">
+                                            @Resources.InternalPages.Report_6
+                                        </label>
+                                    </div>*@
 
                             }
                         </div>
@@ -135,143 +139,143 @@
 
         </div>
 
-        
+
 
         <h4 class="mb-4">@Resources.InternalPages.Related_Files_Title</h4>
         <ul class="list-unstyled recommended_list">
             <!-- Start list item show (repeat it inside for loop)-->
             @foreach (var item in ViewBag.Related)
             {
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-                                    <div class="item_info">
+                <li>
+                    <div class="item">
+                        <div class="item_body">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="item_img_and_info_holder">
+                                        <div class="item_type_img_holder">
+                                            <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
+                                        </div>
+                                        <div class="item_info">
                                             <a class="black_link no_decoration" href="@Url.Action("File","Web",new {fileId =item.Id , CollegeName = ViewBag.CollegeName , depName = ViewBag.depName } )">
                                                 <h6 class="item_title">@item.title</h6>
-                                        </a>
+                                            </a>
                                             <span class="item_college">@ViewBag.CollegeName - <span>@ViewBag.depName</span></span>
-                                        <a class="black_link no_decoration" style="display:block" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
+                                            <a class="black_link no_decoration" style="display:block" href="#">
+                                                <div class="item_owner">
+                                                    <img class="item_owner_img" src="~/Content/images/avatar.png" />
                                                     <span class="item_owner_name">@item.User.firstname @item.User.lastname</span>
-                                            </div>
-                                        </a>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
+                                <div class="col-md-5">
+                                    <div class="item_statistics">
+                                        <div class="statistic">
                                             <i class="fa fa-heart"></i> @item.likeNumber
-                                    </div>
-                                    <div class="statistic">
+                                        </div>
+                                        <div class="statistic">
                                             <i class="fa fa-eye"></i> @item.viewNumber
-                                    </div>
-                                    <div class="statistic">
+                                        </div>
+                                        <div class="statistic">
                                             <i class="fa fa-download"></i> @item.downloadNumber
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                             <span class="item_date">@item.yearOfPublish</span>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
-            <!-- End list item show (repeat it inside for loop)-->
+                <!-- End list item show (repeat it inside for loop)-->
 
-            @*<li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="~/Web/File">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <span class="item_college">Information technology - <span>Computer science</span></span>
-                                        <a class="black_link no_decoration" style="display:block" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                @*<li>
+                        <div class="item">
+                            <div class="item_body">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="item_img_and_info_holder">
+                                            <div class="item_type_img_holder">
+                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                             </div>
-                                        </a>
+                                            <div class="item_info">
+                                                <a class="black_link no_decoration" href="~/Web/File">
+                                                    <h6 class="item_title">database midterm exam</h6>
+                                                </a>
+                                                <span class="item_college">Information technology - <span>Computer science</span></span>
+                                                <a class="black_link no_decoration" style="display:block" href="#">
+                                                    <div class="item_owner">
+                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
+                                                        <span class="item_owner_name">omar kishko</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="item_statistics">
+                                            <div class="statistic">
+                                                <i class="fa fa-heart"></i> 184
+                                            </div>
+                                            <div class="statistic">
+                                                <i class="fa fa-eye"></i> 301
+                                            </div>
+                                            <div class="statistic">
+                                                <i class="fa fa-download"></i> 190
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
+
+                                <span class="item_date">2018</span>
                             </div>
                         </div>
+                    </li>
 
-                        <span class="item_date">2018</span>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="~/Web/File">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <span class="item_college">Information technology - <span>Computer science</span></span>
-                                        <a class="black_link no_decoration" style="display:block" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                    <li>
+                        <div class="item">
+                            <div class="item_body">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="item_img_and_info_holder">
+                                            <div class="item_type_img_holder">
+                                                <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                             </div>
-                                        </a>
+                                            <div class="item_info">
+                                                <a class="black_link no_decoration" href="~/Web/File">
+                                                    <h6 class="item_title">database midterm exam</h6>
+                                                </a>
+                                                <span class="item_college">Information technology - <span>Computer science</span></span>
+                                                <a class="black_link no_decoration" style="display:block" href="#">
+                                                    <div class="item_owner">
+                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
+                                                        <span class="item_owner_name">omar kishko</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="item_statistics">
+                                            <div class="statistic">
+                                                <i class="fa fa-heart"></i> 184
+                                            </div>
+                                            <div class="statistic">
+                                                <i class="fa fa-eye"></i> 301
+                                            </div>
+                                            <div class="statistic">
+                                                <i class="fa fa-download"></i> 190
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
+
+                                <span class="item_date">2017</span>
                             </div>
                         </div>
-
-                        <span class="item_date">2017</span>
-                    </div>
-                </div>
-            </li>*@
+                    </li>*@
 
             }
         </ul>
@@ -282,11 +286,11 @@
 
 @section scripts {
     <script>
-        // toggle favorite icon 
+        // toggle favorite icon
         $('#favorite_btn').on('click', function () {
             $('#favorite_btn i.fa').toggleClass('fa-heart-o fa-heart');
         });
-      
+
         //ajax method for like the item
         $(".addlike").on("click", function () {
              $.ajax({

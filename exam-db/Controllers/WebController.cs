@@ -9,12 +9,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.IO;
+using System.IO.Compression;
 
 namespace exam_db.Controllers
 {
     public class WebController : Controller
     {
-        private const int defaultPageSize =5 ;
+        private const int defaultPageSize = 5;
         private IList<Course> allCourse = new List<Course>();
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult College(int CollegeId)
@@ -128,7 +130,7 @@ namespace exam_db.Controllers
             int total = course.listOfItem.Count();
             var data = course.listOfItem.Where(a => a.category.Equals("Exams")).Skip(skip).Take(Take);
             string pagin = paging.Pagination(total, Page, Take, offset, "Course", "/Course", "");
-            List<File> exams = new List<File>();
+            List<Models.File> exams = new List<Models.File>();
             ViewBag.exams = exams;
             ViewBag.CollegeName = CollegeName;
             Department department = db.Departments.Find(course.departmentId);
@@ -227,7 +229,7 @@ namespace exam_db.Controllers
             ViewBag.constants = constants;
 
             //get Related Files
-            List<Item> relatedFiles = (from a in db.Items where a.CourseId == item.CourseId && a.Id != item.Id select a).OrderByDescending( v => v.downloadNumber).Take(5).ToList();
+            List<Item> relatedFiles = (from a in db.Items where a.CourseId == item.CourseId && a.Id != item.Id select a).OrderByDescending(v => v.downloadNumber).Take(5).ToList();
             //List<Item> relatedFiles = db.Items.Where(a => a.CourseId == item.CourseId && a.Id == item.Id).Take(2).ToList();
             Course course = db.Courses.Find(item.CourseId);
             if (relatedFiles.Count() == 0)
@@ -238,7 +240,7 @@ namespace exam_db.Controllers
 
             // create Cookies 
 
-            string cookie =  userId + item.Id;
+            string cookie = userId + item.Id;
 
             if (Request.Cookies[cookie] == null)
             {
@@ -260,7 +262,76 @@ namespace exam_db.Controllers
                 ViewBag.user = Request.Cookies[cookie].Value;
             }
 
+            long filesSize = 0;
+
+            //get size of files in each item
+            foreach (Models.File file in item.listOfFile)
+            {
+                filesSize = filesSize + file.size;
+
+            }
+            ViewBag.size = filesSize;
+
             return View(item);
+        }
+
+        //[download files]
+        public ActionResult Download(int itemId)
+        {
+            //the file path stored in db like this ~/Files/file name.txt  
+            Item item = db.Items.Find(itemId);
+            string CollName = item.Course.department.college.name;
+            string departmentName = item.Course.department.name;
+            if (item.listOfFile.Count == 1)
+            {
+                Models.File file = item.listOfFile.FirstOrDefault();
+                string fileName = file.path;
+                string contentType = file.type.ToString();
+                var absolutePath = HttpContext.Server.MapPath(fileName);
+                if (System.IO.File.Exists(absolutePath))
+                {
+
+                    return File(fileName, contentType, Path.GetFileName(fileName));
+                }
+                else
+                {
+                    TempData["message"] = "Not Found";
+                    return RedirectToAction("File", new { fileId = item.Id, CollegeName = CollName, depName = departmentName });
+                }
+
+            }
+            else if (item.listOfFile.Count == 0)
+            {
+                TempData["message"] = "This Item without Files";    
+                return RedirectToAction("File", new { fileId = item.Id, CollegeName = CollName, depName = departmentName });
+            }
+            else
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                    {
+                        foreach (Models.File file1 in item.listOfFile)
+                        {
+                            var absolutePath = HttpContext.Server.MapPath(file1.path);
+                            if (System.IO.File.Exists(absolutePath))
+                            {
+                                var fileEntry = archive.CreateEntry(file1.path);
+                            }
+                            else
+                            {
+                                TempData["message"] = "One or more Of files are not Found";
+                                return RedirectToAction("File", new { fileId = item.Id, CollegeName = CollName, depName = departmentName });
+                            }
+
+                        }
+                    }
+                    string fileName = item.title + ".zip";
+                    string contentType = "application/zip";
+                    return File(memoryStream.ToArray(), contentType, fileName);
+                }
+            }
+
         }
 
         public JsonResult AddLike(int itemId)
@@ -282,7 +353,7 @@ namespace exam_db.Controllers
                     db.Entry(item).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                
+
                 return Json("Success", JsonRequestBehavior.AllowGet);
             }
             else
@@ -294,7 +365,7 @@ namespace exam_db.Controllers
                     db.Entry(item).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                
+
                 return Json("Remove Like", JsonRequestBehavior.AllowGet);
             }
         }
@@ -309,7 +380,7 @@ namespace exam_db.Controllers
             report.itemId = itemId;
             report.UserId = userId;
             Report existReport = (from a in db.Reports where a.UserId == userId && a.itemId == itemId select a).FirstOrDefault();
-            if(existReport == null)
+            if (existReport == null)
             {
                 if (ModelState.IsValid)
                 {
@@ -322,8 +393,8 @@ namespace exam_db.Controllers
             {
                 return Json("Just One Report For Person", JsonRequestBehavior.AllowGet);
             }
-           
-            
+
+
         }
 
 
