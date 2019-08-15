@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace exam_db.Controllers
 {
-    public class WebController : Controller
+    public class WebController : ApplicationBaseController
     {
         private const int defaultPageSize =5 ;
         private IList<Course> allCourse = new List<Course>();

@@ -20,9 +20,6 @@
                 <a href="~/Home/About" class="no_decoration">
                     <li id="nabbar_animate_2" class="bold_custom">@Resources.Global.Menu_About</li>
                 </a>
-                <a href="~/Home/Contact" class="no_decoration">
-                    <li id="nabbar_animate_3" class="bold_custom">Contact us</li>
-                </a>
 
             </ol>
         </div>
@@ -63,15 +60,8 @@
                     <div class="col-lg-5 pr-1 signup_field_col_sm">
                         <div class="form-group">
                             <div class="signup_field_wrap">
-<<<<<<< .mine
                                 <label for="FirstName"> @Resources.InternalPages.First_Name</label>
                                 <input class="form-control" type="text" name="firstname" id="FirstName" required />
-
-=======
-                                <label for="FirstName"> First Name</label>
-                                @*<input class="form-control" type="text" name="FirstName" id="FirstName" />*@
-                                @Html.TextBoxFor(m =>m.firstname , new { @class = "form-control", required = "required" })
->>>>>>> .theirs
                                 @*  @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
@@ -79,15 +69,8 @@
                     <div class="col-lg-5 pl-1 signup_field_col_sm">
                         <div class="form-group">
                             <div class="signup_field_wrap">
-<<<<<<< .mine
                                 <label for="LastName"> @Resources.InternalPages.Last_Name</label>
                                 <input class="form-control" type="text" name="lastname" id="LastName"  required/>
-
-=======
-                                <label for="LastName"> Last Name</label>
-                                @*<input class="form-control" type="text" name="LastName" id="LastName" />*@
-                                @Html.TextBoxFor(m => m.lastname, new { @class = "form-control", required = "required" })
->>>>>>> .theirs
                                 @* @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })*@
                             </div>
                         </div>

@@ -251,7 +251,9 @@
     <Content Include="App_Data\ExamDB_log.ldf">
       <DependentUpon>ExamDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\about_us.css" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-rtl.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\courses.css" />
     <Content Include="Content\customAnimation.css" />
@@ -259,8 +261,10 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\homepage.css" />
+    <Content Include="Content\images\ar-flag.png" />
     <Content Include="Content\images\avatar.png" />
     <Content Include="Content\images\cloud.png" />
+    <Content Include="Content\images\en-flag.png" />
     <Content Include="Content\images\files_types\csv.png" />
     <Content Include="Content\images\files_types\doc.png" />
     <Content Include="Content\images\files_types\jpg.png" />
@@ -268,8 +272,10 @@
     <Content Include="Content\images\files_types\ppt.png" />
     <Content Include="Content\images\files_types\txt.png" />
     <Content Include="Content\images\files_types\xls.png" />
+    <Content Include="Content\images\Image 1.png" />
     <Content Include="Content\images\logo-small.png" />
     <Content Include="Content\images\files_types\pdf.png" />
+    <Content Include="Content\images\omar.jpg" />
     <Content Include="Content\images\profile-background.png" />
     <Content Include="Content\images\team-1.jpg" />
     <Content Include="Content\images\writing-1149962_1280.jpg" />
@@ -278,6 +284,7 @@
     <Content Include="Content\pretty-checkbox.min.css" />
     <Content Include="Content\profile_page.css" />
     <Content Include="Content\search.css" />
+    <Content Include="Content\site-rtl.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -287,7 +294,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dm-uploader.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\upload_file_ui.js" />
     <Content Include="Web.config" />
@@ -330,6 +340,11 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\Droid Sans Arabic.ttf" />
+    <Content Include="Content\fonts\Merienda-Regular.ttf" />
+    <Content Include="Content\fonts\Roboto-Regular.ttf" />
+    <Content Include="Content\fonts\THESANSARABIC-BOLD.ttf" />
+    <Content Include="Content\fonts\TheSansArabic-Light.otf" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Colleges\Create.cshtml" />
@@ -358,13 +373,10 @@
     <Content Include="Views\Universities\Edit.cshtml" />
     <Content Include="Views\Universities\Index.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <None Include="Properties\PublishProfiles\examdb - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\examdb - Web Deploy.pubxml" />
     <Content Include="Views\Web\College.cshtml" />
     <Content Include="Views\Web\Course.cshtml" />
     <Content Include="Views\Web\File.cshtml" />
     <Content Include="Views\Web\UniversityRequirements.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Items\Delete.cshtml" />
@@ -386,6 +398,9 @@
     <Content Include="Views\Constants\Details.cshtml" />
     <Content Include="Views\Constants\Edit.cshtml" />
     <Content Include="Views\Constants\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\examdb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\examdb - Web Deploy.pubxml" />
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -404,6 +419,7 @@
     <EmbeddedResource Include="Resources\InternalPages.ar.resx" />
     <EmbeddedResource Include="Resources\InternalPages.resx" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

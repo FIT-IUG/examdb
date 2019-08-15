@@ -173,6 +173,7 @@ namespace exam_db.Controllers
                 itm.uploadTime = item.uploadTime;
                 itm.CourseName = item.Course.name;
                 itm.DepartmentName = item.Course.department.name;
+                
                 Object myObject = new Item() { Id = item.Id, title = item.title, likeNumber = item.likeNumber, viewNumber = item.viewNumber, downloadNumber = item.downloadNumber, yearOfPublish = item.yearOfPublish, uploadTime = item.uploadTime, CourseName = item.Course.name, DepartmentName = item.Course.department.name};
                 objects.Add(myObject);
                 jsonString = JsonConvert.SerializeObject(itm, Formatting.None);
