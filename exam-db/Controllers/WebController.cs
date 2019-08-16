@@ -1,15 +1,17 @@
 ﻿using exam_db.Models;
-using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.IO;
+
+
+using Ionic.Zip;
+
 using System.IO.Compression;
 
 namespace exam_db.Controllers
@@ -204,12 +206,13 @@ namespace exam_db.Controllers
                 totalPage = totalPage
             }, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult File(int fileId, String CollegeName, String depName)
+        [Authorize]
+        public ActionResult File(int fileId)
         {
-            ViewBag.CollegeName = CollegeName;
-            ViewBag.depName = depName;
             Item item = db.Items.Find(fileId);
+            ViewBag.CollegeName = item.Course.department.college.name;
+            ViewBag.depName = item.Course.department.name;
+
             int count = (from a in db.Favorites where a.ItemId == fileId select a).Count();
             item.likeNumber = count;
             String userId = User.Identity.GetUserId(); // get Current User
@@ -271,57 +274,102 @@ namespace exam_db.Controllers
 
             }
             ViewBag.size = filesSize;
+            //set file icon
+            if (item.listOfFile.Count == 1)
+            {
+                Models.File file = item.listOfFile.FirstOrDefault();
+                string path = "~/Content/images/files_types/" + file.type.ToString() + ".png";
+                if (System.IO.File.Exists(path))
+                {
+                    ViewBag.icon = file.type.ToString() + ".png";
+                }
+                else
+                {
+                    ViewBag.icon = "txt.png";
+                }
+
+            }
+            else
+            {
+                Models.File file = item.listOfFile.FirstOrDefault();
+                ViewBag.icon = "rar.png";
+            }
 
             return View(item);
         }
-
+        [Authorize]
+        public ActionResult SetCookiesAndDownloadFile(int itemId)
+        {
+            String userId = User.Identity.GetUserId(); // get Current User
+            string cookie = userId + itemId + "download";
+            Item item = db.Items.Find(itemId);
+            if (Request.Cookies[cookie] == null)
+            {
+                HttpCookie download = new HttpCookie(cookie);
+                download[""] = cookie;
+                download.Expires.AddMonths(2);
+                Response.Cookies.Add(download);
+                item.downloadNumber = item.downloadNumber + 1;
+                if (ModelState.IsValid)
+                {
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                //cookie exist
+            }
+            return RedirectToAction("Download", new { itemId = itemId }); ;
+        }
+        [Authorize]
         //[download files]
         public ActionResult Download(int itemId)
+
         {
             //the file path stored in db like this ~/Files/file name.txt  
             Item item = db.Items.Find(itemId);
-            string CollName = item.Course.department.college.name;
-            string departmentName = item.Course.department.name;
             if (item.listOfFile.Count == 1)
             {
                 Models.File file = item.listOfFile.FirstOrDefault();
                 string fileName = file.path;
                 string contentType = file.type.ToString();
-                var absolutePath = HttpContext.Server.MapPath(fileName);
+                var absolutePath = HttpContext.Server.MapPath("~/Content/Uploads/" + fileName);
                 if (System.IO.File.Exists(absolutePath))
                 {
-
-                    return File(fileName, contentType, Path.GetFileName(fileName));
+                    TempData["successMessage"] = "Success";
+                    return File(absolutePath, contentType, Path.GetFileName(fileName));
                 }
                 else
                 {
-                    TempData["message"] = "Not Found";
-                    return RedirectToAction("File", new { fileId = item.Id, CollegeName = CollName, depName = departmentName });
+                    TempData["errorMessage"] = "Not Found";
+                    return RedirectToAction("File", new { fileId = item.Id });
                 }
 
             }
             else if (item.listOfFile.Count == 0)
             {
-                TempData["message"] = "This Item without Files";    
-                return RedirectToAction("File", new { fileId = item.Id, CollegeName = CollName, depName = departmentName });
+                TempData["errorMessage"] = "This Item without Files";
+                return RedirectToAction("File", new { fileId = item.Id });
             }
             else
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                    using (var zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                     {
                         foreach (Models.File file1 in item.listOfFile)
                         {
-                            var absolutePath = HttpContext.Server.MapPath(file1.path);
+                            var absolutePath = HttpContext.Server.MapPath("~/Content/Uploads/" + file1.path);
                             if (System.IO.File.Exists(absolutePath))
                             {
-                                var fileEntry = archive.CreateEntry(file1.path);
+                                TempData["successMessage"] = "Success";
+                                zip.CreateEntry(file1.path, CompressionLevel.Fastest);
                             }
                             else
                             {
-                                TempData["message"] = "One or more Of files are not Found";
-                                return RedirectToAction("File", new { fileId = item.Id, CollegeName = CollName, depName = departmentName });
+                                TempData["errorMessage"] = "One or more Of files are not Found";
+                                return RedirectToAction("File", new { fileId = item.Id });
                             }
 
                         }
@@ -331,9 +379,8 @@ namespace exam_db.Controllers
                     return File(memoryStream.ToArray(), contentType, fileName);
                 }
             }
-
         }
-
+        [Authorize]
         public JsonResult AddLike(int itemId)
         {
             String userId = User.Identity.GetUserId();
@@ -369,7 +416,7 @@ namespace exam_db.Controllers
                 return Json("Remove Like", JsonRequestBehavior.AllowGet);
             }
         }
-
+        [Authorize]
         public JsonResult Report(int itemId, string reportKey)
         {
             String userId = User.Identity.GetUserId();
