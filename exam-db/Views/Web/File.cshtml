@@ -12,11 +12,11 @@
                 <div class="download_info">
                     <span class="file_size">@ViewBag.size MB</span>
                     <div class="type_img_holder">
-                        <img src="~/Content/images/files_types/pdf.png" />
+                        <img src="~/Content/images/files_types/@ViewBag.icon" />
                     </div>
-                  
-                    <a class="btn btn-success" href="@Url.Action("Download","Web",new { itemId = Model.Id })"><i class="fa fa-download"></i> @Resources.InternalPages.Download</a>
                    
+                    <a class="btn btn-success" href="@Url.Action("SetCookiesAndDownloadFile","Web",new { itemId = Model.Id })"><i class="fa fa-download"></i> @Resources.InternalPages.Download</a>
+
                 </div>
 
                 <div class="file_college_info">
@@ -24,10 +24,7 @@
                     <span><i class="fa fa-bank"></i> @ViewBag.CollegeName</span>
                 </div>
 
-               
-                
-
-                <div class="file_desc">
+				@ViewBag.download                <div class="file_desc">
                     <p>
                         @Model.description
                     </p>
@@ -156,7 +153,7 @@
                                             <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                         </div>
                                         <div class="item_info">
-                                            <a class="black_link no_decoration" href="@Url.Action("File","Web",new {fileId =item.Id , CollegeName = ViewBag.CollegeName , depName = ViewBag.depName } )">
+                                            <a class="black_link no_decoration" href="@Url.Action("File","Web",new {fileId =item.Id  } )">
                                                 <h6 class="item_title">@item.title</h6>
                                             </a>
                                             <span class="item_college">@ViewBag.CollegeName - <span>@ViewBag.depName</span></span>

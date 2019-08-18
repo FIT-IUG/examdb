@@ -70,7 +70,7 @@
                                                     <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
                                                 </div>
                                                 <div class="item_info">
-                                                    <a class="black_link no_decoration" href="@Url.Action("File","Web",new {fileId =file.Id , CollegeName = ViewBag.CollegeName , depName = ViewBag.departmentName } )">
+                                                    <a class="black_link no_decoration" href="@Url.Action("File","Web",new {fileId =file.Id  } )">
                                                         <h6 class="item_title">@file.title</h6>
                                                     </a>
                                                     <span class="item_college">@ViewBag.CollegeName - <span>@ViewBag.departmentName</span></span>
@@ -182,10 +182,14 @@
 
                     var item_info = document.createElement("div");
                     item_info.setAttribute("class", "item_info");
+                    var url = '@Url.Action("File","Web",new {fileId = "fileid" } )'.replace("fileid", data.Id);
+                    item_info.setAttribute("href", url);
                     item_img_and_info_holder.appendChild(item_info);
 
                     var link = document.createElement("a");
                     link.setAttribute("class", "black_link no_decoration");
+                    var url = '@Url.Action("File","Web",new {fileId = "fileid" } )'.replace("fileid", data.Id);
+                    link.setAttribute("href", url);
                     item_info.appendChild(link);
 
                     var fileTitle = document.createElement("h6");
@@ -411,8 +415,10 @@
                     item_info.setAttribute("class", "item_info");
                     item_img_and_info_holder.appendChild(item_info);
 
-                    var link = document.createElement("a");
+                     var link = document.createElement("a");
                     link.setAttribute("class", "black_link no_decoration");
+                    var url = '@Url.Action("File","Web",new {fileId = "fileid" } )'.replace("fileid", data.Id);
+                    link.setAttribute("href", url);
                     item_info.appendChild(link);
 
                     var fileTitle = document.createElement("h6");
