@@ -19,7 +19,7 @@ namespace exam_db.Controllers
 {
     public class HomeController : ApplicationBaseController
     {
-        private const int defaultPageSize = 1;
+        private const int defaultPageSize = 8;
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
