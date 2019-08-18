@@ -291,6 +291,9 @@
     <Content Include="Content\pretty-checkbox.min.css" />
     <Content Include="Content\profile_page.css" />
     <Content Include="Content\search.css" />
+    <Content Include="Content\site-rtl.css" />
+    <Content Include="Content\Uploads\Movie List 2.txt" />
+    <Content Include="Content\Uploads\Movie List.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -346,6 +349,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\Uploads\javafile.docx" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Colleges\Create.cshtml" />

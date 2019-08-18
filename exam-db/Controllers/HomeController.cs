@@ -193,7 +193,6 @@ namespace exam_db.Controllers
 
         public ActionResult ChangeLang(string lang)
         {
-            string[] link = ReferrerUrl();
             Session.Remove("lang");
             if (lang == "ar")
             {
@@ -218,42 +217,43 @@ namespace exam_db.Controllers
                    
             }
             ViewBag.college = db.Colleges.ToList();
-            return RedirectToAction(link[1], link[0]);
+            return Redirect(Request.UrlReferrer.ToString());
+            //return RedirectToAction(link[1], link[0]);
         }
 
 
         /* getting the controller & the action names for the Referrer url */
-        public string[] ReferrerUrl()
-        {
-            var fullUrl = Request.UrlReferrer.ToString();
-            var questionMarkIndex = fullUrl.IndexOf('?');
-            string queryString = null;
-            string url = fullUrl;
-            if (questionMarkIndex != -1) // There is a QueryString
-            {
-                url = fullUrl.Substring(0, questionMarkIndex);
-                queryString = fullUrl.Substring(questionMarkIndex + 1);
-            }
+        //public string[] ReferrerUrl()
+        //{
+        //    var fullUrl = Request.UrlReferrer.ToString();
+        //    var questionMarkIndex = fullUrl.IndexOf('?');
+        //    string queryString = null;
+        //    string url = fullUrl;
+        //    if (questionMarkIndex != -1) // There is a QueryString
+        //    {
+        //        url = fullUrl.Substring(0, questionMarkIndex);
+        //        queryString = fullUrl.Substring(questionMarkIndex + 1);
+        //    }
 
-            // Arranges
-            var request = new HttpRequest(null, url, queryString);
-            var response = new HttpResponse(new StringWriter());
-            var httpContext = new HttpContext(request, response);
+        //    // Arranges
+        //    var request = new HttpRequest(null, url, queryString);
+        //    var response = new HttpResponse(new StringWriter());
+        //    var httpContext = new HttpContext(request, response);
 
-            RouteData routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
+        //    RouteData routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
 
-            // Extract the data    
-            var values = routeData.Values;
-            var controllerName = values["controller"].ToString();
-            var actionName = values["action"].ToString();
-            var areaName = values["area"];
+        //    // Extract the data    
+        //    var values = routeData.Values;
+        //    var controllerName = values["controller"].ToString();
+        //    var actionName = values["action"].ToString();
+        //    var areaName = values["area"];
 
-            string[] link = new string[2];
-            link[0] = controllerName;
-            link[1] = actionName;
-
-            return link;
-        }
+        //    string[] link = new string[3];
+        //    link[0] = controllerName;
+        //    link[1] = actionName;
+        //    link[2] = fullUrl;
+        //    return link;
+        //}
         
     }
 }
