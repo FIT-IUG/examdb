@@ -38,9 +38,7 @@ namespace exam_db.Controllers
             {
                 string test = Session["lang"].ToString();
             }
-            ViewBag.college = db.Colleges.ToList();
-            SelectList li = new SelectList(db.Departments.ToList(), "Id", "name");
-            ViewBag.lst = li;
+            ViewBag.Colleges = db.Colleges.ToList();
             return View();
         }
 
@@ -281,7 +279,16 @@ namespace exam_db.Controllers
 
             return View();
         }
+        public ActionResult deleteFromHistory(int id) {
+            string[] existingQuestions = (string[])System.Web.HttpContext.Current.Session["Questions"];
+            String[] newQuestions = existingQuestions.Where(val => val != existingQuestions[id]).ToArray(); 
+            System.Web.HttpContext.Current.Session["Questions"] = newQuestions;
+            string[] existingUrls = (string[])System.Web.HttpContext.Current.Session["urls"];
+            String[] newUrl = existingUrls.Where(val => val != existingUrls[id]).ToArray(); ;
 
+            System.Web.HttpContext.Current.Session["urls"] = newUrl;
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public ActionResult Search(Search s, int? page)
         {

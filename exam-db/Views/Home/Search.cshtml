@@ -12,29 +12,7 @@
 
         <nav class="pagination_nav">
             <h4 class="search_page_title">@Resources.InternalPages.Search_Results_Title</h4>
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-            of @Model.PageCount
 
-            <ul class="pagination">
-                @Html.PagedListPager(Model, page => Url.Action("Search", "Home", new
-           {
-               @class = "page-link",
-               page,
-               search = Request.QueryString["search"],
-               mid = Request.QueryString["mid"],
-               final = Request.QueryString["final"],
-               all = Request.QueryString["all"],
-               quiz = Request.QueryString["quiz"],
-               summary = Request.QueryString["summary"],
-               year = Request.QueryString["year"]
-           }),
-     new PagedListRenderOptions()
-     {
-         LiElementClasses = new string[] { "page-item" }
-     })
-
-
-            </ul>
             @*<ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Previous</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -140,24 +118,7 @@
         {
             <h1>@ViewBag.message</h1>
         }
-
-
-        <ul class="pagination">
-            @Html.PagedListPager(Model, page => Url.Action("Search", "Home", new
-       {
-           @class = "page-item page-link",
-           page,
-           search = Request.QueryString["search"],
-           mid = Request.QueryString["mid"],
-           final = Request.QueryString["final"],
-           all = Request.QueryString["all"]
-       }),
-     new PagedListRenderOptions()
-     {
-         LiElementClasses = new string[] { "page-item" }
-     })
-        </ul>
-
+        
         @*<nav class="bottom_nav_pagination">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Previous</a></li>
@@ -167,5 +128,23 @@
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Next</a></li>
             </ul>
         </nav>*@
+
+        @Html.PagedListPager(Model, page => Url.Action("Search", "Home", new
+        {
+
+       page,
+       @class = "",
+       search = Request.QueryString["search"],
+       mid = Request.QueryString["mid"],
+       final = Request.QueryString["final"],
+       all = Request.QueryString["all"]
+
+   }), new PagedListRenderOptions()
+        {
+       LiElementClasses = new string[] { "page-item" },
+
+   })
+
+
     </div>
 </div>

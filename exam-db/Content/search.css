@@ -13,16 +13,34 @@
         display: flex;
         justify-content: space-between;
     }
-.bottom_nav_pagination .pagination {
-    justify-content: flex-end
+.pagination-container .pagination {
+    justify-content: flex-start;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
 }
+    .pagination-container .pagination .page-item.active a {
+        z-index: 1;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
 
-/***************************************************************************************** Start Media */
-
-/*Large devices (desktops, less than 1200px)*/
-@media (max-width: 1199.98px) {
-
-}
+        .pagination-container .pagination li a {
+            position: relative;
+            display: block;
+            padding: .5rem .75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+    /***************************************************************************************** Start Media */
+    /*Large devices (desktops, less than 1200px)*/
+    @media (max-width: 1199.98px) {
+    }
 /*Medium devices (tablets, less than 992px)*/
 @media (max-width: 991.98px) {
 

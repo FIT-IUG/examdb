@@ -20,13 +20,19 @@
                             {
                                 re = (string[])System.Web.HttpContext.Current.Session["Questions"];
                                 urls = (string[])System.Web.HttpContext.Current.Session["urls"];
+                                
+                                re = re.Reverse().ToArray();
+                                urls = urls.Reverse().ToArray();
                             }
 
                         }
-
+                        
                         @for (int i = 0; i < re.Length; i++)
                         {
-                            <li><a href="@urls.GetValue(i)">@re.GetValue(i) </a> <a href="#"> <i class="fa fa-close"></i></a></li>
+                            if (i < re.Length - 5) { continue; }
+                                                        var deletePath = "deleteFromHistory/" +i;
+
+                            <li><a href="@urls.GetValue(i)">@re.GetValue(i) </a> <a href="@deletePath"> <i class="fa fa-close"></i></a></li>
 
                         }
 
@@ -39,7 +45,7 @@
                             @Resources.Homepage.College_requirement
                         <ul class="list-unstyled colleges_list">
                             @* get them from database *@
-                            @foreach (var item in ViewBag.college)
+                            @foreach (var item in ViewBag.Colleges)
                             {
                                 <li><a href="@Url.Action("College","Web",new {CollegeId =item.Id } )">Faculty of @item.name</a></li>
 
@@ -114,7 +120,19 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="upload_field_wrap">
-                                                        @Html.DropDownList("Department", ViewBag.lst as SelectList, "Select Department", new { @class = "form-control" })
+                                                        <select name="collegeId" class="form-control" id="Colleges">
+                                                            @foreach (var item in ViewBag.Colleges)
+                                                            {
+                                                                <option id="@item.Id" value="@item.Id">@item.name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="upload_field_wrap">
+                                                        <select name="departmentId" class="form-control" id="departments"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,45 +251,7 @@
                 i = Math.floor(Math.log(bytes) / Math.log(k));
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         }
-        function ChangeImageHandler()
-        {
-            var x = $('#mfile').val();
-            let file = $('#mfile')[0].files[0];
-            var size = $('#mfile')[0].size;
-
-            var sizeWithTag = formatBytes(size);
-            $('#item_size').text(sizeWithTag);
-            $('#item_title').text(file.name);
-            if (x.split('.').pop()=='pdf') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/pdf.png");
-            }
-            else if (x.split('.').pop() == 'docx') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/doc.png");
-            }
-            else if (x.split('.').pop() == 'doc') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/doc.png");
-            }
-            else if (x.split('.').pop() == 'jpg') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/jpg.png");
-            }
-            else if (x.split('.').pop() == 'png') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/png.png");
-            }
-            else if (x.split('.').pop() == 'ppt') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/ppt.png");
-            }
-            else if (x.split('.').pop() == 'txt') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/txt.png");
-            }
-            else if (x.split('.').pop() == 'xls') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/xls.png");
-            }
-            else if (x.split('.').pop() == 'csv') {
-                $("#item_type_img").attr("src", "../../Content/images/files_types/csv.png");
-            }
-                console.log();
-
-        }
+ 
         function FileConfigHandler()
         {
             //console.log('chal raha h')
@@ -308,7 +288,7 @@
                      $('#files').append(x);
 
                 }
-                JSON.parse(fii);//dont remove this please i know it is making error but please
+           //     JSON.parse(fi);//dont remove this please i know it is making error but please
             }
         }
 
@@ -317,7 +297,7 @@
             var template = $('#files-template').html();
             var name = name;
             var parent = $(template);
-            var extention =  name.split('.').pop();
+            var extention = name.split('.').pop().toLowerCase();
            // console.log(item.name.split('.').pop());
             ////item.name;
             var temp_size = sizee;//item.size;
@@ -446,10 +426,9 @@
 
         });
         $("#Department").change(function () {
-            LoadDepartments();
+            LoadCourses();
         });
-
-        function LoadDepartments() {
+        function LoadCourses() {
             var collegeId = document.getElementById("Department");
             var ID = collegeId.options[collegeId.selectedIndex].value;
             var depatments = document.getElementById("CourseId");
@@ -479,7 +458,44 @@
                     console.log(response.responseText);
                 }
             });
-        }
+            }
+
+    $("#Colleges").change(function () {
+        LoadDepartments();
+    });
+
+    function LoadDepartments() {
+        var collegeId = document.getElementById("Colleges");
+        var ID = collegeId.options[collegeId.selectedIndex].value;
+        var depatments = document.getElementById("departments");
+        console.log(ID);
+
+         $.ajax({
+                url: '@Url.Action("getDepartment","Web")',
+                type: 'POST',
+                dataType: "json",
+                data: { idString: ID },
+                success: function (result) {
+                    console.log(result)
+                    depatments.innerHTML = "";
+                    $.each(result, function (i, result) {
+                    var options = "<option value='" + result.Id + "' id='" + result.Id + "'>" + result.name + "</option>";
+
+                    $('#departments').append(options);
+                });
+                    },
+                failure: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                     },
+                error: function (response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                    }
+            });
+}
+
+
     </script>
 }
 
