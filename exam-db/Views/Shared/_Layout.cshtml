@@ -44,31 +44,58 @@
                 <input id="search" type="text" class="search_input" name="search" placeholder="@Resources.Global.Search_Placeholder" />
                 <i onclick="document.getElementById('search_form').submit();" style="cursor:pointer" class="fa fa-search"></i>
                 <span class="filter_btn"><i class="fa fa-sliders"></i></span>
+
+
+                <div class="search_filters_container">
+
+
+
+                    <div class="pretty  p-default p-curve check_all_filter">
+                        <input type="checkbox" id="mid" name="mid" value="Mid" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom">@Resources.Global.Search_Filter_Midterm</label>
+                        </div>
+                    </div>
+
+                    <div class="pretty  p-default p-curve check_all_filter">
+                        <input type="checkbox" id="final" name="final" value="Final" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom">@Resources.Global.Search_Filter_Final</label>
+                        </div>
+                    </div>
+
+                    <div class="pretty p-default p-curve check_all_filter">
+                        <input type="checkbox" id="all" name="all" value="all" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom">@Resources.Global.Search_Filter_All</label>
+                        </div>
+                    </div>
+                    <div class="pretty p-default p-curve check_all_filter">
+                        <input type="checkbox" id="quiz" name="quiz" value="Quiz" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom"> @Resources.InternalPages.Quizs</label>
+                        </div>
+                    </div>
+                    <div class="pretty p-default p-curve check_all_filter">
+                        <input type="checkbox" id="summary" name="summary" value="Summary" />
+                        <div class="state p-primary-o">
+                            <label class="bold_custom"> @Resources.InternalPages.Summaries</label>
+                        </div>
+                    </div>
+
+                    <div class="pretty p-default p-curve check_all_filter">
+                        <select id="year" name="year" class="search_form custom-select">
+                            <option value=""> Select Year</option>
+                            <option value="allyears"> All Years</option>
+                            @for (int i = 2000; i < 2020; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
             </form>
-
-            <div class="search_filters_container">
-                <div class="pretty  p-default p-curve">
-                    <input type="checkbox" value="midterm" />
-                    <div class="state p-primary-o">
-                        <label class="bold_custom">@Resources.Global.Search_Filter_Midterm</label>
-                    </div>
-                </div>
-                <div class="pretty  p-default p-curve">
-                    <input type="checkbox" value="final" />
-                    <div class="state p-primary-o">
-                        <label class="bold_custom">@Resources.Global.Search_Filter_Final</label>
-                    </div>
-                </div>
-
-                <div class="pretty p-default p-curve check_all_filter">
-                    <input type="checkbox" value="all" />
-                    <div class="state p-primary-o">
-                        <label class="bold_custom">@Resources.Global.Search_Filter_All</label>
-                    </div>
-                </div>
-
-            </div>
-
 
             @Html.Partial("_LoginPartial")
 

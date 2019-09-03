@@ -104,7 +104,7 @@ namespace exam_db.Controllers
                 string[] arr = { ".pdf", ".csv", ".jpg", ".png", ".ppt", ".txt", ".xlsx", ".docx", ".doc", "xls" };
                 foreach (var item in mfile)
                 {
-                    string extention = Path.GetExtension(item.FileName);
+                    string extention = Path.GetExtension(item.FileName.ToLower());
                     if (arr.Contains(extention))
                     {
                         continue;
@@ -301,7 +301,7 @@ namespace exam_db.Controllers
 
                 string[] newUrl = urls;
                 string[] existingUrls = (string[])System.Web.HttpContext.Current.Session["urls"];
-                System.Web.HttpContext.Current.Session["urls"] = newQuestions.Union(existingQuestions).ToArray();
+                System.Web.HttpContext.Current.Session["urls"] = newUrl.Union(existingUrls).ToArray();
             }
 
             List<Item> response = null;

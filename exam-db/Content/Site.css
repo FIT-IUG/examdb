@@ -157,21 +157,23 @@ input.search_input {
             .search_container .filter_btn:hover {
                 color: var(--main-color)
             }
-            
 
-            .search_filters_container {
-                display: none;
-                position: absolute;
-                bottom: -55px;
-                left: 0;
-                right: 0;
-                height: 55px;
-                background: #fff;
-                justify-content: center;
-                align-items: center;
-                border-top: 1px solid #f7f7f7;
-                box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
-            }
+        form.search_container {
+            position: unset
+        }
+        .search_filters_container {
+            display: none;
+            position: absolute;
+            bottom: -55px;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background: #fff;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #f7f7f7;
+            box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
+        }
             .search_filters_container_show {
                 display: flex
             }

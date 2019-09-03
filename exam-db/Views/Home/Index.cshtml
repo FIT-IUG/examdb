@@ -5,7 +5,6 @@
 <link href="~/Content/jquery.dm-uploader.min.css" rel="stylesheet" />
 <link href="~/Content/homepage.css" rel="stylesheet" />
 
-<h1 class="text-center">    omar kishko </h1>
 <div class="container-fluid">
     <div class="row" style="position:relative">
         <!-- Start Side Nav Section -->
@@ -15,8 +14,8 @@
                     <h6 class="side_nav_headers"><i class="fa fa-clock-o"></i>@Resources.Homepage.Recent_Searches</h6>
                     <ul class="list-unstyled side_nav_list">
                         @{
-                            string[] re = { "fresh" };
-                            string[] urls = { "#" };
+                            string[] re = { };
+                            string[] urls = { };
                             if (System.Web.HttpContext.Current.Session["Questions"] != null)
                             {
                                 re = (string[])System.Web.HttpContext.Current.Session["Questions"];
@@ -27,7 +26,7 @@
 
                         @for (int i = 0; i < re.Length; i++)
                         {
-                            <a href="@urls.GetValue(i)"><li>@re.GetValue(i) </li> </a>
+                            <li><a href="@urls.GetValue(i)">@re.GetValue(i) </a> <a href="#"> <i class="fa fa-close"></i></a></li>
 
                         }
 
@@ -81,7 +80,7 @@
                 <form id="drag-and-drop-zone" class=" upload_container" action="/Home/Upload" method="POST" enctype="multipart/form-data" ondrop="dropHandler(event);">
                     <div class="text-center">
                         <img class="cloud_upload_img" src="~/Content/images/cloud.png" />
-                        <p>@Resources.Homepage.Drag_Drop_p1 <span class="browse_btn_holder">@Resources.Homepage.Drag_Drop_p2 <input class="browse_btn" type="file" accept=".xls..xlsx image/* " multiple id="mfile" name="mfile" title='@Resources.Homepage.Drag_Drop_Hint' /> </span> @Resources.Homepage.Drag_Drop_p3</p>
+                        <p>@Resources.Homepage.Drag_Drop_p1 <span class="browse_btn_holder">@Resources.Homepage.Drag_Drop_p2 <input class="browse_btn" type="file" accept=".png, .jpg, .jpeg, .pdf, .docx,.doc,.xls, .xlsx, .csv, .ppt, .txt, " multiple id="mfile" name="mfile" title='@Resources.Homepage.Drag_Drop_Hint' /> </span> @Resources.Homepage.Drag_Drop_p3</p>
 
                     </div>
 
@@ -249,6 +248,9 @@
             else if (x.split('.').pop() == 'docx') {
                 $("#item_type_img").attr("src", "../../Content/images/files_types/doc.png");
             }
+            else if (x.split('.').pop() == 'doc') {
+                $("#item_type_img").attr("src", "../../Content/images/files_types/doc.png");
+            }
             else if (x.split('.').pop() == 'jpg') {
                 $("#item_type_img").attr("src", "../../Content/images/files_types/jpg.png");
             }
@@ -298,7 +300,7 @@
 
                 // RUN A LOOP TO CHECK EACH SELECTED FILE.
                 for (var i = 0; i <= fi.files.length - 1; i++) {
-
+                    
                     var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
                     var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
                     var x = AddChild(fname, fsize);

@@ -1,6 +1,6 @@
-﻿@if (Request.IsAuthenticated && Model != null)
+﻿@if (Model.Count != 0)
 {
-
+    <h1>omar</h1>
     <ul class="list-unstyled recommended_list">
         <!-- Start list item show (repeat it inside for loop)-->
 
@@ -59,6 +59,5 @@
 }
 else
 {
-    <p class="text"> </p>
+    <p class="text"> There isint any recomended item for y </p>
 }
-
