@@ -384,8 +384,9 @@ input.form-control, select.form-control {
         right: -100px
     }
     .navbar .bars {
-        left: 10px;
-        right: unset !important
+        position: relative;
+        right: unset !important;
+        bottom: unset !important;
     }
 
     input.search_input {
@@ -394,15 +395,14 @@ input.form-control, select.form-control {
     }
 
     .search_container .fa-search {
-        left: 147px;
+        left: 50px;
         right: unset !important
     }
 }
 
 @media (max-width: 380px) {
-
     .search_container .fa-search {
-        left: 115px;
+        left: 40px;
         right: unset !important
     }
 }

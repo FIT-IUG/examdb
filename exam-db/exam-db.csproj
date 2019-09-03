@@ -47,15 +47,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="iDiTect.Converter, Version=8.2.3.1050, Culture=neutral, PublicKeyToken=d0c0010775a29e75, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\iDiTect.Converter.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MvcPaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Paging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Paging.1.0.1\lib\net40\Paging.dll</HintPath>
@@ -233,6 +254,10 @@
     <Compile Include="Migrations\201908101618237_addAll_8_10.Designer.cs">
       <DependentUpon>201908101618237_addAll_8_10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908151050396_FileContent.cs" />
+    <Compile Include="Migrations\201908151050396_FileContent.Designer.cs">
+      <DependentUpon>201908151050396_FileContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constant.cs" />
     <Compile Include="Models\Favorite.cs" />
@@ -255,6 +280,10 @@
     <Compile Include="Models\University.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ConvertText.cs" />
+    <Compile Include="ViewModels\ReadContent.cs" />
+    <Compile Include="ViewModels\RecommendViewModel.cs" />
+    <Compile Include="ViewModels\Search.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ExamDB.mdf" />
@@ -292,6 +321,7 @@
     <Content Include="Content\images\writing-1149962_1280.jpg" />
     <Content Include="Content\jquery.dm-uploader.min.css" />
     <Content Include="Content\login_signup.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\pretty-checkbox.min.css" />
     <Content Include="Content\profile_page.css" />
     <Content Include="Content\search.css" />
@@ -414,6 +444,7 @@
     <None Include="Properties\PublishProfiles\examdb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\examdb - Web Deploy.pubxml" />
     <Content Include="Views\Account\RegisterSuccess.cshtml" />
+    <Content Include="Views\Home\Recommended.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -425,6 +456,9 @@
     <EmbeddedResource Include="Migrations\201908101618237_addAll_8_10.resx">
       <DependentUpon>201908101618237_addAll_8_10.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908151050396_FileContent.resx">
+      <DependentUpon>201908151050396_FileContent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Global.ar.resx" />
     <EmbeddedResource Include="Resources\Global.resx" />
     <EmbeddedResource Include="Resources\Homepage.ar.resx" />
@@ -432,7 +466,9 @@
     <EmbeddedResource Include="Resources\InternalPages.ar.resx" />
     <EmbeddedResource Include="Resources\InternalPages.resx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

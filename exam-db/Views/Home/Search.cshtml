@@ -1,7 +1,10 @@
-﻿
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<exam_db.Models.Item>
+
 @{
     ViewBag.Title = "Search";
 }
+   
 <link href="~/Content/search.css" rel="stylesheet" />
 <div class="container">
 
@@ -9,305 +12,153 @@
 
         <nav class="pagination_nav">
             <h4 class="search_page_title">@Resources.InternalPages.Search_Results_Title</h4>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
 
             <ul class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Search", "Home", new
+           {
+               @class = "page-link",
+               page,
+               search = Request.QueryString["search"],
+               mid = Request.QueryString["mid"],
+               final = Request.QueryString["final"],
+               all = Request.QueryString["all"],
+               quiz = Request.QueryString["quiz"],
+               summary = Request.QueryString["summary"],
+               year = Request.QueryString["year"]
+           }),
+     new PagedListRenderOptions()
+     {
+         LiElementClasses = new string[] { "page-item" }
+     })
+
+
+            </ul>
+            @*<ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Previous</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Next</a></li>
-            </ul>
+            </ul>*@
         </nav>
 
-        <ul class="list-unstyled recommended_list">
-            <!-- Start list item show (repeat it inside for loop)-->
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
+        @if (Model != null)
+        {
+            <ul class="list-unstyled recommended_list">
+                <!-- Start list item show (repeat it inside for loop)-->
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <div class="item">
+                            <div class="item_body">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="item_img_and_info_holder">
+                                            <div class="item_type_img_holder">
+                                                @*".pdf", ".csv", ".jpg", ".png", ".ppt", ".txt", ".xlsx", ".docx", ".doc", "xls"*@
+                                                @if (item.listOfFile.Count <= 1)
+                                                {
+                                                    if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.csv).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/csv.png" />
+                                                    }
+                                                    else if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.docx).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/doc.png" />
+                                                    }
+                                                    else if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.png).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/png.png" />
+                                                    }
+                                                    else if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.Jpg).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/jpg.png" />
+                                                    }
+                                                    else if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.ppt).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/ppt.png" />
+                                                    }
+                                                    else if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.xls).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/xls.png" />
+                                                    }
+                                                    else if (item.listOfFile.Where(x => x.type == exam_db.Models.FileType.txt).SingleOrDefault() != null)
+                                                    {
+                                                        <img class="item_type_img" src="~/Content/images/files_types/txt.png" />
+                                                    }
 
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <a class="black_link no_decoration" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                                                }
+                                                else
+                                                {
+                                                    //for any
+                                                    <img class="item_type_img" src="~/Content/images/files_types/doc.png" />
+                                                }
+
+                                                @*<img class="item_type_img" src="~/Content/images/files_types/pdf.png" />*@
                                             </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- End list item show (repeat it inside for loop)-->
 
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <a class="black_link no_decoration" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                                            <div class="item_info">
+                                                <a class="black_link no_decoration" href="~/Web/File?fileId=@item.Id">
+                                                    <h6 class="item_title">@item.title</h6>
+                                                </a>
+                                                <a class="black_link no_decoration" href="#">
+                                                    <div class="item_owner">
+                                                        <img class="item_owner_img" src="~/Content/images/avatar.png" />
+                                                        <span class="item_owner_name">@item.User.UserName</span>
+                                                    </div>
+                                                </a>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <a class="black_link no_decoration" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                                    <div class="col-md-5">
+                                        <div class="item_statistics">
+                                            <div class="statistic">
+                                                <i class="fa fa-heart"></i> @item.likeNumber
                                             </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <a class="black_link no_decoration" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                                            <div class="statistic">
+                                                <i class="fa fa-eye"></i> @item.viewNumber
                                             </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <a class="black_link no_decoration" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
+                                            <div class="statistic">
+                                                <i class="fa fa-download"></i> @item.downloadNumber
                                             </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <a class="black_link no_decoration" href="#">
-                                            <div class="item_owner">
-                                                <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                                <span class="item_owner_name">omar kishko</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="item">
-                    <div class="item_body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="item_img_and_info_holder">
-                                    <div class="item_type_img_holder">
-                                        <img class="item_type_img" src="~/Content/images/files_types/pdf.png" />
-                                    </div>
-
-                                    <div class="item_info">
-                                        <a class="black_link no_decoration" href="#">
-                                            <h6 class="item_title">database midterm exam</h6>
-                                        </a>
-                                        <div class="item_owner">
-                                            <img class="item_owner_img" src="~/Content/images/avatar.png" />
-                                            <span class="item_owner_name">omar kishko</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                                <div class="item_statistics">
-                                    <div class="statistic">
-                                        <i class="fa fa-heart"></i> 184
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-eye"></i> 301
-                                    </div>
-                                    <div class="statistic">
-                                        <i class="fa fa-download"></i> 190
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
-            </li>
+                    </li>
+                }
+                <!-- End list item show (repeat it inside for loop)-->
 
+
+
+            </ul>
+        }
+        else
+        {
+            <h1>@ViewBag.message</h1>
+        }
+
+
+        <ul class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Search", "Home", new
+       {
+           @class = "page-item page-link",
+           page,
+           search = Request.QueryString["search"],
+           mid = Request.QueryString["mid"],
+           final = Request.QueryString["final"],
+           all = Request.QueryString["all"]
+       }),
+     new PagedListRenderOptions()
+     {
+         LiElementClasses = new string[] { "page-item" }
+     })
         </ul>
 
-  
-
-        <nav class="bottom_nav_pagination">
+        @*<nav class="bottom_nav_pagination">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Previous</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -315,6 +166,6 @@
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">@Resources.InternalPages.Next</a></li>
             </ul>
-        </nav>
+        </nav>*@
     </div>
 </div>

@@ -612,21 +612,24 @@ a.dropdownLangMenu_item {
         flex-basis: 0
     }
     .navbar .bars {
-        position: absolute;
+        /*position: absolute;
         right: 10px;
-        bottom: -36px;
+        bottom: -36px;*/
+        position: relative;
+        right: unset !important;
+        bottom: unset !important;
     }
     .dropdownLangMenu {
         left: -100px
     }
     
     input.search_input {
-        width: 70%;
+        width: 85%;
         margin-left: 10px;
         margin-bottom: 5px;
     }
     .search_container .fa-search {
-        right: 147px;
+        right: 75px;
     }
     .search_container {
         justify-content: flex-start
@@ -639,7 +642,7 @@ a.dropdownLangMenu_item {
 @media (max-width: 380px) {
 
     .search_container .fa-search {
-        right: 115px;
+        right: 65px;
     }
     
 }

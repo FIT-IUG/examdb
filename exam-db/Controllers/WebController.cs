@@ -8,10 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.IO;
-
-
 using Ionic.Zip;
-
 using System.IO.Compression;
 
 namespace exam_db.Controllers

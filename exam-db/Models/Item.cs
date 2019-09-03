@@ -22,7 +22,9 @@ namespace exam_db.Models
         public string category { get; set; }//file category (quiz , exam,others,Summaries);
         public int likeNumber  { get; set; }
         public DateTime uploadTime { get; set; }
-       
+
+        public string FileContent { get; set; }
+
         public virtual ICollection<File> listOfFile { get; set; }
 
         public int CourseId { get; set; }
