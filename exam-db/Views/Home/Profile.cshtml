@@ -405,11 +405,11 @@
                     if (methodFlag == 1) {
                         var items_parent = document.getElementById("Uploaded_files_ul");
                         items_parent.innerHTML = ''; // clean the parent
-                        items_parent.innerHTML = (array.length == 0) ? "<p class'lead'>You have no uploaded items</p>" : "";
+                        items_parent.innerHTML = (array.length == 0) ? "<div class='emptyContent'><i class='fa fa-inbox fa-3x'></i><br />You Have No Uploaded Items<br>Any Uploaded Items will appear here</div>" : "";
                     } else if (methodFlag == 2) {
                         var items_parent = document.getElementById("Favorites_files_ul");
                         items_parent.innerHTML = ''; // clean the parent
-                        items_parent.innerHTML = (array.length == 0) ? "<p class'lead'>You have no favorites items</p>" : "";
+                        items_parent.innerHTML = (array.length == 0) ? "<div class='emptyContent'><i class='fa fa-inbox fa-3x'></i><br />You have no Favorites items<br>Any Favorites items will appear here</div>" : "";
                     }
                     for (var i = 0; i < array.length; i++) {
                         // Start Item Block

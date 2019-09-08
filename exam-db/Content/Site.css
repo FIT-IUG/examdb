@@ -64,9 +64,20 @@ body {
     content: "\f057";
     background-color: #c0392b
 }
-.bold_custom {
-    font-weight: 450 !important
+.emptyContent {
+    background: #fafafa;
+    padding: 25px;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
 }
+    .emptyContent .fa {
+        margin-bottom: 5px
+    }
+
+    .bold_custom {
+        font-weight: 450 !important
+    }
 a.black_link {
     color: #333 !important
 }
@@ -158,13 +169,11 @@ input.search_input {
                 color: var(--main-color)
             }
 
-        form.search_container {
-            position: unset
-        }
+      
         .search_filters_container {
             display: none;
-            position: absolute;
-            bottom: -55px;
+            position: fixed;
+            top: 65px;
             left: 0;
             right: 0;
             height: 55px;

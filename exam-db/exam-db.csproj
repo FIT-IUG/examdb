@@ -310,6 +310,7 @@
     <Content Include="Content\images\files_types\jpg.png" />
     <Content Include="Content\images\files_types\png.png" />
     <Content Include="Content\images\files_types\ppt.png" />
+    <Content Include="Content\images\files_types\rar.png" />
     <Content Include="Content\images\files_types\txt.png" />
     <Content Include="Content\images\files_types\xls.png" />
     <Content Include="Content\images\Image 1.png" />

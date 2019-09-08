@@ -12,7 +12,11 @@
     .search_page nav.pagination_nav {
         display: flex;
         justify-content: space-between;
+        padding: 20px
     }
+.pagination-container{
+    padding: 20px
+}
 .pagination-container .pagination {
     justify-content: flex-start;
     display: flex;
